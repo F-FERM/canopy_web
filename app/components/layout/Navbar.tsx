@@ -40,18 +40,19 @@ function Navbar() {
     <>
       <header
         className={`
-          w-full bg-white sticky top-0 z-50
+          w-screen bg-white fixed top-0 left-0 right-0 z-50
           border-b border-gray-200
           transition-shadow duration-300
+          overflow-hidden
+          box-border
           ${scrolled ? "shadow-md" : ""}
         `}
       >
         <div
           className="
-            max-w-[1920px]
+            max-w-[1520px]
             h-[80px] sm:h-[100px] lg:h-[120px]
-            mx-auto
-            px-4 sm:px-6 lg:px-[100px]
+            px-4 sm:px-6 lg:px-[30px]
             py-[12px]
             flex
             items-center
@@ -60,7 +61,7 @@ function Navbar() {
           "
         >
           {/* LEFT SECTION - LOGO */}
-          <div className="h-[56px] sm:h-[75px] lg:h-[95px] flex items-center shrink-0">
+          <div className="h-[56px] sm:h-[75px] lg:h-[65px] flex items-center shrink-0">
             <Image
               src={logo}
               alt="Canopy Security Services"
@@ -87,14 +88,18 @@ function Navbar() {
             {navItems.map((item, index) => (
               <Link
                 key={index}
-                href={item === "Home" ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                href={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
+                }
                 onClick={() => setActiveItem(item)}
                 className={`
                   text-white
                   text-[14px] xl:text-[16px] 2xl:text-[18px]
                   font-medium
                   transition-all duration-300
-                  px-3 xl:px-4 2xl:px-6
+                  px-3 xl:px-3 2xl:px-6
                   py-2
                   rounded-full
                   whitespace-nowrap
@@ -209,7 +214,11 @@ function Navbar() {
             {navItems.map((item, index) => (
               <Link
                 key={index}
-                href={item === "Home" ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                href={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
+                }
                 onClick={() => {
                   setActiveItem(item);
                   setMenuOpen(false);
