@@ -20,7 +20,7 @@ export interface HeroButton {
 
 export interface HeroSectionProps {
   badgeText?: string;
-  badgeIcon?: StaticImageData | string ;
+  badgeIcon?: StaticImageData | string;
   heading?: string;
   headingHighlight?: string;
   subtext?: string;
@@ -59,7 +59,7 @@ export default function HeroSection({
     if (slides.length <= 1) return;
     const id = setInterval(
       () => setCurrentSlide((prev) => (prev + 1) % slides.length),
-      slideInterval
+      slideInterval,
     );
     return () => clearInterval(id);
   }, [slides.length, slideInterval]);
@@ -67,8 +67,7 @@ export default function HeroSection({
   const activeSlide = slides[currentSlide];
 
   return (
-    <section className="relative overflow-hidden pt-24 px-4 sm:px-8 lg:px-40">
-
+    <section className="relative overflow-hidden pt-24 px-4 sm:px-8 lg:px-20">
       {/* Decorative pattern */}
       {patternImage && (
         <Image
@@ -80,17 +79,20 @@ export default function HeroSection({
       )}
 
       {/* Main grid */}
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-[120px] py-8 sm:py-12 lg:py-24">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-[10px] py-8 sm:py-12 lg:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-5 items-center">
-
           {/* ── Left: copy ── */}
           <div className="relative z-10">
-
             {/* Badge */}
             {badgeText && (
               <div className="flex items-center gap-2">
                 {badgeIcon && (
-                  <Image src={badgeIcon} alt="" aria-hidden className="w-5 h-5" />
+                  <Image
+                    src={badgeIcon}
+                    alt=""
+                    aria-hidden
+                    className="w-5 h-5"
+                  />
                 )}
                 <p
                   className="uppercase tracking-wide text-sm lg:text-[18px] font-semibold"
@@ -102,14 +104,12 @@ export default function HeroSection({
             )}
 
             {/* Heading */}
-           <h1 className="mt-4 text-[36px] sm:text-[42px] lg:text-[46px] font-semibold text-black ">
-  {heading}{" "}
-  {headingHighlight && (
-    <span style={{ color: accentColor }}>
-      {headingHighlight}
-    </span>
-  )}
-</h1>
+            <h1 className="mt-4 text-[36px] sm:text-[42px] lg:text-[46px] font-semibold text-black ">
+              {heading}{" "}
+              {headingHighlight && (
+                <span style={{ color: accentColor }}>{headingHighlight}</span>
+              )}
+            </h1>
 
             {/* Subtext */}
             {subtext && (
@@ -138,7 +138,6 @@ export default function HeroSection({
           {slides.length > 0 && (
             <div className="relative">
               <div className="relative w-full h-[260px] sm:h-[380px] lg:h-[500px] overflow-hidden rounded-[36px]">
-
                 {/* Slides */}
                 {slides.map((slide, index) => (
                   <img
@@ -161,7 +160,9 @@ export default function HeroSection({
                 {/* Slide copy */}
                 {activeSlide && (
                   <div className="absolute bottom-10 left-10 text-white z-10">
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">{activeSlide.title}</h3>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
+                      {activeSlide.title}
+                    </h3>
                     <p className="mt-4 max-w-[600px] text-base lg:text-lg text-white/90 leading-8">
                       {activeSlide.description}
                     </p>
@@ -183,7 +184,6 @@ export default function HeroSection({
                     />
                   ))}
                 </div>
-
               </div>
             </div>
           )}

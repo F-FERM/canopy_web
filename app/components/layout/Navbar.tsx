@@ -48,10 +48,10 @@ function Navbar() {
       >
         <div
           className="
-            max-w-[1920px]
+            xl:max-w-[1920px]
             h-[80px] sm:h-[100px] lg:h-[120px]
             mx-auto
-            px-4 sm:px-6 lg:px-[100px]
+            xl:px-4 sm:px-6 lg:px-[80px]
             py-[12px]
             flex
             items-center
@@ -60,7 +60,7 @@ function Navbar() {
           "
         >
           {/* LEFT SECTION - LOGO */}
-          <div className="h-[56px] sm:h-[75px] lg:h-[95px] flex items-center shrink-0">
+          <div className="xl:h-[56px] sm:h-[75px] lg:h-[95px] flex items-center shrink-0">
             <Image
               src={logo}
               alt="Canopy Security Services"
@@ -87,7 +87,11 @@ function Navbar() {
             {navItems.map((item, index) => (
               <Link
                 key={index}
-                href={item === "Home" ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                href={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
+                }
                 onClick={() => setActiveItem(item)}
                 className={`
                   text-white
@@ -209,7 +213,11 @@ function Navbar() {
             {navItems.map((item, index) => (
               <Link
                 key={index}
-                href={item === "Home" ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`}
+                href={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
+                }
                 onClick={() => {
                   setActiveItem(item);
                   setMenuOpen(false);

@@ -12,8 +12,7 @@ import { IconExclamationCircle } from "@tabler/icons-react";
 
 export default function AboutSection() {
   return (
-    <section className="relative overflow-hidden py-28">
-
+    <section className="relative overflow-hidden py-28 px-20">
       {/* TOP RIGHT dot pattern */}
       <Image
         src={Pattern}
@@ -47,12 +46,11 @@ export default function AboutSection() {
       />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6">
-
         {/* SECTION TITLE */}
         <div className="text-center mb-20">
-
           <div className="flex items-center justify-center gap-2 mb-4">
-            <span className="
+            <span
+              className="
               flex items-center justify-center
               w-[20px] h-[20px]
              
@@ -60,54 +58,56 @@ export default function AboutSection() {
               text-[11px]
               font-bold
               leading-none
-            ">
-              <IconExclamationCircle/>
+            "
+            >
+              <IconExclamationCircle />
             </span>
-            <p className="
+            <p
+              className="
               text-[#F97316]
               uppercase
               tracking-[3px]
               text-[18px]
               font-semibold
-            ">
+            "
+            >
               About
             </p>
           </div>
 
-          <h2 className="
+          <h2
+            className="
             text-[42px]
             md:text-[56px]
             font-bold
             leading-tight
             text-black
-          ">
-            Canopy{" "}
-            <span className="text-[#F97316]">Security Services</span>
+          "
+          >
+            Canopy <span className="text-[#F97316]">Security Services</span>
           </h2>
         </div>
 
         {/* MAIN CONTENT GRID */}
-     <div
-  className="
+        <div
+          className="
     grid
     lg:grid-cols-2
     items-start
     gap-[90px]
   "
->
-
+        >
           {/* ── LEFT: OVERLAPPING IMAGES ── */}
-<div
-  className="
+          <div
+            className="
     relative
     w-[705px]
     h-[421px]
   "
->
-
-  {/* FIRST IMAGE */}
-  <div
-    className="
+          >
+            {/* FIRST IMAGE */}
+            <div
+              className="
       absolute
       top-0
       left-0
@@ -118,19 +118,19 @@ export default function AboutSection() {
       shadow-xl
       z-20
     "
-  >
-    <Image
-      src={AboutImage2}
-      alt="Security Guards"
-      fill
-      className="object-cover"
-      sizes="377px"
-    />
-  </div>
+            >
+              <Image
+                src={AboutImage2}
+                alt="Security Guards"
+                fill
+                className="object-cover"
+                sizes="377px"
+              />
+            </div>
 
-  {/* SECOND IMAGE */}
-  <div
-    className="
+            {/* SECOND IMAGE */}
+            <div
+              className="
       absolute
       top-[42px]
       left-[321px]
@@ -141,30 +141,29 @@ export default function AboutSection() {
       shadow-2xl
       z-10
     "
-  >
-    <Image
-      src={AboutImage1}
-      alt="Security Officer"
-      fill
-      className="object-cover"
-      sizes="384px"
-    />
-  </div>
-
-</div>
+            >
+              <Image
+                src={AboutImage1}
+                alt="Security Officer"
+                fill
+                className="object-cover"
+                sizes="384px"
+              />
+            </div>
+          </div>
 
           {/* ── RIGHT: TEXT CONTENT ── */}
-        <div
-  className="
+          <div
+            className="
     w-[705px]
     h-[377px]
     flex
     flex-col
     gap-[40px]
   "
->
-<div
-  className="
+          >
+            <div
+              className="
     flex
     flex-col
     gap-[24px]
@@ -173,23 +172,26 @@ export default function AboutSection() {
     leading-[1.85]
     font-normal
   "
->              <p>
-                Since 2016, Canopy Security Services L.L.C has been delivering reliable
-                and professional security and support solutions across Dubai, ensuring
-                the safety of people, assets, and businesses with trust, excellence,
-                and operational efficiency.
+            >
+              {" "}
+              <p>
+                Since 2016, Canopy Security Services L.L.C has been delivering
+                reliable and professional security and support solutions across
+                Dubai, ensuring the safety of people, assets, and businesses
+                with trust, excellence, and operational efficiency.
               </p>
               <p>
-                We provide a comprehensive range of services including manned guarding,
-                Cash &amp; Valuables in Transit (CVIT), event security, close
-                protection, and professional cleaning services, all supported by skilled
-                personnel, strict compliance, and industry-leading standards.
+                We provide a comprehensive range of services including manned
+                guarding, Cash &amp; Valuables in Transit (CVIT), event
+                security, close protection, and professional cleaning services,
+                all supported by skilled personnel, strict compliance, and
+                industry-leading standards.
               </p>
               <p>
-                Serving commercial, residential, construction, events, and corporate
-                sectors, we are committed to delivering tailored solutions that meet
-                the highest levels of quality, safety, reliability, and complete client
-                satisfaction across Dubai.
+                Serving commercial, residential, construction, events, and
+                corporate sectors, we are committed to delivering tailored
+                solutions that meet the highest levels of quality, safety,
+                reliability, and complete client satisfaction across Dubai.
               </p>
             </div>
 
