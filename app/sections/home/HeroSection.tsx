@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image, { StaticImageData } from "next/image";
 import Button from "@/app/components/ui/Button";
+import Image, { StaticImageData } from "next/image";
+import { useEffect, useState } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -20,7 +20,7 @@ export interface HeroButton {
 
 export interface HeroSectionProps {
   badgeText?: string;
-  badgeIcon?: StaticImageData | string;
+  badgeIcon?: StaticImageData | string ;
   heading?: string;
   headingHighlight?: string;
   subtext?: string;
@@ -67,7 +67,7 @@ export default function HeroSection({
   const activeSlide = slides[currentSlide];
 
   return (
-    <section className="relative overflow-hidden pt-24 px-4 sm:px-8 lg:px-52">
+    <section className="relative overflow-hidden pt-24 px-4 sm:px-8 lg:px-40">
 
       {/* Decorative pattern */}
       {patternImage && (
@@ -75,13 +75,13 @@ export default function HeroSection({
           src={patternImage}
           alt=""
           aria-hidden
-          className="absolute top-0 left-0 w-[300px] lg:w-[420px] opacity-90 pointer-events-none select-none"
+          className="absolute top-0  left-0 w-[300px] lg:w-[420px] opacity-90 pointer-events-none select-none"
         />
       )}
 
       {/* Main grid */}
       <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-[120px] py-8 sm:py-12 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-5 items-center">
 
           {/* ── Left: copy ── */}
           <div className="relative z-10">
@@ -93,7 +93,7 @@ export default function HeroSection({
                   <Image src={badgeIcon} alt="" aria-hidden className="w-5 h-5" />
                 )}
                 <p
-                  className="uppercase tracking-wide text-sm lg:text-base font-medium"
+                  className="uppercase tracking-wide text-sm lg:text-[18px] font-semibold"
                   style={{ color: accentColor }}
                 >
                   {badgeText}
@@ -102,16 +102,18 @@ export default function HeroSection({
             )}
 
             {/* Heading */}
-            <h1 className="mt-6 text-[36px] sm:text-[42px] lg:text-[46px] font-semibold text-black whitespace-pre-line">
-              {heading}{" "}
-              {headingHighlight && (
-                <span style={{ color: accentColor }}>{headingHighlight}</span>
-              )}
-            </h1>
+           <h1 className="mt-4 text-[36px] sm:text-[42px] lg:text-[46px] font-semibold text-black ">
+  {heading}{" "}
+  {headingHighlight && (
+    <span style={{ color: accentColor }}>
+      {headingHighlight}
+    </span>
+  )}
+</h1>
 
             {/* Subtext */}
             {subtext && (
-              <p className="mt-4 max-w-[620px] text-[#979797] text-[16px] leading-8 font-normal">
+              <p className="mt-2 max-w-[620px] text-[#979797] text-[16px] leading-8 font-normal">
                 {subtext}
               </p>
             )}

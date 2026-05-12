@@ -27,7 +27,7 @@ export default function StatsSection() {
       className="
         w-full
         bg-[#7A0012]
-        mx-auto px-32
+     px-4 sm:px-8 lg:px-40
         
         
       "

@@ -31,12 +31,8 @@ export default function CTASection() {
 
           {/* BUTTONS */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="px-8 py-3 bg-[#F97316] text-white font-semibold rounded-full hover:bg-[#ea6a0a] transition-colors duration-300">
-              Contact Us
-            </button>
-            <button className="px-8 py-3 border-2 border-white text-white font-semibold rounded-full hover:bg-white/10 transition-colors duration-300">
-              Request Quote
-            </button>
+            <Button label="Contact Us" variant="primary" href="/contact" />
+            <Button label="Request Quote" variant="outline" href="/request-quote" className="border-white text-white"   />
           </div>
         </div>
       </div>

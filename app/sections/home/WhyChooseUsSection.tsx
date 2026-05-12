@@ -1,5 +1,6 @@
 "use client";
 
+import { IconHelpOctagon } from "@tabler/icons-react";
 import {
   Users,
   Clock,
@@ -68,11 +69,11 @@ export default function WhyChooseUsSection() {
         {/* SECTION HEADER */}
         <div className="text-center mb-20 px-6 lg:px-[120px]">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <span className="flex items-center justify-center w-[22px] h-[22px] rounded-full border border-[#F97316] text-[#F97316] text-[11px] font-bold leading-none">
-              ⊙
+            <span className="flex items-center justify-center text-[#F97316] text-[11px] font-bold leading-none">
+              <IconHelpOctagon />
             </span>
-            <p className="text-[#F97316] uppercase tracking-[3px] text-sm font-semibold">
-              Why Canopy
+            <p className="text-[#F97316]  tracking-[3px] text-[18px] font-semibold uppercase">
+              Why canopy
             </p>
           </div>
 
@@ -80,64 +81,140 @@ export default function WhyChooseUsSection() {
             Why <span className="text-[#F97316]">Choose Us</span>
           </h2>
 
-          <p className="text-[#979797] text-[16px] leading-relaxed max-w-[600px] mx-auto">
+          <p className="text-[#979797] text-[16px] leading-relaxed max-w-[600px] mx-auto font-normal">
             We are committed to delivering the highest standard of security
             services with professionalism, integrity, and reliability.
           </p>
         </div>
 
         {/* FEATURES GRID */}
-        <div className="px-6 lg:px-[120px]">
+      <div className="px-6 lg:px-[120px] py-16">
+  <div
+    className="
+      grid
+      grid-cols-1
+      md:grid-cols-2
+      lg:grid-cols-3
+      gap-8
+      w-full
+    "
+  >
+    {features.map((feature, index) => (
+      <div
+        key={index}
+        className="
+          relative
+          bg-white
+          border
+          border-[#E5E7EB]
+          overflow-hidden
+          transition-all
+          duration-300
+          hover:shadow-xl
+          group
+        "
+        style={{
+          width: "100%",
+          maxWidth: "560px",
+          height: "375px",
+          borderRadius: "10px",
+          clipPath:
+            "polygon(0 0, calc(100% - 90px) 0, 100% 90px, 100% 100%, 0 100%)",
+        }}
+      >
+        {/* TOP RIGHT CUT BOX */}
+       {/* TOP RIGHT CUT CARD */}
+<div
+  className="
+    absolute
+    top-0
+    right-0
+    bg-white
+    border-l
+    border-b
+    border-[#E5E7EB]
+    flex
+    items-center
+    justify-center
+    group-hover:border-[#F97316]
+    transition-all
+    duration-300
+  "
+  style={{
+    width: "181px",
+    height: "101px",
+    borderRadius: "0 17px 0 17px",
+    paddingTop: "10px",
+    paddingRight: "28px",
+    paddingBottom: "10px",
+    paddingLeft: "28px",
+    clipPath: "polygon(35% 0%, 100% 0%, 100% 100%, 0% 100%)",
+  }}
+>
+  <span
+    className="
+      text-[32px]
+      font-bold
+      text-[#D97354]
+      leading-none
+    "
+  >
+    {feature.number}
+  </span>
+</div>
+
+        {/* HOVER BOTTOM LINE */}
+        <div
+          className="
+            absolute
+            bottom-0
+            left-0
+            h-[4px]
+            bg-[#F97316]
+            w-0
+            group-hover:w-full
+            transition-all
+            duration-300
+          "
+        />
+
+        {/* CONTENT */}
+        <div className="p-8 flex flex-col h-full">
+          {/* ICON */}
           <div
             className="
-              grid
-              grid-cols-1
-              md:grid-cols-2
-              lg:grid-cols-3
-              gap-8
-              w-full
+              w-[60px]
+              h-[60px]
+              rounded-[14px]
+              border
+              border-[#E5E7EB]
+              flex
+              items-center
+              justify-center
+              text-[#D97354]
+              mb-8
+              transition-all
+              duration-300
+              group-hover:border-[#F97316]
             "
           >
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="
-                  relative
-                  p-8
-                  rounded-lg
-                  border
-                  border-gray-200
-                  bg-white
-                  transition-all
-                  duration-300
-                  hover:border-[#F97316]
-                  hover:shadow-lg
-                  group
-                "
-              >
-                {/* NUMBER BACKGROUND */}
-                <div className="absolute top-4 right-4 text-[80px] font-bold text-gray-100 leading-none pointer-events-none select-none">
-                  {feature.number}
-                </div>
-
-                {/* ICON */}
-                <div className="relative z-10 mb-4 text-[#F97316] group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
-                </div>
-
-                {/* TITLE */}
-                <h3 className="relative z-10 text-[18px] font-bold text-black mb-3 leading-tight">
-                  {feature.title}
-                </h3>
-
-                {/* DESCRIPTION */}
-                <p className="relative z-10 text-[14px] leading-[1.7] text-[#979797]">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
+            {feature.icon}
           </div>
+
+          {/* TITLE */}
+          <h3 className="text-[22px] font-bold text-black mb-4 leading-snug max-w-[320px]">
+            {feature.title}
+          </h3>
+
+          {/* DESCRIPTION */}
+          <p className="text-[15px] leading-[30px] text-[#8B8B8B] max-w-[420px]">
+            {feature.description}
+          </p>
         </div>
+      </div>
+    ))}
+  </div>
+</div>
       </div>
     </section>
   );

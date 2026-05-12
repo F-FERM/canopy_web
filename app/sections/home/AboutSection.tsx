@@ -8,6 +8,7 @@ import Pattern from "../../../public/images/home/HomePattern2.png";
 import AboutImage1 from "../../../public/images/home/About1.png";
 import AboutImage2 from "../../../public/images/home/About2.png";
 import Button from "@/app/components/ui/Button";
+import { IconExclamationCircle } from "@tabler/icons-react";
 
 export default function AboutSection() {
   return (
@@ -53,21 +54,20 @@ export default function AboutSection() {
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="
               flex items-center justify-center
-              w-[22px] h-[22px]
-              rounded-full
-              border border-[#F97316]
+              w-[20px] h-[20px]
+             
               text-[#F97316]
               text-[11px]
               font-bold
               leading-none
             ">
-              ⊙
+              <IconExclamationCircle/>
             </span>
             <p className="
               text-[#F97316]
               uppercase
               tracking-[3px]
-              text-sm
+              text-[18px]
               font-semibold
             ">
               About
@@ -135,7 +135,7 @@ export default function AboutSection() {
       top-[42px]
       left-[321px]
       w-[384px]
-      h-[354px]
+      h-[384px]
       rounded-[10px]
       overflow-hidden
       shadow-2xl

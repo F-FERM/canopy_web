@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} `}>
         <Navbar />
-        <div className="mt-[80px] sm:mt-[100px] lg:mt-[120px]">{children}</div>
+        <div className="">{children}</div>
         <Footer />
       </body>
     </html>

@@ -1,13 +1,16 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Blog1 from "../../../public/images/home/Blog1.png"
+import Blog2 from "../../../public/images/home/Blog2.jpg"
+import Blog3 from "../../../public/images/home/Blog3.png"
 
 interface BlogPost {
   title: string;
   excerpt: string;
-  image: string;
+  image: StaticImageData;
   slug: string;
 }
 
@@ -17,27 +20,27 @@ export default function BlogSection() {
       title: "Security Guard Importance",
       excerpt:
         "How professional guards protect people, property, and businesses from security threats.",
-      image: "/images/home/blog-security-guard.png",
+      image: Blog1,
       slug: "security-guard-importance",
     },
     {
       title: "Business Security Tips",
-      description:
+      excerpt:
         "Simple security practices every business should follow to stay safe.",
-      image: "/images/home/blog-business-security.png",
+      image: Blog2,
       slug: "business-security-tips",
     },
     {
       title: "Modern Security Solutions",
       excerpt:
         "How technology and trained guards work together to ensure protection.",
-      image: "/images/home/blog-modern-security.png",
+      image: Blog3,
       slug: "modern-security-solutions",
     },
   ];
 
   return (
-    <section className="relative overflow-hidden py-28 px-4 sm:px-8">
+    <section className="relative overflow-hidden pt-20 px-4 sm:px-8 lg:px-40">
       <div className="relative z-10 max-w-[1920px] mx-auto">
         {/* SECTION HEADER */}
         <div className="text-center mb-20 px-6 lg:px-[120px]">
@@ -93,29 +96,29 @@ export default function BlogSection() {
                 "
               >
                 {/* IMAGE CONTAINER */}
-                <div className="relative h-[240px] w-full overflow-hidden bg-gray-200">
+                <div className="relative h-[240px] w-full overflow-hidden ">
                   <Image
                     src={post.image}
                     alt={post.title}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="object-cover transition-transform duration-300 group-hover:scale-110 rounded-xl"
                   />
                 </div>
 
                 {/* CONTENT */}
-                <div className="flex flex-col flex-1 p-6 gap-4">
+                <div className="flex flex-col flex-1 p-10 gap-4">
                   {/* TITLE */}
-                  <h3 className="text-[18px] font-bold text-black leading-tight group-hover:text-[#F97316] transition-colors duration-300">
+                  <h3 className="text-[20px] font-semibold text-black leading-tight group-hover:text-[#F97316] transition-colors duration-300">
                     {post.title}
                   </h3>
 
                   {/* EXCERPT */}
-                  <p className="text-[14px] leading-[1.6] text-[#979797] flex-1">
+                  <p className="text-[16px] leading-[1.6] text-[#D4D4D4] flex-1">
                     {post.excerpt}
                   </p>
 
                   {/* READ MORE LINK */}
-                  <div className="flex items-center gap-2 text-[#F97316] font-semibold text-[14px] group-hover:gap-3 transition-all duration-300">
+                  <div className="flex items-center gap-2 text-[#F97316] font-semibold text-[16px] group-hover:gap-3 transition-all duration-300">
                     <span>Read More</span>
                     <ArrowRight className="w-4 h-4" />
                   </div>
