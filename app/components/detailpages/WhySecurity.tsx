@@ -18,7 +18,7 @@ const SecurityWhy = () => {
     <section
       className="
         w-full
-        bg-[#8B2A14]
+        bg-[#7F220E]
 
         pt-[63px]
         pb-[111px]
@@ -28,28 +28,37 @@ const SecurityWhy = () => {
         md:px-[150px]
         lg:px-[250px]
         xl:px-[377px]
+
         mb-20
       "
     >
-      <div className="max-w-[1166px] mx-auto text-center">
+      <div className="max-w-[1166px] mx-auto">
 
-        {/* TITLE */}
-        <h2 className="text-white text-[26px] sm:text-[34px] md:text-[46px] font-semibold leading-tight ">
-          Why <span className="text-[#F26A21]">Security Guards</span> Are <br/>Essential
+        {/* TITLE (centered like design) */}
+        <h2 className="text-center text-white text-[26px] sm:text-[34px] md:text-[46px] font-semibold leading-tight">
+          Why <span className="text-[#F26A21]">Security Guards</span> Are <br />
+          Essential
         </h2>
 
-        {/* DESCRIPTION */}
-        <p className="mt-4 text-[#E9E9E9] text-[13px] md:text-[16px] max-w-[700px] mx-auto">
+        {/* DESCRIPTION (centered like design) */}
+        <p className="mt-4 text-center text-[#E9E9E9] text-[13px] md:text-[16px] max-w-[700px] mx-auto">
           Security guards act as the first line of defense, preventing risks before they escalate into serious threats.
         </p>
 
-        {/* CONTENT */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-left">
+        {/* POINTS GRID */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-70">
 
           {/* LEFT */}
           <div className="space-y-5">
             {pointsLeft.map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-[#E9E9E9] text-[14px] md:text-[18px]">
+              <div
+                key={i}
+                className="
+                  flex items-center gap-3
+                  text-[#C0C0C0]
+                  text-[14px] md:text-[18px]
+                "
+              >
                 <CheckCircle className="text-[#F26A21]" size={18} />
                 {item}
               </div>
@@ -59,7 +68,14 @@ const SecurityWhy = () => {
           {/* RIGHT */}
           <div className="space-y-5">
             {pointsRight.map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-white text-[14px] md:text-[15px]">
+              <div
+                key={i}
+                className="
+                  flex items-center gap-3
+                  text-[#C0C0C0]
+                  text-[14px] md:text-[18px]
+                "
+              >
                 <CheckCircle className="text-[#F26A21]" size={18} />
                 {item}
               </div>
