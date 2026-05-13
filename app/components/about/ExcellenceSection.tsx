@@ -1,7 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import Image, { StaticImageData } from "next/image";
+import Excellence1 from "../../../public/images/about/Excelence1.jpg";
+import Excellence2 from "../../../public/images/about/Excelence2.jpg";
+import Excellence3 from "../../../public/images/about/Excelence3.jpg";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -9,7 +12,7 @@ interface Employee {
   id: string;
   name: string;
   month: string;
-  image: string;
+  image: StaticImageData;
   featured?: boolean;
 }
 
@@ -27,21 +30,21 @@ const defaultEmployees: Employee[] = [
     id: "1",
     name: "John Mathew",
     month: "March",
-    image: "/images/about/About1.png",
+    image: Excellence1,
     featured: false,
   },
   {
     id: "2",
     name: "Mariya ks",
     month: "February",
-    image: "/images/about/About2.png",
+    image: Excellence2,
     featured: true,
   },
   {
     id: "3",
     name: "Arun Kumar",
     month: "January",
-    image: "/images/about/About3.png",
+    image: Excellence3,
     featured: false,
   },
 ];
@@ -75,7 +78,7 @@ function EmployeeCard({
   employee: Employee;
   delay: number;
 }) {
-  const { name, month, image, featured } = employee;
+  const { name, month, image } = employee;
 
   return (
     <motion.div
@@ -84,13 +87,21 @@ function EmployeeCard({
       whileInView="visible"
       viewport={{ once: true, margin: "-60px" }}
       whileHover={{ y: -6, transition: { duration: 0.25 } }}
-      className={`
-        group relative overflow-hidden rounded-2xl
-        ${featured ? "h-50 shadow-[0_16px_48px_rgba(0,0,0,0.18)]" : "h-60 shadow-[0_8px_30px_rgba(0,0,0,0.10)]"}
-        w-full cursor-pointer
-      `}
+      className="
+        group relative overflow-hidden rounded-[30px]
+        w-full
+        max-w-full
+        sm:max-w-[448px]
+
+        h-[300px]
+        sm:h-[320px]
+        md:h-[340px]
+        lg:h-[363px]
+
+        cursor-pointer
+        shadow-[0_10px_40px_rgba(0,0,0,0.12)]
+      "
     >
-      {/* Background image */}
       <Image
         src={image}
         alt={`${name} – Employee of the Month`}
@@ -99,7 +110,6 @@ function EmployeeCard({
         sizes="(max-width: 768px) 100vw, 33vw"
       />
 
-      {/* Soft vignette gradient — bottom-heavy for text legibility */}
       <div
         className="absolute inset-0"
         style={{
@@ -108,12 +118,14 @@ function EmployeeCard({
         }}
       />
 
-      {/* Name + month text */}
-      <div className="absolute bottom-0 left-0 right-0 p-5">
-        <p className="text-[15px] font-bold leading-tight text-white drop-shadow-sm">
+      <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-[36px] pb-6 md:pb-[31px]">
+        <p className="text-[22px] sm:text-[24px] md:text-[26px] font-medium leading-tight text-white drop-shadow-sm">
           {name}
         </p>
-        <p className="mt-0.5 text-[12px] font-medium text-white/70">{month}</p>
+
+        <p className="mt-0.5 text-[14px] md:text-[15px] font-medium text-white/70">
+          {month}
+        </p>
       </div>
     </motion.div>
   );
@@ -129,19 +141,43 @@ export default function ExcellenceSection({
 }: ExcellenceSectionProps) {
   return (
     <section
-      className="bg-white px-6 py-16 md:px-12 lg:px-20 lg:py-20"
+      className="
+        px-5
+        sm:px-8
+        md:px-14
+        lg:px-24
+        xl:px-40
+        2xl:px-60
+
+        py-14
+        md:py-20
+        mx-auto
+      "
       aria-label="Excellence in Service – Employee of the Month"
     >
       {/* ── Section heading ── */}
-      <div className="mb-30 flex flex-col items-center text-center">
+      <div className="mb-14 md:mb-20 lg:mb-28 flex flex-col items-center text-center">
         <motion.h2
           variants={fadeUp(0)}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-[30px] font-extrabold tracking-tight text-[#111111] md:text-[34px]"
+          className="
+            text-center
+            text-[32px]
+            sm:text-[38px]
+            md:text-[42px]
+            lg:text-[46px]
+
+            font-semibold
+            leading-[110%]
+            tracking-[0.04em]
+            mb-2
+            text-[#111111]
+          "
         >
-          {title} <span style={{ color: "#E8490F" }}>{titleHighlight}</span>
+          {title}{" "}
+          <span className="text-[#F26A23]">{titleHighlight}</span>
         </motion.h2>
 
         <motion.p
@@ -149,17 +185,37 @@ export default function ExcellenceSection({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-2 text-[13px] text-[#999999]"
+          className="
+            mt-4 md:mt-5
+            text-[14px]
+            md:text-[16px]
+            text-[#979797]
+            font-normal
+          "
         >
           {subtitle}
         </motion.p>
       </div>
 
       {/* ── Cards grid ── */}
-      {/* Middle card is taller — achieved via self-end + individual heights */}
-      <div className="mx-auto grid max-w-4xl grid-cols-1 items-end gap-5 sm:grid-cols-3">
+      <div
+        className="
+          mx-auto
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          items-end
+
+          gap-5
+        "
+      >
         {employees.map((emp, i) => (
-          <EmployeeCard key={emp.id} employee={emp} delay={0.1 + i * 0.12} />
+          <EmployeeCard
+            key={emp.id}
+            employee={emp}
+            delay={0.1 + i * 0.12}
+          />
         ))}
       </div>
     </section>

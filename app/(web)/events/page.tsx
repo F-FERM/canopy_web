@@ -1,4 +1,3 @@
-import React from "react";
 import EventsHeroSection from "@/app/sections/events/EventsHeroSection";
 import FeaturedEventSection from "@/app/sections/events/FeaturedEventSection";
 import UpcomingEventsSection from "@/app/sections/events/UpcomingEventsSection";

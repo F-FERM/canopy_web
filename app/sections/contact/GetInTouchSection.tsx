@@ -1,57 +1,202 @@
-import React from "react";
+"use client";
+
 import Button from "@/app/components/ui/Button";
+import HeroBg from "../../../public/images/blog/Blog1.png";
+import { Phone } from "lucide-react";
 
 const GetInTouchSection = () => {
   return (
-    <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 bg-gray-50">
-      <div className="max-w-5xl mx-auto">
-        {/* Main Card with Background */}
+    <section
+      className="
+        relative
+        w-full
+        overflow-hidden
+
+        px-4
+        sm:px-6
+        md:px-8
+        lg:px-8
+
+        py-6
+        md:py-8
+      "
+    >
+      {/* Main Container */}
+      <div
+        className="
+          relative
+          w-full
+          max-w-[1760px]
+          mx-auto
+
+          h-[420px]
+          sm:h-[520px]
+          md:h-[620px]
+          lg:h-[720px]
+
+          rounded-[20px]
+          overflow-hidden
+        "
+      >
+        {/* Background Image */}
         <div
-          className="relative rounded-3xl overflow-hidden h-96 md:h-125 flex items-center justify-center p-6 md:p-12 lg:p-16"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=600&fit=crop')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundImage: `url(${HeroBg.src})`,
           }}
         >
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50 rounded-3xl"></div>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/55" />
+        </div>
 
-          {/* Content */}
-          <div className="relative z-10 text-center max-w-3xl">
+        {/* Content Wrapper */}
+        <div
+          className="
+            relative
+            z-10
+
+            flex
+            items-center
+            justify-center
+
+            text-center
+
+            h-full
+
+            px-5
+            sm:px-8
+            md:px-14
+            lg:px-24
+            xl:px-[148px]
+
+            py-10
+            sm:py-14
+            md:py-16
+          "
+        >
+          {/* Content Box */}
+          <div
+            className="
+              flex
+              flex-col
+              items-center
+
+              gap-4
+              sm:gap-5
+              md:gap-6
+              lg:gap-[25px]
+
+              w-full
+              max-w-[900px]
+            "
+          >
             {/* Tag */}
-            <div className="mb-4">
-              <span className="text-orange-500 font-semibold text-sm md:text-sm tracking-widest">
-                GET IN TOUCH
+            <p
+              className="
+                flex items-center gap-2
+
+                text-[13px]
+                sm:text-[15px]
+                md:text-[16px]
+                lg:text-[18px]
+
+                font-semibold
+                tracking-[0.14em]
+                uppercase
+                text-[#F26A23]
+              "
+            >
+              <span
+                aria-hidden="true"
+                className="
+                  text-[14px]
+                  sm:text-[16px]
+                  md:text-[18px]
+
+                  leading-none
+                "
+              >
+                ⓘ
               </span>
-            </div>
+
+              <span>GET IN TOUCH</span>
+            </p>
 
             {/* Heading */}
-            <h2 className="text-4xl md:text-5xl lg:text-3xl font-bold mb-6 leading-tight">
-              <span className="text-white">Get In Touch With Our</span>
+            <h2
+              className="
+                font-semibold
+                leading-[1.1]
+
+                text-[30px]
+                sm:text-[40px]
+                md:text-[48px]
+                lg:text-[56px]
+              "
+            >
+              <span className="text-white">
+                Get In Touch With Our
+              </span>
               <br />
-              <span className="text-orange-500">Security</span>
-              <br />
-              <span className="text-orange-500">Experts</span>
+
+              <span className="text-[#F26A23]">
+                Security Experts
+              </span>
             </h2>
 
             {/* Description */}
-            <p className="text-gray-200 text-base md:text-sm mb-8 leading-relaxed max-w-2xl mx-auto">
-              Have questions? Let's build the right protection solution for you.
+            <p
+              className="
+                text-[#CDCDCD]
+
+                text-[14px]
+                sm:text-[15px]
+                md:text-[16px]
+
+                font-normal
+                leading-[1.8]
+
+                max-w-[720px]
+              "
+            >
+              Have questions? Let’s build the right protection solution
+              for your business, property, and people with our trusted
+              security professionals.
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div
+              className="
+                flex
+                flex-col
+                sm:flex-row
+
+                items-center
+                justify-center
+
+                gap-4
+
+                pt-2
+                sm:pt-4
+              "
+            >
               <Button
+              icon={Phone}
+                label="Call Now"
                 variant="primary"
-                label="📞 Call Now"
-                className="px-8 py-3 rounded-full font-semibold flex items-center gap-2"
+                className="rounded-full"
+                showArrow={false}
               />
+
               <Button
-                variant="outline"
                 label="Request Quote →"
-                className="px-8 py-3 rounded-full font-semibold bg-white text-black"
+                variant="outline"
+                className="
+                  bg-transparent
+                  text-white
+                  border-white
+                  rounded-full
+                "
               />
             </div>
           </div>

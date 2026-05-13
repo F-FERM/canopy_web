@@ -1,28 +1,26 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 
-import Pattern from "../../../public/images/home/HomePattern2.png";
-import AboutImage1 from "../../../public/images/home/About1.png";
-import AboutImage2 from "../../../public/images/home/About2.png";
 import Button from "@/app/components/ui/Button";
 import { IconExclamationCircle } from "@tabler/icons-react";
+import AboutImage1 from "../../../public/images/home/About1.png";
+import AboutImage2 from "../../../public/images/home/About2.png";
+import Pattern from "../../../public/images/home/HomePattern2.png";
 
 export default function AboutSection() {
   return (
-    <section className="relative overflow-hidden py-28 px-20">
+    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-28 px-4 sm:px-6 md:px-12 lg:px-20 mb-16 sm:mb-20 md:mb-24 lg:mb-30">
       {/* TOP RIGHT dot pattern */}
       <Image
         src={Pattern}
         alt="pattern"
         className="
           absolute
-          top-[-4%]
-          right-[29%]
-          w-[320px]
-          opacity-60
+          top-[-2%] sm:top-[-3%] lg:top-[-4%]
+          right-[10%] sm:right-[20%] lg:right-[29%]
+          w-[160px] sm:w-[220px] md:w-[280px] lg:w-[320px]
+          opacity-40 sm:opacity-50 lg:opacity-60
           pointer-events-none
           select-none
           z-0
@@ -35,27 +33,26 @@ export default function AboutSection() {
         alt="pattern"
         className="
           absolute
-          bottom-[-30px]
-          left-[19%]
-          w-[190px]
-          opacity-25
+          bottom-[-40px] sm:bottom-[-50px] lg:bottom-[-70px]
+          left-[5%] sm:left-[12%] lg:left-[22%]
+          w-[160px] sm:w-[220px] md:w-[280px] lg:w-[320px]
+          opacity-15 sm:opacity-20 lg:opacity-25
           pointer-events-none
           select-none
           z-0
         "
       />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-2 sm:px-4 md:px-6">
         {/* SECTION TITLE */}
-        <div className="text-center mb-20">
-          <div className="flex items-center justify-center gap-2 mb-4">
+        <div className="text-center mb-10 sm:mb-14 md:mb-16 lg:mb-20">
+          <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
             <span
               className="
               flex items-center justify-center
-              w-[20px] h-[20px]
-             
+              w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]
               text-[#F97316]
-              text-[11px]
+              text-[10px] sm:text-[11px]
               font-bold
               leading-none
             "
@@ -66,8 +63,8 @@ export default function AboutSection() {
               className="
               text-[#F97316]
               uppercase
-              tracking-[3px]
-              text-[18px]
+              tracking-[2px] sm:tracking-[3px]
+              text-[14px] sm:text-[16px] md:text-[18px]
               font-semibold
             "
             >
@@ -77,11 +74,11 @@ export default function AboutSection() {
 
           <h2
             className="
-            text-[42px]
-            md:text-[56px]
+            text-[28px] sm:text-[36px] md:text-[42px] lg:text-[56px]
             font-bold
             leading-tight
             text-black
+            px-4
           "
           >
             Canopy <span className="text-[#F97316]">Security Services</span>
@@ -92,17 +89,20 @@ export default function AboutSection() {
         <div
           className="
     grid
+    grid-cols-1
     lg:grid-cols-2
     items-start
-    gap-[90px]
+    gap-8 sm:gap-12 md:gap-16 lg:gap-[90px]
   "
         >
           {/* ── LEFT: OVERLAPPING IMAGES ── */}
           <div
             className="
     relative
-    w-[705px]
-    h-[421px]
+    w-full
+    max-w-[705px]
+    mx-auto
+    h-[280px] sm:h-[340px] md:h-[380px] lg:h-[421px]
   "
           >
             {/* FIRST IMAGE */}
@@ -111,11 +111,11 @@ export default function AboutSection() {
       absolute
       top-0
       left-0
-      w-[377px]
-      h-[349px]
-      rounded-[10px]
+      w-[55%] sm:w-[54%] lg:w-[377px]
+      h-[72%] sm:h-[75%] md:h-[80%] lg:h-[349px]
+      rounded-[8px] sm:rounded-[10px]
       overflow-hidden
-      shadow-xl
+      shadow-lg sm:shadow-xl
       z-20
     "
             >
@@ -124,7 +124,7 @@ export default function AboutSection() {
                 alt="Security Guards"
                 fill
                 className="object-cover"
-                sizes="377px"
+                sizes="(max-width: 640px) 55vw, (max-width: 1024px) 54vw, 377px"
               />
             </div>
 
@@ -132,13 +132,13 @@ export default function AboutSection() {
             <div
               className="
       absolute
-      top-[42px]
-      left-[321px]
-      w-[384px]
-      h-[384px]
-      rounded-[10px]
+      top-[32px] sm:top-[38px] md:top-[40px] lg:top-[42px]
+      left-[42%] sm:left-[44%] lg:left-[321px]
+      w-[57%] sm:w-[55%] lg:w-[384px]
+      h-[75%] sm:h-[80%] md:h-[87%] lg:h-[384px]
+      rounded-[8px] sm:rounded-[10px]
       overflow-hidden
-      shadow-2xl
+      shadow-xl sm:shadow-2xl
       z-10
     "
             >
@@ -147,7 +147,7 @@ export default function AboutSection() {
                 alt="Security Officer"
                 fill
                 className="object-cover"
-                sizes="384px"
+                sizes="(max-width: 640px) 57vw, (max-width: 1024px) 55vw, 384px"
               />
             </div>
           </div>
@@ -155,25 +155,25 @@ export default function AboutSection() {
           {/* ── RIGHT: TEXT CONTENT ── */}
           <div
             className="
-    w-[705px]
-    h-[377px]
+    w-full
+    max-w-[705px]
+    mx-auto lg:mx-0
     flex
     flex-col
-    gap-[40px]
+    gap-6 sm:gap-8 md:gap-10 lg:gap-[40px]
   "
           >
             <div
               className="
     flex
     flex-col
-    gap-[24px]
+    gap-4 sm:gap-5 md:gap-6 lg:gap-[24px]
     text-[#979797]
-    text-[16px]
-    leading-[1.85]
+    text-[14px] sm:text-[15px] md:text-[16px]
+    leading-[1.7] sm:leading-[1.75] md:leading-[1.85]
     font-normal
   "
             >
-              {" "}
               <p>
                 Since 2016, Canopy Security Services L.L.C has been delivering
                 reliable and professional security and support solutions across
@@ -196,7 +196,7 @@ export default function AboutSection() {
             </div>
 
             {/* CTA BUTTON */}
-            <div className="mt-1">
+            <div className="mt-0 sm:mt-1">
               <Button
                 label="Learn More"
                 href="/about"

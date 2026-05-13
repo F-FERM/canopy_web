@@ -67,20 +67,20 @@ export default function HeroSection({
   const activeSlide = slides[currentSlide];
 
   return (
-    <section className="relative overflow-hidden pt-24 px-4 sm:px-8 lg:px-20">
+    <section className="relative overflow-hidden px-4 sm:px-6 md:px-12 lg:px-20 xl:px-60 py-12 sm:py-16 lg:py-20 mx-auto">
       {/* Decorative pattern */}
       {patternImage && (
         <Image
           src={patternImage}
           alt=""
           aria-hidden
-          className="absolute top-0  left-0 w-[300px] lg:w-[420px] opacity-90 pointer-events-none select-none"
+          className="absolute top-0 left-0 w-[180px] sm:w-[240px] md:w-[300px] lg:w-[420px] opacity-90 pointer-events-none select-none"
         />
       )}
 
       {/* Main grid */}
-      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-[10px] py-8 sm:py-12 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-5 items-center">
+      <div className="max-w-[1920px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 xl:px-[10px] py-4 sm:py-8 md:py-12 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6 sm:gap-8 lg:gap-5 items-center">
           {/* ── Left: copy ── */}
           <div className="relative z-10">
             {/* Badge */}
@@ -91,11 +91,11 @@ export default function HeroSection({
                     src={badgeIcon}
                     alt=""
                     aria-hidden
-                    className="w-5 h-5"
+                    className="w-4 h-4 sm:w-5 sm:h-5"
                   />
                 )}
                 <p
-                  className="uppercase tracking-wide text-sm lg:text-[18px] font-semibold"
+                  className="uppercase tracking-wide text-xs sm:text-sm md:text-base lg:text-[18px] font-semibold"
                   style={{ color: accentColor }}
                 >
                   {badgeText}
@@ -104,7 +104,7 @@ export default function HeroSection({
             )}
 
             {/* Heading */}
-            <h1 className="mt-4 text-[36px] sm:text-[42px] lg:text-[46px] font-semibold text-black ">
+            <h1 className="mt-3 sm:mt-4 text-[28px] sm:text-[36px] md:text-[42px] lg:text-[46px] font-semibold text-black leading-tight">
               {heading}{" "}
               {headingHighlight && (
                 <span style={{ color: accentColor }}>{headingHighlight}</span>
@@ -113,14 +113,14 @@ export default function HeroSection({
 
             {/* Subtext */}
             {subtext && (
-              <p className="mt-2 max-w-[620px] text-[#979797] text-[16px] leading-8 font-normal">
+              <p className="mt-3 sm:mt-4 max-w-[620px] text-[#979797] text-[14px] sm:text-[15px] md:text-[16px] leading-6 sm:leading-7 md:leading-8 font-normal">
                 {subtext}
               </p>
             )}
 
             {/* Buttons */}
             {buttons.length > 0 && (
-              <div className="mt-7 flex flex-wrap gap-5">
+              <div className="mt-5 sm:mt-6 md:mt-7 flex flex-wrap gap-3 sm:gap-4 md:gap-5">
                 {buttons.map((btn) => (
                   <Button
                     key={btn.href}
@@ -137,7 +137,7 @@ export default function HeroSection({
           {/* ── Right: image slider ── */}
           {slides.length > 0 && (
             <div className="relative">
-              <div className="relative w-full h-[260px] sm:h-[380px] lg:h-[500px] overflow-hidden rounded-[36px]">
+              <div className="relative w-full h-[220px] sm:h-[280px] md:h-[360px] lg:h-[460px] xl:h-[500px] overflow-hidden rounded-[20px] sm:rounded-[28px] lg:rounded-[36px]">
                 {/* Slides */}
                 {slides.map((slide, index) => (
                   <img
@@ -159,27 +159,27 @@ export default function HeroSection({
 
                 {/* Slide copy */}
                 {activeSlide && (
-                  <div className="absolute bottom-10 left-10 text-white z-10">
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
+                  <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 left-4 sm:left-6 md:left-8 lg:left-10 text-white z-10 pr-4">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold leading-tight">
                       {activeSlide.title}
                     </h3>
-                    <p className="mt-4 max-w-[600px] text-base lg:text-lg text-white/90 leading-8">
+                    <p className="mt-2 sm:mt-3 md:mt-4 max-w-[600px] text-sm sm:text-base lg:text-lg text-white/90 leading-6 sm:leading-7 md:leading-8">
                       {activeSlide.description}
                     </p>
                   </div>
                 )}
 
                 {/* Dot indicators */}
-                <div className="absolute bottom-6 right-6 flex gap-2 z-10">
+                <div className="absolute bottom-4 sm:bottom-5 md:bottom-6 right-4 sm:right-5 md:right-6 flex gap-1.5 sm:gap-2 z-10">
                   {slides.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentSlide(index)}
                       aria-label={`Go to slide ${index + 1}`}
-                      className={`h-3 rounded-full transition-all duration-300 ${
+                      className={`h-2 sm:h-2.5 md:h-3 rounded-full transition-all duration-300 ${
                         currentSlide === index
-                          ? "w-10 bg-white"
-                          : "w-3 bg-white/50"
+                          ? "w-8 sm:w-9 md:w-10 bg-white"
+                          : "w-2 sm:w-2.5 md:w-3 bg-white/50"
                       }`}
                     />
                   ))}

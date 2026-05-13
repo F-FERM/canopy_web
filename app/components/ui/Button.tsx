@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, LucideIcon } from "lucide-react";
+import { isValidElement } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -36,14 +37,14 @@ export default function Button({
   const isOutline = variant === "outline";
   const isGhost   = variant === "ghost";
 
-  const displayArrow = showArrow ?? isPrimary;
+const displayArrow = showArrow ?? (isPrimary || isGhost);  
 
   // ── Shared base classes ──────────────────────────────────────────────────
   const base = `
     inline-flex items-center justify-center gap-2
-    h-[51px] px-[45px] rounded-[10px]
+    h-[51px] px-[45px] rounded-[40px]
     text-[18px] font-medium
-    transition-all duration-300
+    transition-all duration-300 
     select-none whitespace-nowrap
     disabled:opacity-50 disabled:pointer-events-none
     hover:-translate-y-1
@@ -53,7 +54,7 @@ export default function Button({
   const variantClass = isOutline
     ? "border border-black bg-transparent text-black hover:bg-black hover:text-white"
     : isGhost
-    ? "bg-transparent text-black hover:underline"
+    ? "text-white hover:shadow-lg bg-transparent border border-white rounded"
     : "text-white hover:shadow-lg";  
 
   const inlineStyle =
@@ -62,9 +63,11 @@ export default function Button({
   // ── Inner content ────────────────────────────────────────────────────────
   const content = (
     <>
-      {Icon && <Icon className="w-5 h-5" />}
+      {Icon && (
+        isValidElement(Icon) ? Icon : <Icon size={20} className="shrink-0" />
+      )}
       {label}
-      {displayArrow && <ArrowRight className="w-5 h-5" />}
+      {displayArrow && !Icon && <ArrowRight size={20} className="shrink-0" />}
     </>
   );
 

@@ -1,12 +1,12 @@
-import React from "react";
 import BlogHeroSection from "@/app/sections/blog/BlogHeroSection";
-import BlogSection from "@/app/sections/blog/BlogSection";
+import BlogSection from "@/app/sections/home/BlogSection";
+
 
 const page = () => {
   return (
     <>
       <BlogHeroSection />
-      <BlogSection />
+         <BlogSection />
     </>
   );
 };

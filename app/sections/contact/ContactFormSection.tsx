@@ -1,142 +1,483 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
+import {
+  Zap,
+  Users,
+  Target,
+  BadgeDollarSign,
+} from "lucide-react";
+
 import Button from "@/app/components/ui/Button";
 
-const ContactFormSection = () => {
-  return (
-    <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div className="p-8 rounded-2xl border border-gray-200 bg-white">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
-              Send Message
-            </h3>
+// ─────────────────────────────────────────────────────────────
+// Animation Variants
+// ─────────────────────────────────────────────────────────────
 
-            <form className="space-y-6">
-              {/* Name Input */}
+const fadeUp = (delay = 0) => ({
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      delay,
+    },
+  },
+});
+
+const scaleIn = (delay = 0) => ({
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.55,
+      delay,
+    },
+  },
+});
+
+// ─────────────────────────────────────────────────────────────
+// Feature Data
+// ─────────────────────────────────────────────────────────────
+
+const features = [
+  {
+    id: 1,
+    title: "Fast Response",
+    description: "We reply within hours.",
+    icon: <Zap size={22} strokeWidth={2.2} />,
+  },
+  {
+    id: 2,
+    title: "Professional Team",
+    description: "Certified security experts.",
+    icon: <Users size={22} strokeWidth={2.2} />,
+  },
+  {
+    id: 3,
+    title: "Custom Plans",
+    description: "Tailored security solutions.",
+    icon: <Target size={22} strokeWidth={2.2} />,
+  },
+  {
+    id: 4,
+    title: "Value for Money",
+    description: "Best value for your investment.",
+    icon: <BadgeDollarSign size={22} strokeWidth={2.2} />,
+  },
+];
+
+// ─────────────────────────────────────────────────────────────
+// Main Component
+// ─────────────────────────────────────────────────────────────
+
+export default function ContactFormSection() {
+  return (
+    <section
+      className="
+        px-5
+        sm:px-8
+        md:px-14
+        lg:px-24
+        xl:px-40
+        2xl:px-60
+
+        py-14
+        md:py-20
+
+        mx-auto
+      "
+    >
+      <div className="mx-auto max-w-[1400px]">
+
+        {/* GRID */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+
+          {/* ───────────────── LEFT FORM CARD ───────────────── */}
+          <motion.div
+            variants={fadeUp(0)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="
+              bg-white
+              border border-[#E8E8E8]
+              rounded-[14px]
+
+              shadow-[0_4px_20px_rgba(0,0,0,0.03)]
+
+              w-full
+
+              px-5
+              sm:px-7
+              md:px-10
+              lg:px-[50px]
+              xl:px-[64px]
+
+              py-8
+              md:py-10
+              xl:pt-[43px]
+              xl:pb-[61px]
+
+              min-h-auto
+              xl:min-h-[728px]
+            "
+          >
+            {/* TITLE */}
+            <h2
+              className="
+                text-[26px]
+                sm:text-[32px]
+                md:text-[38px]
+                xl:text-[42px]
+
+                font-semibold
+                leading-[110%]
+
+                tracking-[-0.02em]
+
+                text-[#111111]
+
+                mb-8
+                md:mb-10
+              "
+            >
+              Send Message
+            </h2>
+
+            {/* FORM */}
+            <form className="space-y-5 md:space-y-7">
+
+              {/* NAME */}
               <div>
-                <label className="block text-gray-900 font-semibold mb-2">
+                <label
+                  className="
+                    block
+
+                    text-[16px]
+                    md:text-[18px]
+
+                    font-medium
+                    text-[#111111]
+
+                    mb-2
+                    md:mb-3
+                  "
+                >
                   Name
                 </label>
+
                 <input
                   type="text"
-                  placeholder="Your Name.."
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition"
+                  placeholder="Your Name..."
+                  className="
+                    w-full
+
+                    h-[56px]
+                    md:h-[62px]
+
+                    rounded-[10px]
+                    border border-[#E3E3E3]
+
+                    px-4
+                    md:px-6
+
+                    bg-white
+                    outline-none
+
+                    text-[15px]
+                    md:text-[16px]
+
+                    text-[#111111]
+
+                    placeholder:text-[#C6C6C6]
+
+                    focus:border-[#F26A23]
+
+                    transition-all
+                  "
                 />
               </div>
 
-              {/* Email Input */}
+              {/* EMAIL */}
               <div>
-                <label className="block text-gray-900 font-semibold mb-2">
+                <label
+                  className="
+                    block
+
+                    text-[16px]
+                    md:text-[18px]
+
+                    font-medium
+                    text-[#111111]
+
+                    mb-2
+                    md:mb-3
+                  "
+                >
                   Email
                 </label>
+
                 <input
                   type="email"
                   placeholder="example@gmail.com"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition"
+                  className="
+                    w-full
+
+                    h-[56px]
+                    md:h-[62px]
+
+                    rounded-[10px]
+                    border border-[#E3E3E3]
+
+                    px-4
+                    md:px-6
+
+                    bg-white
+                    outline-none
+
+                    text-[15px]
+                    md:text-[16px]
+
+                    text-[#111111]
+
+                    placeholder:text-[#C6C6C6]
+
+                    focus:border-[#F26A23]
+
+                    transition-all
+                  "
                 />
               </div>
 
-              {/* Subject Input */}
+              {/* SUBJECT */}
               <div>
-                <label className="block text-gray-900 font-semibold mb-2">
+                <label
+                  className="
+                    block
+
+                    text-[16px]
+                    md:text-[18px]
+
+                    font-medium
+                    text-[#111111]
+
+                    mb-2
+                    md:mb-3
+                  "
+                >
                   Subject
                 </label>
+
                 <input
                   type="text"
-                  placeholder="Title.."
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition"
+                  placeholder="Title..."
+                  className="
+                    w-full
+
+                    h-[56px]
+                    md:h-[62px]
+
+                    rounded-[10px]
+                    border border-[#E3E3E3]
+
+                    px-4
+                    md:px-6
+
+                    bg-white
+                    outline-none
+
+                    text-[15px]
+                    md:text-[16px]
+
+                    text-[#111111]
+
+                    placeholder:text-[#C6C6C6]
+
+                    focus:border-[#F26A23]
+
+                    transition-all
+                  "
                 />
               </div>
 
-              {/* Message Textarea */}
+              {/* MESSAGE */}
               <div>
-                <label className="block text-gray-900 font-semibold mb-2">
+                <label
+                  className="
+                    block
+
+                    text-[16px]
+                    md:text-[18px]
+
+                    font-medium
+                    text-[#111111]
+
+                    mb-2
+                    md:mb-3
+                  "
+                >
                   Message
                 </label>
+
                 <textarea
-                  placeholder="Type Here.."
                   rows={5}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition resize-none"
-                ></textarea>
+                  placeholder="Type Here..."
+                  className="
+                    w-full
+
+                    h-[140px]
+                    md:h-[160px]
+
+                    rounded-[10px]
+                    border border-[#E3E3E3]
+
+                    p-4
+                    md:p-6
+
+                    bg-white
+                    outline-none
+                    resize-none
+
+                    text-[15px]
+                    md:text-[16px]
+
+                    text-[#111111]
+
+                    placeholder:text-[#C6C6C6]
+
+                    focus:border-[#F26A23]
+
+                    transition-all
+                  "
+                />
               </div>
 
-              {/* Send Button */}
-              <Button
-                variant="primary"
-                className="w-full px-6 py-3 rounded-lg font-semibold"
-              >
-                Send Now
-              </Button>
+              {/* BUTTON */}
+              <div className="pt-2">
+                <Button
+                  label="Send Now"
+                  variant="primary"
+                  className="
+                    w-full
+                    sm:w-[220px]
+                    md:w-[250px]
+
+                    h-[56px]
+                    md:h-[64px]
+
+                    rounded-[10px]
+
+                    bg-[#F26A23]
+                    hover:bg-[#df5f1d]
+
+                    text-white
+
+                    text-[16px]
+                    md:text-[18px]
+
+                    font-semibold
+
+                    transition-all
+                    duration-300
+                  "
+                />
+              </div>
             </form>
-          </div>
+          </motion.div>
 
-          {/* Benefits Section */}
-          <div className="space-y-6">
-            {/* Fast Response */}
-            <div className="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="text-3xl">⚡</div>
-                <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-1">
-                    Fast Response
-                  </h4>
-                  <p className="text-gray-600 text-sm md:text-base">
-                    We reply within hours.
-                  </p>
-                </div>
-              </div>
-            </div>
+          {/* ───────────────── RIGHT FEATURE CARDS ───────────────── */}
+          <div className="flex flex-col gap-5 md:gap-7">
 
-            {/* Professional Team */}
-            <div className="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="text-3xl">👥</div>
-                <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-1">
-                    Professional Team
-                  </h4>
-                  <p className="text-gray-600 text-sm md:text-base">
-                    Certified security experts.
-                  </p>
-                </div>
-              </div>
-            </div>
+            {features.map((item, i) => (
+              <motion.div
+                key={item.id}
+                variants={scaleIn(0.1 + i * 0.12)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{
+                  y: -4,
+                  transition: {
+                    duration: 0.2,
+                  },
+                }}
+                className="
+                  bg-white
+                  border border-[#E8E8E8]
 
-            {/* Custom Plans */}
-            <div className="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="text-3xl">🎯</div>
-                <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-1">
-                    Custom Plans
-                  </h4>
-                  <p className="text-gray-600 text-sm md:text-base">
-                    Tailored security solutions.
-                  </p>
-                </div>
-              </div>
-            </div>
+                  rounded-[20px]
 
-            {/* Value for Money */}
-            <div className="p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-shadow">
-              <div className="flex items-start gap-4">
-                <div className="text-3xl">💰</div>
-                <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-1">
-                    Value for Money
-                  </h4>
-                  <p className="text-gray-600 text-sm md:text-base">
-                    Best value for your investment.
-                  </p>
+                  px-5
+                  sm:px-7
+                  md:px-10
+
+                  py-7
+                  md:py-10
+
+                  min-h-[140px]
+                  md:min-h-[154px]
+
+                  flex items-center
+
+                  shadow-[0_4px_18px_rgba(0,0,0,0.02)]
+
+                  transition-all
+                "
+              >
+                <div className="flex items-start gap-4 md:gap-5">
+
+                  {/* ICON */}
+                  <div className="text-[#F26A23] mt-1 shrink-0">
+                    {item.icon}
+                  </div>
+
+                  {/* TEXT */}
+                  <div>
+                    <h3
+                      className="
+                        text-[20px]
+                        sm:text-[24px]
+                        md:text-[30px]
+                        xl:text-[34px]
+
+                        font-semibold
+                        leading-[110%]
+
+                        text-[#111111]
+
+                        mb-2
+                        md:mb-3
+                      "
+                    >
+                      {item.title}
+                    </h3>
+
+                    <p
+                      className="
+                        text-[14px]
+                        md:text-[16px]
+                        xl:text-[18px]
+
+                        text-[#5B5B5B]
+
+                        leading-[160%]
+                      "
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            ))}
+
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default ContactFormSection;
+}

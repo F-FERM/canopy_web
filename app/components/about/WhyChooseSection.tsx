@@ -1,253 +1,288 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import CardShape from "../../../public/images/about/Rectangle 22.png";
 
-// ─── Icons (simple SVG components) ────────────────────────────────────────────
-
-const HelpIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <circle cx="16" cy="16" r="14" stroke="currentColor" strokeWidth="1.5" />
-    <text
-      x="50%"
-      y="50%"
-      textAnchor="middle"
-      dy="0.3em"
-      fontSize="18"
-      fontWeight="bold"
-      fill="currentColor"
-    >
-      ?
-    </text>
-  </svg>
-);
-
-const TargetIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="16" cy="16" r="8" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="16" cy="16" r="4" fill="currentColor" />
-  </svg>
-);
-
-const ShieldIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <path
-      d="M16 2L5 8V15C5 23 16 28 16 28C16 28 27 23 27 15V8L16 2Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      fill="none"
-    />
-  </svg>
-);
-
-const PeopleIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <circle cx="10" cy="10" r="4" stroke="currentColor" strokeWidth="1.5" />
-    <path
-      d="M4 20C4 16.5 6.5 14 10 14C13.5 14 16 16.5 16 20"
-      stroke="currentColor"
-      strokeWidth="1.5"
-    />
-    <circle cx="22" cy="10" r="4" stroke="currentColor" strokeWidth="1.5" />
-    <path
-      d="M16 20C16 16.5 18.5 14 22 14C25.5 14 28 16.5 28 20"
-      stroke="currentColor"
-      strokeWidth="1.5"
-    />
-  </svg>
-);
-
-const ValuesIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <path
-      d="M16 4L20 12H28L21 17L24 25L16 20L8 25L11 17L4 12H12L16 4Z"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      fill="none"
-    />
-  </svg>
-);
-
-const FocusIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <circle cx="16" cy="16" r="6" stroke="currentColor" strokeWidth="1.5" />
-    <path
-      d="M16 2V6M16 26V30M2 16H6M26 16H30"
-      stroke="currentColor"
-      strokeWidth="1.5"
-    />
-  </svg>
-);
-
-// ─── Icon Map ─────────────────────────────────────────────────────────────────
-
-const iconMap: { [key: string]: React.ReactNode } = {
-  help: <HelpIcon />,
-  target: <TargetIcon />,
-  shield: <ShieldIcon />,
-  people: <PeopleIcon />,
-  values: <ValuesIcon />,
-  focus: <FocusIcon />,
-};
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-export interface WhyChooseCard {
+interface WhatWeDoCardData {
   id: number;
-  number: string;
+  numberPrefix: string;
+  numberSuffix: string;
+  icon: string;
   title: string;
   description: string;
-  icon: keyof typeof iconMap;
 }
 
-interface WhyChooseSectionProps {
-  title?: string;
-  subtitle?: string;
-  cards?: WhyChooseCard[];
-}
-
-// ─── Default Data (API-like structure) ────────────────────────────────────────
-
-const defaultCards: WhyChooseCard[] = [
+const cards: WhatWeDoCardData[] = [
   {
     id: 1,
-    number: "01",
+    numberPrefix: "0",
+    numberSuffix: "1",
+    icon: "?",
     title: "WHAT WE DO",
     description:
-      "With an unwavering sense of professionalism and dedication to excellence, we work tirelessly to deliver the best possible service. Our commitment to quality is reflected in every aspect of our work.",
-    icon: "help",
+      "With an unwavering sense of professionalism instilled into everyone working in the firm, we are constantly striving towards improving ourselves and satisfying our customers. One factor without which this industry cannot move forward is trust, and we offer that without any sort of bargain.",
   },
   {
     id: 2,
-    number: "02",
-    title: "OUR MISSION",
+    numberPrefix: "0",
+    numberSuffix: "2",
+    icon: "★",
+    title: "OUR VISION",
     description:
-      "In today's world of increasing uncertainty, we are proud to offer something certain to our economy and society. Our mission is rooted in an unwavering sense of security and satisfaction from our customers.",
-    icon: "target",
+      "We envision a future where quality and reliability go hand in hand. Our team is dedicated to building long-lasting relationships with clients through transparent communication, consistent delivery, and an uncompromising commitment to excellence in every project.",
   },
   {
     id: 3,
-    number: "03",
-    title: "OUR SERVICES",
+    numberPrefix: "0",
+    numberSuffix: "3",
+    icon: "◆",
+    title: "OUR VALUES",
     description:
-      "With highly trained and experienced security personnel, you can be assured that we will deliver on our promises and protect your interests. We use a rigorous and thorough screening process.",
-    icon: "shield",
+      "Integrity, innovation, and impact drive everything we do. We believe in creating meaningful work that makes a difference — not just for our clients but for the communities we serve. Our values are not just words; they are the foundation of every decision we make.",
   },
   {
     id: 4,
-    number: "04",
-    title: "OUR TEAM",
+    numberPrefix: "0",
+    numberSuffix: "1",
+    icon: "?",
+    title: "WHAT WE DO",
     description:
-      "With a team of multi-cultural staff from various nationalities, we strive to become a truly global company that provides services that cannot be trumped to customers all over the world.",
-    icon: "people",
+      "With an unwavering sense of professionalism instilled into everyone working in the firm, we are constantly striving towards improving ourselves and satisfying our customers. One factor without which this industry cannot move forward is trust, and we offer that without any sort of bargain.",
   },
   {
     id: 5,
-    number: "05",
-    title: "OUR VALUES",
+    numberPrefix: "0",
+    numberSuffix: "2",
+    icon: "★",
+    title: "OUR VISION",
     description:
-      "With a team of multi-cultural staff from various nationalities, we strive to become a truly global company that provides services that cannot be trumped to customers all over the world.",
-    icon: "values",
+      "We envision a future where quality and reliability go hand in hand. Our team is dedicated to building long-lasting relationships with clients through transparent communication, consistent delivery, and an uncompromising commitment to excellence in every project.",
   },
   {
     id: 6,
-    number: "06",
-    title: "OUR FOCUS",
+    numberPrefix: "0",
+    numberSuffix: "3",
+    icon: "◆",
+    title: "OUR VALUES",
     description:
-      "The level of focus and attention paid to customers is done so with the aim of making you feel as if you are part of the family, not just part of the job.",
-    icon: "focus",
+      "Integrity, innovation, and impact drive everything we do. We believe in creating meaningful work that makes a difference — not just for our clients but for the communities we serve. Our values are not just words; they are the foundation of every decision we make.",
   },
 ];
 
-// ─── Animation Variants ────────────────────────────────────────────────────────
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
-};
-
-// ─── Component ─────────────────────────────────────────────────────────────────
-
-export default function WhyChooseSection({
-  title = "Why Choose",
-  subtitle = "Canopy Security Services",
-  cards = defaultCards,
-}: WhyChooseSectionProps) {
+function WhatWeDoCard({ card }: { card: WhatWeDoCardData }) {
   return (
-    <>
-      <section className=" from-slate-900 to-slate-800 px-6 py-16 md:px-12 lg:px-20 lg:py-24">
-        {/* ── Section Header ── */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
-        >
-          {/* <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-          {title} <span className="text-[#E8490F]">{subtitle}</span>
-        </h2> */}
-          <div className="h-1 w-16 bg-[#E8490F] mx-auto mt-4"></div>
-        </motion.div>
+    <div
+      className="
+        relative
 
-        {/* ── Cards Grid ── */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        w-full
+        max-w-[540px]
+
+        h-[420px]
+        sm:h-[480px]
+        lg:h-[560px]
+      "
+    >
+      {/* Number */}
+      <div
+        className="
+          absolute z-20 flex items-end leading-none
+
+          top-6 left-6
+          sm:top-8 sm:left-10
+
+          lg:top-10 lg:left-20
+        "
+      >
+        <span
+          className="
+            text-[55px]
+            sm:text-[65px]
+            lg:text-[80px]
+
+            font-semibold text-[#D9D9D9]
+          "
         >
-          {cards.map((card) => (
-            <motion.div
-              key={card.id}
-              variants={itemVariants}
-              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+          {card.numberPrefix}
+        </span>
+
+        <span
+          className="
+            text-[75px]
+            sm:text-[90px]
+            lg:text-[110px]
+
+            font-semibold text-[#F4A176]
+          "
+        >
+          {card.numberSuffix}
+        </span>
+      </div>
+
+      {/* Shape Card */}
+      <div
+        className="
+          absolute
+
+          top-[45px]
+          left-1/2
+          -translate-x-1/2
+
+          sm:top-[50px]
+
+          lg:top-[60px]
+          lg:left-[70px]
+          lg:translate-x-0
+
+          w-[88%]
+          sm:w-[430px]
+
+          h-[360px]
+          sm:h-[400px]
+          lg:h-[455px]
+        "
+      >
+        <Image
+          src={CardShape}
+          alt="shape card"
+          fill
+          className="object-contain"
+          priority
+        />
+
+        {/* Content */}
+        <div
+          className="
+            absolute inset-0 z-10 flex flex-col justify-end
+
+            px-6
+            sm:px-7
+            lg:px-[34px]
+
+            pt-[120px]
+            lg:pt-[141px]
+
+            pb-7
+            lg:pb-9
+          "
+        >
+          {/* Icon */}
+          <div
+            className="
+              absolute
+
+              top-5 right-5
+              sm:top-6 sm:right-6
+
+              lg:top-[28px]
+              lg:right-[34px]
+
+              w-[70px]
+              h-[65px]
+
+              sm:w-[80px]
+              sm:h-[72px]
+
+              lg:w-[92px]
+              lg:h-[82px]
+
+              rounded-[14px]
+              bg-[#F2F2F2]
+
+              flex items-center justify-center
+            "
+          >
+            <span
+              className="
+                text-[36px]
+                sm:text-[42px]
+                lg:text-[50px]
+
+                text-[#8B2E12]
+                leading-none
+              "
             >
-              {/* Number Badge */}
-              <div className="absolute -top-6 -left-6 w-20 h-20  rounded-full flex items-center justify-center">
-                <span className="text-5xl font-bold text-gray-300">
-                  {card.number}
-                </span>
-              </div>
+              {card.icon}
+            </span>
+          </div>
 
-              {/* Icon */}
-              <div className="relative z-10 mb-6 inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-xl text-[#E8490F] group-hover:bg-[#E8490F] group-hover:text-white transition-all duration-300">
-                {iconMap[card.icon]}
-              </div>
+          {/* Title */}
+          <h2
+            className="
+              text-[17px]
+              sm:text-[18px]
+              lg:text-[20px]
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 mb-4 mt-8">
-                {card.title}
-              </h3>
+              font-semibold
+              tracking-[1px]
+              text-black
+            "
+          >
+            {card.title}
+          </h2>
 
-              {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {card.description}
-              </p>
+          {/* Description */}
+          <p
+            className="
+              mt-4
+              lg:mt-5
 
-              {/* Hover underline */}
-              <div className="absolute bottom-0 left-0 h-1 bg-[#E8490F] rounded-full w-0 group-hover:w-full transition-all duration-300"></div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
-      <div className="bg-[#6B0F1A] h-[500px]"></div>
-    </>
+              text-[14px]
+              sm:text-[15px]
+              lg:text-[16px]
+
+              text-[#979797]
+              font-normal
+
+              max-w-[320px]
+              leading-[1.7]
+            "
+          >
+            {card.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function WhatWeDoCards() {
+  return (
+    <section
+      className="
+        w-full
+
+        px-5
+        sm:px-8
+        md:px-14
+        lg:px-24
+        xl:px-40
+        2xl:px-60
+
+        py-14
+        md:py-20
+
+        mx-auto
+      "
+    >
+      <div
+        className="
+          grid
+
+          grid-cols-1
+          sm:grid-cols-2
+          xl:grid-cols-3
+
+          gap-8
+          lg:gap-10
+
+          justify-items-center
+        "
+      >
+        {cards.map((card) => (
+          <WhatWeDoCard key={card.id} card={card} />
+        ))}
+      </div>
+    </section>
   );
 }
