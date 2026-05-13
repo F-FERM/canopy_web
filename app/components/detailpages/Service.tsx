@@ -2,7 +2,10 @@
 // Two components: CoreResponsibilities + IndustriesWeServe
 // Tailwind CSS (Next.js compatible)
 
+import GetInTouchSection from "@/app/sections/contact/GetInTouchSection";
 import React from "react";
+import ImageCard from "./ImageCard";
+import WhyCCTVOperators from "./ServiceSecond";
 
 // ─── 1. Core Responsibilities ──────────────────────────────────────────────
 
@@ -138,7 +141,9 @@ export function IndustriesWeServe() {
 
 export default function SecurityPage() {
   return (
-    <main className="font-sans">
+    <main className="">
+      <ImageCard />
+      <WhyCCTVOperators />
       <CoreResponsibilities />
       <IndustriesWeServe />
     </main>

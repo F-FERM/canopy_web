@@ -27,16 +27,15 @@ export default function StatsSection() {
       className="
         w-full
         bg-[#6B0F1A]
-        px-4 sm:px-6 md:px-12 lg:px-20 xl:px-60
+        px-4 sm:px-6 md:px-10 lg:px-20 xl:px-60
       "
     >
       <div
         className="
           max-w-[1920px]
-          min-h-[100px] sm:min-h-[120px] md:min-h-[140px] lg:h-[148px]
+          h-auto lg:h-[148px]
           mx-auto
-          px-4 sm:px-6 md:px-8 lg:px-[40px] xl:px-[120px]
-          py-6 sm:py-8 md:py-[20px]
+          py-8 lg:py-[20px]
           flex
           items-center
           justify-center
@@ -49,7 +48,11 @@ export default function StatsSection() {
             grid-cols-2
             sm:grid-cols-3
             lg:grid-cols-5
-            gap-6 sm:gap-8 md:gap-10 lg:gap-[60px]
+            gap-y-8
+            gap-x-6
+            sm:gap-x-8
+            md:gap-x-10
+            lg:gap-x-[60px]
             items-center
             justify-items-center
           "
@@ -63,15 +66,20 @@ export default function StatsSection() {
                 items-center
                 text-center
                 w-full
+                min-w-0
               "
             >
               {/* NUMBER */}
               <h3
                 className="
                   text-[#F97316]
-                  text-[32px] sm:text-[40px] md:text-[48px] lg:text-[58px]
+                  text-[30px]
+                  sm:text-[38px]
+                  md:text-[46px]
+                  lg:text-[58px]
                   leading-none
                   font-bold
+                  whitespace-nowrap
                 "
               >
                 {item.value}
@@ -80,11 +88,16 @@ export default function StatsSection() {
               {/* LABEL */}
               <p
                 className="
-                  mt-2 sm:mt-2.5 md:mt-3
+                  mt-2 md:mt-3
                   text-white
-                  text-[13px] sm:text-[15px] md:text-[17px] lg:text-[20px]
+                  text-[12px]
+                  sm:text-[14px]
+                  md:text-[16px]
+                  lg:text-[20px]
                   font-medium
-                  whitespace-nowrap
+                  leading-snug
+                  text-center
+                  break-words
                 "
               >
                 {item.label}

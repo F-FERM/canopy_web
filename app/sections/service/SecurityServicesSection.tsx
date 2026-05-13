@@ -55,7 +55,7 @@ const services: ServiceCard[] = [
     id: 5,
     title: "Housekeeping Services",
     image:
-     Image5,
+      Image5,
     description:
       "Comprehensive housekeeping solutions maintaining cleanliness, hygiene, and comfort across all environments.",
   },
@@ -241,7 +241,7 @@ const SecurityServicesSection = () => {
 
                 {/* Button */}
                 <Link
-                  href={`/service/${service.id}`}
+                  href={`/service-detail`}
                   className="
                     inline-flex items-center
 
