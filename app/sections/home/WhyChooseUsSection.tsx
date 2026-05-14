@@ -88,44 +88,40 @@ export default function WhyChooseUsSection() {
         </div>
 
         {/* FEATURES GRID */}
-      <div className="px-6 lg:px-[120px] py-16">
-  <div
-    className="
+        <div className="px-6 lg:px-[120px] py-16">
+          <div
+            className="
       grid
       grid-cols-1
       md:grid-cols-2
-      lg:grid-cols-3
       gap-8
       w-full
     "
-  >
-    {features.map((feature, index) => (
-      <div
-        key={index}
-        className="
+          >
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="
           relative
-          bg-white
-          border
-          border-[#E5E7EB]
+          w-full
+          h-[300px]
+          rounded-[10px]
           overflow-hidden
           transition-all
           duration-300
           hover:shadow-xl
           group
         "
-        style={{
-          width: "100%",
-          maxWidth: "560px",
-          height: "375px",
-          borderRadius: "10px",
-          clipPath:
-            "polygon(0 0, calc(100% - 90px) 0, 100% 90px, 100% 100%, 0 100%)",
-        }}
-      >
-        {/* TOP RIGHT CUT BOX */}
-       {/* TOP RIGHT CUT CARD */}
-<div
-  className="
+                style={{
+                  backgroundImage: "url('/images/home/Subtract.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
+                }}
+              >
+                {/* NUMBER CARD */}
+                <div
+                  className="
     absolute
     top-0
     right-0
@@ -136,85 +132,55 @@ export default function WhyChooseUsSection() {
     flex
     items-center
     justify-center
+    gap-[10px]
     group-hover:border-[#F97316]
     transition-all
     duration-300
   "
-  style={{
-    width: "181px",
-    height: "101px",
-    borderRadius: "0 17px 0 17px",
-    paddingTop: "10px",
-    paddingRight: "28px",
-    paddingBottom: "10px",
-    paddingLeft: "28px",
-    clipPath: "polygon(35% 0%, 100% 0%, 100% 100%, 0% 100%)",
-  }}
->
-  <span
-    className="
-      text-[32px]
+                  style={{
+                    width: "121px",
+                    height: "79px",
+                    borderRadius: "17px",
+                    paddingTop: "10px",
+                    paddingRight: "28px",
+                    paddingBottom: "10px",
+                    paddingLeft: "28px",
+                    opacity: 1,
+                  }}
+                >
+                  <span
+                    className="
+      text-[28px]
       font-bold
       text-[#D97354]
       leading-none
     "
-  >
-    {feature.number}
-  </span>
-</div>
+                  >
+                    {feature.number}
+                  </span>
+                </div>
 
-        {/* HOVER BOTTOM LINE */}
-        <div
-          className="
-            absolute
-            bottom-0
-            left-0
-            h-[4px]
-            bg-[#F97316]
-            w-0
-            group-hover:w-full
-            transition-all
-            duration-300
-          "
-        />
+                {/* CONTENT */}
+                <div className="relative z-10 p-8 flex flex-col h-full">
+                  {/* ICON */}
+                  <div className="w-[50px] h-[50px] text-[#D97354] mb-4">
+                    {feature.icon}
+                  </div>
 
-        {/* CONTENT */}
-        <div className="p-8 flex flex-col h-full">
-          {/* ICON */}
-          <div
-            className="
-              w-[60px]
-              h-[60px]
-              rounded-[14px]
-              border
-              border-[#E5E7EB]
-              flex
-              items-center
-              justify-center
-              text-[#D97354]
-              mb-8
-              transition-all
-              duration-300
-              group-hover:border-[#F97316]
-            "
-          >
-            {feature.icon}
+                  {/* TITLE */}
+                  <h3 className="text-[18px] font-bold text-black mb-3">
+                    {feature.title}
+                  </h3>
+
+                  {/* DESCRIPTION */}
+                  <p className="text-[14px] leading-[22px] text-[#555]">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-
-          {/* TITLE */}
-          <h3 className="text-[22px] font-bold text-black mb-4 leading-snug max-w-[320px]">
-            {feature.title}
-          </h3>
-
-          {/* DESCRIPTION */}
-          <p className="text-[15px] leading-[30px] text-[#8B8B8B] max-w-[420px]">
-            {feature.description}
-          </p>
         </div>
-      </div>
-    ))}
-  </div>
-</div>
       </div>
     </section>
   );
