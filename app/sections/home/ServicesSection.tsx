@@ -73,7 +73,7 @@ export default function ServicesSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8 lg:gap-y-10 lg:justify-items-center">
             {services.map((service, index) => (
               <Link
-                href="/security-detail"
+                href="/service-detail"
                 key={index}
                 className="
                   group
