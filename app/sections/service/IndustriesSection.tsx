@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
 import HotelIcon from "../../../public/images/Service/Icon1.png";
@@ -12,67 +12,146 @@ import CorporateIcon from "../../../public/images/Service/Icon6.png";
 import ManufacturingIcon from "../../../public/images/Service/Icon7.png";
 import CulturalIcon from "../../../public/images/Service/Icon8.png";
 import BankIcon from "../../../public/images/Service/Icon9.png";
+import { listIndustriesGridApi } from "@/app/api/ServiceIndustry";
 
-interface IndustryCard {
-  id: number;
+// ─── Icon map (API icon name → local PNG) ────────────────────────────────────
+
+const ICON_MAP: Record<string, StaticImageData> = {
+  Building2: HotelIcon,
+  Building: EstateIcon,
+  Landmark: WorkplaceIcon,
+  ShieldCheck: WorkplaceIcon,
+  PlusSquare: ConstructionIcon,
+  Construction: CorporateIcon,
+  BuildingOffice: ManufacturingIcon,
+  Factory: CulturalIcon,
+  Library: BankIcon,
+  Banknote: ExchangeIcon,
+};
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface IndustryItem {
   title: string;
-  icon: StaticImageData;
+  icon: string;
+  isActive: boolean;
 }
 
-const industries: IndustryCard[] = [
-  {
-    id: 1,
-    title: "Hospitality & Hotels",
-    icon: HotelIcon,
-  },
-  {
-    id: 2,
-    title: "Residential & Commercial Estate",
-    icon: EstateIcon,
-  },
-  {
-    id: 3,
-    title: "Government & Public Institutions",
-    icon: WorkplaceIcon,
-  },
-  {
-    id: 4,
-    title: "Government & Public Institutions",
-    icon: WorkplaceIcon,
-  },
-  {
-    id: 5,
-    title: "Healthcare Facilities",
-    icon: ConstructionIcon,
-  },
-  {
-    id: 6,
-    title: "Construction & Industrial Projects",
-    icon: CorporateIcon,
-  },
-  {
-    id: 7,
-    title: "Corporate Offices & Campuses",
-    icon: ManufacturingIcon,
-  },
-  {
-    id: 8,
-    title: "Manufacturing & Industrial Facilities",
-    icon: CulturalIcon,
-  },
-  {
-    id: 9,
-    title: "Cultural Institutions",
-    icon: BankIcon,
-  },
-  {
-    id: 10,
-    title: "Banks & Exchange Houses",
-    icon: ExchangeIcon,
-  },
-];
+interface IndustriesAPIResponse {
+  _id: string;
+  industries: IndustryItem[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+// ─── Skeleton ─────────────────────────────────────────────────────────────────
+
+function CardSkeleton() {
+  return (
+    <div
+      className="
+        w-full max-w-[276px] h-[139px]
+        rounded-[30px] border border-gray-200 bg-gray-100
+        animate-pulse
+      "
+    />
+  );
+}
+
+// ─── Industry Card ────────────────────────────────────────────────────────────
+
+function IndustryCard({ industry }: { industry: IndustryItem }) {
+  const iconSrc = ICON_MAP[industry.icon] ?? HotelIcon;
+
+  return (
+    <div
+      className="
+        w-full
+        max-w-[276px]
+
+        h-[139px]
+
+        rounded-[30px]
+        border border-gray-200
+        bg-white
+
+        flex flex-col
+        items-center
+        justify-center
+
+        px-6
+        sm:px-8
+        lg:px-[61px]
+
+        pt-[23px]
+        pb-[19px]
+
+        gap-[10px]
+
+        hover:shadow-lg
+        hover:border-orange-300
+        hover:-translate-y-1
+
+        transition-all duration-300
+      "
+    >
+      {/* Icon */}
+      <div className="relative w-[28px] h-[28px] sm:w-[30px] sm:h-[30px]">
+        <Image
+          src={iconSrc}
+          alt={industry.title}
+          fill
+          className="object-contain"
+        />
+      </div>
+
+      {/* Title */}
+      <h3
+        className="
+          text-center
+
+          text-[13px]
+          sm:text-[14px]
+          md:text-[15px]
+          lg:text-[16px]
+
+          font-semibold
+          text-[#111111]
+
+          leading-[1.4]
+        "
+      >
+        {industry.title}
+      </h3>
+    </div>
+  );
+}
+
+// ─── Main Section ─────────────────────────────────────────────────────────────
 
 const IndustriesSection = () => {
+  const [industries, setIndustries] = useState<IndustryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchIndustries = async () => {
+      try {
+        const res: IndustriesAPIResponse[] = await listIndustriesGridApi({});
+        const active = res?.[0]?.industries.filter((i) => i.isActive) ?? [];
+        setIndustries(active);
+      } catch (err) {
+        console.error("IndustriesSection API error:", err);
+        setError("Failed to load industries data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchIndustries();
+  }, []);
+
   return (
     <section
       className="
@@ -89,6 +168,10 @@ const IndustriesSection = () => {
         mx-auto
       "
     >
+      {error && !loading && (
+        <p className="text-center text-sm text-red-500 mb-6">{error}</p>
+      )}
+
       {/* Grid */}
       <div
         className="
@@ -106,79 +189,11 @@ const IndustriesSection = () => {
           justify-items-center
         "
       >
-        {industries.map((industry) => (
-          <div
-            key={industry.id}
-            className="
-              w-full
-              max-w-[276px]
-
-              h-[139px]
-
-              rounded-[30px]
-              border border-gray-200
-              bg-white
-
-              flex flex-col
-              items-center
-              justify-center
-
-              px-6
-              sm:px-8
-              lg:px-[61px]
-
-              pt-[23px]
-              pb-[19px]
-
-              gap-[10px]
-
-              hover:shadow-lg
-              hover:border-orange-300
-              hover:-translate-y-1
-
-              transition-all duration-300
-            "
-          >
-            {/* Icon */}
-            <div
-              className="
-                relative
-
-                w-[28px]
-                h-[28px]
-
-                sm:w-[30px]
-                sm:h-[30px]
-              "
-            >
-              <Image
-                src={industry.icon}
-                alt={industry.title}
-                fill
-                className="object-contain"
-              />
-            </div>
-
-            {/* Title */}
-            <h3
-              className="
-                text-center
-
-                text-[13px]
-                sm:text-[14px]
-                md:text-[15px]
-                lg:text-[16px]
-
-                font-semibold
-                text-[#111111]
-
-                leading-[1.4]
-              "
-            >
-              {industry.title}
-            </h3>
-          </div>
-        ))}
+        {loading
+          ? Array.from({ length: 10 }).map((_, i) => <CardSkeleton key={i} />)
+          : industries.map((industry, i) => (
+              <IndustryCard key={`${industry.title}-${i}`} industry={industry} />
+            ))}
       </div>
     </section>
   );

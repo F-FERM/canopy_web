@@ -1,53 +1,31 @@
 "use client";
 
+import { listEmployeeServiceApi } from "@/app/api/AboutEmployee";
 import { motion } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
-import Excellence1 from "../../../public/images/about/Excelence1.jpg";
-import Excellence2 from "../../../public/images/about/Excelence2.jpg";
-import Excellence3 from "../../../public/images/about/Excelence3.jpg";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-interface Employee {
-  id: string;
+interface EmployeeAPI {
   name: string;
   month: string;
-  image: StaticImageData;
-  featured?: boolean;
+  image: string;
+  designation: string;
+  description: string;
+  isActive: boolean;
 }
 
-interface ExcellenceSectionProps {
-  title?: string;
-  titleHighlight?: string;
-  subtitle?: string;
-  employees?: Employee[];
+interface ExcellenceAPIResponse {
+  _id: string;
+  heading: string;
+  headingHighlight: string;
+  description: string;
+  employees: EmployeeAPI[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
-
-// ─── Default data ─────────────────────────────────────────────────────────────
-
-const defaultEmployees: Employee[] = [
-  {
-    id: "1",
-    name: "John Mathew",
-    month: "March",
-    image: Excellence1,
-    featured: false,
-  },
-  {
-    id: "2",
-    name: "Mariya ks",
-    month: "February",
-    image: Excellence2,
-    featured: true,
-  },
-  {
-    id: "3",
-    name: "Arun Kumar",
-    month: "January",
-    image: Excellence3,
-    featured: false,
-  },
-];
 
 // ─── Animation variants ───────────────────────────────────────────────────────
 
@@ -75,7 +53,7 @@ function EmployeeCard({
   employee,
   delay,
 }: {
-  employee: Employee;
+  employee: EmployeeAPI;
   delay: number;
 }) {
   const { name, month, image } = employee;
@@ -107,7 +85,7 @@ function EmployeeCard({
         alt={`${name} – Employee of the Month`}
         fill
         className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-        sizes="(max-width: 768px) 100vw, 33vw"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
       />
 
       <div
@@ -131,14 +109,59 @@ function EmployeeCard({
   );
 }
 
+// ─── Skeleton Card ────────────────────────────────────────────────────────────
+
+function SkeletonCard() {
+  return (
+    <div
+      className="
+        relative overflow-hidden rounded-[30px]
+        w-full
+        h-[300px]
+        sm:h-[320px]
+        md:h-[340px]
+        lg:h-[363px]
+        bg-gray-200
+        animate-pulse
+      "
+    >
+      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-[36px] space-y-2">
+        <div className="h-5 w-32 rounded bg-gray-300" />
+        <div className="h-3 w-20 rounded bg-gray-300" />
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Section ─────────────────────────────────────────────────────────────
 
-export default function ExcellenceSection({
-  title = "Excellence in",
-  titleHighlight = "Service",
-  subtitle = "Employee of the Month Recognition",
-  employees = defaultEmployees,
-}: ExcellenceSectionProps) {
+const API_URL = "/about/employee-recognition"; // ← Replace with your actual endpoint
+
+export default function ExcellenceSection() {
+  const [data, setData] = useState<ExcellenceAPIResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  // ── Fetch API data ────────────────────────────────────────────────────────
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const data = await listEmployeeServiceApi({});
+        console.log(data, "herodata");
+        setData(data?.[0] ?? null);
+      } catch (error) {
+        console.error("HeroSection API error:", error);
+        setError("Failed to load about section data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeroData();
+  }, []);
+
+  // Active employees only
+  const activeEmployees =
+    data?.employees.filter((e) => e.isActive) ?? [];
+
   return (
     <section
       className="
@@ -176,8 +199,16 @@ export default function ExcellenceSection({
             text-[#111111]
           "
         >
-          {title}{" "}
-          <span className="text-[#F26A23]">{titleHighlight}</span>
+          {loading ? (
+            <span className="inline-block w-64 h-10 rounded bg-gray-200 animate-pulse" />
+          ) : (
+            <>
+              {data?.heading ?? "Excellence in"}{" "}
+              <span className="text-[#F26A23]">
+                {data?.headingHighlight ?? "Service"}
+              </span>
+            </>
+          )}
         </motion.h2>
 
         <motion.p
@@ -193,8 +224,19 @@ export default function ExcellenceSection({
             font-normal
           "
         >
-          {subtitle}
+          {loading ? (
+            <span className="inline-block w-48 h-4 rounded bg-gray-200 animate-pulse" />
+          ) : (
+            data?.description ?? "Employee of the Month Recognition"
+          )}
         </motion.p>
+
+        {/* ── Error state ── */}
+        {error && !loading && (
+          <p className="mt-4 text-sm text-red-500">
+            Failed to load data: {error}
+          </p>
+        )}
       </div>
 
       {/* ── Cards grid ── */}
@@ -206,17 +248,18 @@ export default function ExcellenceSection({
           sm:grid-cols-2
           lg:grid-cols-3
           items-end
-
           gap-5
         "
       >
-        {employees.map((emp, i) => (
-          <EmployeeCard
-            key={emp.id}
-            employee={emp}
-            delay={0.1 + i * 0.12}
-          />
-        ))}
+        {loading
+          ? Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)
+          : activeEmployees.map((emp, i) => (
+              <EmployeeCard
+                key={`${emp.name}-${i}`}
+                employee={emp}
+                delay={0.1 + i * 0.12}
+              />
+            ))}
       </div>
     </section>
   );

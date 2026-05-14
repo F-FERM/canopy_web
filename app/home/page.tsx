@@ -17,51 +17,7 @@ import WhyChooseUsSection from "../sections/home/WhyChooseUsSection";
 export default function HomePage() {
   return (
     <>
-
-      <HeroSection
-        badgeText="Trusted Security Partner"
-        badgeIcon={Shield}
-        heading={"Highly Trained &\nExperienced"}
-        headingHighlight="Security Services"
-        subtext="Providing professional security solutions to protect people, property, and businesses with trained and reliable security personnel."
-        buttons={[
-        { label: "Explore", href: "/services", variant: "primary" },
-        { label: "Contact", href: "/contact", variant: "outline" },
-      ]}
-
-      // ── Image carousel ─────────────────────────────────────────────────
-      slides={[
-        {
-          image: SlidingImage1,
-          title: "General Security",
-          description:
-            "Trained security personnel providing 24/7 protection, access control, patrolling, and risk prevention.",
-        },
-        {
-          image: SlidingImage2,
-          title: "Event Security",
-          description:
-            "Professional crowd management and perimeter control for events of any scale.",
-        },
-        {
-          image: SlidingImage3,
-          title: "Corporate Security",
-          description:
-            "Dedicated security teams safeguarding offices, data centres, and executive personnel.",
-        },
-        {
-          image: SlidingImage4,
-          title: "Mobile Patrols",
-          description:
-            "Rapid-response mobile units covering wide areas with frequent, unpredictable patrols.",
-        },
-      ]}
-      slideInterval={3000}
-
-      // ── Visual options ─────────────────────────────────────────────────
-      patternImage={Pattern}
-      accentColor="#F26A23"   
-    />
+<HeroSection />
       <AboutSection />
       <StatsSection />
       <ServicesSection />

@@ -1,75 +1,211 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { IconExclamationCircle } from "@tabler/icons-react";
-import Image1 from "../../../public/images/Service/Security1.jpg"
-import Image2 from "../../../public/images/Service/Security2.jpg"
-import Image3 from "../../../public/images/Service/Security3.png"
-import Image4 from "../../../public/images/Service/Security4.jpg"
-import Image5 from "../../../public/images/Service/Security5.png"
-import Image6 from "../../../public/images/Service/Security6.png"
+import { listSecurityServicesApi } from "@/app/api/HomeService";
 
-interface ServiceCard {
-  id: number;
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface ServiceItem {
   title: string;
-  image: StaticImageData;
+  image: string;
   description: string;
+  buttonText: string;
+  buttonLink: string;
+  isActive: boolean;
 }
 
-const services: ServiceCard[] = [
-  {
-    id: 1,
-    title: "CCTV Operators",
-    image:
-      Image1,
-    description:
-      "Professional CCTV monitoring services with highly trained operators ensuring complete surveillance and rapid incident response.",
-  },
-  {
-    id: 2,
-    title: "Fire Watch Services",
-    image:
-      Image2,
-    description:
-      "Reliable fire watch services designed to safeguard properties, construction sites, and businesses during emergencies.",
-  },
-  {
-    id: 3,
-    title: "Construction Security",
-    image:
-      Image3,
-    description:
-      "Advanced construction site protection with trained guards, surveillance systems, and 24/7 monitoring support.",
-  },
-  {
-    id: 4,
-    title: "CVIT",
-    image:
-      Image4,
-    description:
-      "Secure cash and valuables transportation services ensuring safety, reliability, and professional handling.",
-  },
-  {
-    id: 5,
-    title: "Housekeeping Services",
-    image:
-     Image5,
-    description:
-      "Comprehensive housekeeping solutions maintaining cleanliness, hygiene, and comfort across all environments.",
-  },
-  {
-    id: 6,
-    title: "Event Security",
-    image:
-      Image6,
-    description:
-      "Professional event security management ensuring crowd control, VIP protection, and smooth event operations.",
-  },
-];
+interface SecurityServicesAPIResponse {
+  _id: string;
+  badgeText: string;
+  heading: string;
+  headingHighlight: string;
+  description: string;
+  services: ServiceItem[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+// ─── Skeleton ─────────────────────────────────────────────────────────────────
+
+function ServiceCardSkeleton() {
+  return (
+    <div
+      className="
+        w-full max-w-[425px]
+        h-[360px] sm:h-[390px] lg:h-[426px]
+        rounded-[20px] overflow-hidden
+        bg-gray-200 animate-pulse
+      "
+    />
+  );
+}
+
+function SectionSkeleton() {
+  return (
+    <section
+      className="
+        px-5 sm:px-8 md:px-14 lg:px-24 xl:px-40 2xl:px-60
+        py-14 md:py-20 mx-auto
+      "
+    >
+      {/* Header skeleton */}
+      <div className="mb-15 sm:mb-14 md:mb-16 lg:mb-25 px-2 sm:px-4 md:px-8 lg:px-[120px] text-center flex flex-col items-center gap-4">
+        <div className="h-4 w-32 rounded bg-gray-200 animate-pulse" />
+        <div className="h-10 w-72 rounded bg-gray-200 animate-pulse" />
+        <div className="h-4 w-[500px] max-w-full rounded bg-gray-200 animate-pulse" />
+      </div>
+
+      {/* Cards skeleton */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <ServiceCardSkeleton key={i} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+// ─── Service Card ─────────────────────────────────────────────────────────────
+
+function ServiceCard({ service }: { service: ServiceItem }) {
+  return (
+    <div
+      className="
+        group
+        relative
+
+        w-full
+        max-w-[425px]
+
+        h-[360px]
+        sm:h-[390px]
+        lg:h-[426px]
+
+        rounded-[20px]
+        overflow-hidden
+
+        bg-white
+        border border-gray-200
+
+        shadow
+        hover:shadow-xl
+
+        transition-all duration-500
+      "
+    >
+      {/* Image */}
+      <div className="relative w-full h-full overflow-hidden">
+        <Image
+          src={service.image}
+          alt={service.title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+      </div>
+
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col justify-end px-6 pb-[27px]">
+        <div className="flex flex-col transition-all duration-500">
+
+          {/* Title */}
+          <h3
+            className="
+              text-[22px]
+              md:text-[24px]
+              font-semibold
+              text-white
+              transition-all duration-500
+            "
+          >
+            {service.title}
+          </h3>
+
+          {/* Description — reveal on hover */}
+          <div
+            className="
+              overflow-hidden
+              max-h-0 opacity-0
+              group-hover:max-h-[250px] group-hover:opacity-100
+              transition-all duration-500 ease-in-out
+            "
+          >
+            <p
+              className="
+                text-[14px]
+                md:text-[15px]
+                text-[#E5E5E5]
+                leading-[1.8]
+                mt-3 mb-4
+              "
+            >
+              {service.description}
+            </p>
+          </div>
+
+          {/* Button */}
+          <Link
+            href={service.buttonLink}
+            className="
+              inline-flex items-center
+              text-[#F97316]
+              font-semibold
+              hover:text-orange-400
+              transition-colors duration-300
+            "
+          >
+            {service.buttonText}
+            <span className="ml-2">→</span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Section ─────────────────────────────────────────────────────────────
 
 const SecurityServicesSection = () => {
+  const [data, setData] = useState<SecurityServicesAPIResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchServicesData = async () => {
+      try {
+        const res = await listSecurityServicesApi({});
+        setData(res?.[0] ?? null);
+      } catch (err) {
+        console.error("SecurityServicesSection API error:", err);
+        setError("Failed to load services data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServicesData();
+  }, []);
+
+  if (loading) return <SectionSkeleton />;
+
+  if (error || !data) {
+    return (
+      <p className="text-center text-sm text-red-500 py-10">
+        Failed to load section{error ? `: ${error}` : ""}.
+      </p>
+    );
+  }
+
+  const activeServices = data.services.filter((s) => s.isActive);
+
   return (
     <section
       className="
@@ -94,18 +230,17 @@ const SecurityServicesSection = () => {
           </span>
 
           <p className="text-[#F97316] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
-            Our Services
+            {data.badgeText}
           </p>
         </div>
 
         <h2 className="text-[28px] sm:text-[36px] md:text-[42px] lg:text-[56px] font-bold leading-tight text-black">
-          Professional <span className="text-[#F97316]">Security</span>{" "}
-          Services
+          {data.heading}{" "}
+          <span className="text-[#F97316]">{data.headingHighlight}</span>
         </h2>
 
         <p className="text-[#979797] text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed mt-3 sm:mt-4 font-normal max-w-[500px] mx-auto">
-          Explore our complete range of security services designed to protect
-          your business, property, and people.
+          {data.description}
         </p>
       </div>
 
@@ -123,142 +258,8 @@ const SecurityServicesSection = () => {
           justify-items-center
         "
       >
-        {services.map((service) => (
-          <div
-            key={service.id}
-            className="
-              group
-              relative
-
-              w-full
-              max-w-[425px]
-
-              h-[360px]
-              sm:h-[390px]
-              lg:h-[426px]
-
-              rounded-[20px]
-              overflow-hidden
-
-              bg-white
-              border border-gray-200
-
-              shadow
-              hover:shadow-xl
-
-              transition-all duration-500
-            "
-          >
-            {/* Image */}
-            <div className="relative w-full h-full overflow-hidden">
-              <Image
-                src={service.image}
-                alt={service.title}
-                fill
-                className="
-                  object-cover
-                  transition-transform duration-700
-                  group-hover:scale-110
-                "
-              />
-
-              {/* Overlay */}
-              <div
-                className="
-                  absolute inset-0
-                  bg-gradient-to-t
-                  from-black/85
-                  via-black/35
-                  to-transparent
-                "
-              />
-            </div>
-
-            {/* Content */}
-            <div
-              className="
-                absolute inset-0
-
-                flex flex-col justify-end
-
-                px-6
-                pb-[27px]
-              "
-            >
-              {/* Bottom Content */}
-              <div
-                className="
-                  flex flex-col
-
-                  transition-all duration-500
-                "
-              >
-                {/* Title */}
-                <h3
-                  className="
-                    text-[22px]
-                    md:text-[24px]
-
-                    font-semibold
-                    text-white
-
-                    transition-all duration-500
-                  "
-                >
-                  {service.title}
-                </h3>
-
-                {/* Description */}
-                <div
-                  className="
-                    overflow-hidden
-
-                    max-h-0
-                    opacity-0
-
-                    group-hover:max-h-[250px]
-                    group-hover:opacity-100
-
-                    transition-all duration-500 ease-in-out
-                  "
-                >
-                  <p
-                    className="
-                      text-[14px]
-                      md:text-[15px]
-
-                      text-[#E5E5E5]
-
-                      leading-[1.8]
-
-                      mt-3
-                      mb-4
-                    "
-                  >
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Button */}
-                <Link
-                  href={`/service/${service.id}`}
-                  className="
-                    inline-flex items-center
-
-                    text-[#F97316]
-                    font-semibold
-
-                    hover:text-orange-400
-
-                    transition-colors duration-300
-                  "
-                >
-                  View Details
-                  <span className="ml-2">→</span>
-                </Link>
-              </div>
-            </div>
-          </div>
+        {activeServices.map((service) => (
+          <ServiceCard key={service.title} service={service} />
         ))}
       </div>
     </section>
