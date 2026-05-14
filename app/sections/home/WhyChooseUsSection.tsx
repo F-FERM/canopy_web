@@ -9,7 +9,8 @@ import {
   DollarSign,
   Shield,
 } from "lucide-react";
-
+import Image from "next/image";
+import Pattern from "../../../public/images/home/HomePattern1.png"
 interface Feature {
   number: string;
   title: string;
@@ -92,8 +93,26 @@ export default function WhyChooseUsSection() {
             services with professionalism, integrity, and reliability.
           </p>
         </div>
-
-        {/* GRID */}
+        
+<div className="absolute left-0 top-1/2 -translate-y-1/2 z-0 pointer-events-none">
+  <Image
+    src={Pattern}
+    alt="Pattern"
+    width={400}
+    height={400}
+    className="opacity-20"
+  />
+</div> 
+<div className="absolute right-[9px] top-[190px] z-0 pointer-events-none">
+  <Image
+    src={Pattern}
+    alt="Pattern Right"
+    width={350} 
+    height={350}
+    className="opacity-20"
+  />
+</div>
+      {/* GRID */}
         <div className="py-16">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             {features.map((feature, index) => {
@@ -117,7 +136,7 @@ export default function WhyChooseUsSection() {
                     min-h-[300px]
                     overflow-hidden
                     rounded-[10px]
-                    transition-all duration-300 group hover:shadow-xl
+                    transition-all duration-300 group hover:shadow-xl 
                   `}
                   style={{
                     backgroundImage: `url(${
@@ -137,8 +156,8 @@ export default function WhyChooseUsSection() {
                   {/* NUMBER CARD */}
                   <div
                     className={`
-                      absolute bg-white border flex items-center justify-center
-                      transition-all duration-300 z-20 border-gray-200
+                      absolute  border flex items-center justify-center 
+                      transition-all duration-300 z-20 border-gray-300
                       ${isSmallCard ? "  top-[20px] right-[2px]" : "  top-[20px] right-[20px]"}
                       group-hover:border-[#F97316]
                     `}
@@ -167,6 +186,7 @@ export default function WhyChooseUsSection() {
                       </span>
                     </div>
                   </div>
+              
 
                   {/* CONTENT */}
                   <div className="relative z-10 flex flex-col h-full p-12 justify-center">
