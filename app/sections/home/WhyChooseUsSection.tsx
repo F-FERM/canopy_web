@@ -64,15 +64,21 @@ export default function WhyChooseUsSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden py-28 px-4 sm:px-8">
-      <div className="relative z-10 max-w-[1920px] mx-auto">
-        {/* SECTION HEADER */}
-        <div className="text-center mb-20 px-6 lg:px-[120px]">
+    <section className="relative overflow-hidden py-28">
+      <div
+        className="
+          relative z-10 max-w-[1920px] mx-auto
+          px-5 sm:px-8 md:px-14 lg:px-24 xl:px-40 2xl:px-60
+        "
+      >
+        {/* HEADER */}
+        <div className="text-center mb-20">
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="flex items-center justify-center text-[#F97316] text-[11px] font-bold leading-none">
               <IconHelpOctagon />
             </span>
-            <p className="text-[#F97316]  tracking-[3px] text-[18px] font-semibold uppercase">
+
+            <p className="text-[#F97316] tracking-[3px] text-[18px] font-semibold uppercase">
               Why canopy
             </p>
           </div>
@@ -87,98 +93,101 @@ export default function WhyChooseUsSection() {
           </p>
         </div>
 
-        {/* FEATURES GRID */}
-        <div className="px-6 lg:px-[120px] py-16">
-          <div
-            className="
-      grid
-      grid-cols-1
-      md:grid-cols-2
-      gap-8
-      w-full
-    "
-          >
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="
-          relative
-          w-full
-          h-[300px]
-          rounded-[10px]
-          overflow-hidden
-          transition-all
-          duration-300
-          hover:shadow-xl
-          group
-        "
-                style={{
-                  backgroundImage: "url('/images/home/Subtract.png')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
-                }}
-              >
-                {/* NUMBER CARD */}
+        {/* GRID */}
+        <div className="py-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            {features.map((feature, index) => {
+              const gridClasses = [
+                "md:col-span-4",
+                "md:col-span-8",
+                "md:col-span-8",
+                "md:col-span-4",
+                "md:col-span-4",
+                "md:col-span-8",
+              ];
+
+              const isSmallCard =
+                gridClasses[index] === "md:col-span-4";
+
+              return (
                 <div
-                  className="
-    absolute
-    top-0
-    right-0
-    bg-white
-    border-l
-    border-b
-    border-[#E5E7EB]
-    flex
-    items-center
-    justify-center
-    gap-[10px]
-    group-hover:border-[#F97316]
-    transition-all
-    duration-300
-  "
+                  key={index}
+                  className={`
+                    relative w-full ${gridClasses[index]}
+                    min-h-[300px]
+                    overflow-hidden
+                    rounded-[10px]
+                    transition-all duration-300 group hover:shadow-xl
+                  `}
                   style={{
-                    width: "121px",
-                    height: "79px",
-                    borderRadius: "17px",
-                    paddingTop: "10px",
-                    paddingRight: "28px",
-                    paddingBottom: "10px",
-                    paddingLeft: "28px",
-                    opacity: 1,
+                    backgroundImage: `url(${
+                      isSmallCard
+                        ? "/images/home/Subtract.png"
+                        : "/images/home/Subtract1.png"
+                    })`,
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))",
                   }}
                 >
-                  <span
-                    className="
-      text-[28px]
-      font-bold
-      text-[#D97354]
-      leading-none
-    "
-                  >
-                    {feature.number}
-                  </span>
-                </div>
+                  {/* HOVER LINE */}
+                  <div className="absolute bottom-0 left-0 h-[4px] w-0 bg-[#D97354] transition-all duration-500 group-hover:w-full rounded-b-[10px] z-30" />
 
-                {/* CONTENT */}
-                <div className="relative z-10 p-8 flex flex-col h-full">
-                  {/* ICON */}
-                  <div className="w-[50px] h-[50px] text-[#D97354] mb-4">
-                    {feature.icon}
+                  {/* NUMBER CARD */}
+                  <div
+                    className={`
+                      absolute bg-white border flex items-center justify-center
+                      transition-all duration-300 z-20 border-gray-200
+                      ${isSmallCard ? "  top-[20px] right-[2px]" : "  top-[20px] right-[20px]"}
+                      group-hover:border-[#F97316]
+                    `}
+                    style={{
+                      width: isSmallCard ? "140px" : "270px",
+                      height: isSmallCard ? "68px" : "78px",
+                      borderRadius: isSmallCard ? "17px" : "20px",
+                      padding: "10px 28px",
+                      overflow: "hidden",
+                      boxShadow: "0 4px 10px rgba(0,0,0,0.03)", 
+                    }}
+                  >
+                    <div className="flex items-center leading-none tracking-[0.04em] font-bold">
+                      <span
+                        style={{ fontSize: isSmallCard ? "30px" : "46px" }}
+                        className="text-[#D9D9D9]"
+                      >
+                        {feature.number.charAt(0)}
+                      </span>
+
+                      <span
+                        style={{ fontSize: isSmallCard ? "40px" : "60px" }}
+                        className="text-[#D97354] -ml-[2px]"
+                      >
+                        {feature.number.charAt(1)}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* TITLE */}
-                  <h3 className="text-[18px] font-bold text-black mb-3">
-                    {feature.title}
-                  </h3>
+                  {/* CONTENT */}
+                  <div className="relative z-10 flex flex-col h-full p-12 justify-center">
+                    {/* ICON */}
+                    <div className="w-[73px] h-[73px] p-[23px] mb-6 flex items-center justify-center bg-white border border-[#E5E7EB] rounded-[10px] text-[#D97354] shadow-xl transition-all duration-300 group-hover:bg-[#D97354] group-hover:text-white">
+                      {feature.icon}
+                    </div>
 
-                  {/* DESCRIPTION */}
-                  <p className="text-[14px] leading-[22px] text-[#555]">
-                    {feature.description}
-                  </p>
+                    {/* TITLE */}
+                    <h3 className="text-[28px] font-bold text-black mb-4 max-w-[70%]">
+                      {feature.title}
+                    </h3>
+
+                    {/* DESCRIPTION */}
+                    <p className="text-[16px] leading-[28px] text-[#555] max-w-[75%]">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
