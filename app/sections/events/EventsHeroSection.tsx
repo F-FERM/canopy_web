@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Button from "@/app/components/ui/Button";
 import { listEventsLandingApi } from "@/app/api/EventLanding";
+import { IconBriefcase, IconZoomExclamation } from "@tabler/icons-react";
 
 interface EventButton {
   label: string;
@@ -119,23 +120,33 @@ const EventsHeroSection = () => {
         {/* ── Left Content ───────────────── */}
         <div className="w-full z-20 order-2 lg:order-1">
           {/* Badge */}
-          <p
-            className="
-              text-[#F26A23]
-              uppercase
-              tracking-[0.16em]
-              font-semibold
+          
+           <div className="flex items-center  gap-2 mb-4">
+  <span
+    aria-hidden="true"
+    className="text-[#F26A23] flex items-center justify-center"
+  >
+    <IconBriefcase className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]" />
+  </span>
 
-              text-[13px]
-              sm:text-[15px]
-              md:text-[17px]
-              lg:text-[18px]
+  <p
+    className="
+      text-[#F26A23]
+      uppercase
+      tracking-[0.16em]
+      font-semibold
 
-              mb-4
-            "
-          >
-            {data.badgeText}
-          </p>
+      text-[13px]
+      sm:text-[15px]
+      md:text-[17px]
+      lg:text-[18px]
+
+      leading-none
+    "
+  >
+    {data.badgeText}
+  </p>
+</div>
 
           {/* Heading */}
           <h2

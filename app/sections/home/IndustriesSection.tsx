@@ -7,6 +7,7 @@ import Vector2 from "../../../public/images/home/Vector2.png";
 import Vector3 from "../../../public/images/home/Vector3.png";
 import Vector4 from "../../../public/images/home/Vector4.png";
 import { listIndustriesApi } from "@/app/api/HomeIndustry";
+import BadgeIcon from "../../../public/images/home/Group.png"
 
 // ── API types ──────────────────────────────────────────────────────────────
 interface Industry {
@@ -75,18 +76,25 @@ export default function IndustriesSection() {
         <div className="mb-8 md:mb-10 xl:mb-10 px-0 md:px-4 lg:px-8 xl:px-[120px]">
 
           {/* Badge */}
-          <div className="flex items-center gap-2 mb-3 md:mb-4">
-            <span className="w-[18px] h-[18px] md:w-[21px] md:h-[21px] rounded-full border border-[#F26A23] text-[#F26A23] flex items-center justify-center text-[10px]">
-              ⊙
-            </span>
-            <p className="text-[#F26A23] uppercase tracking-[2px] text-[11px] md:text-[13px] font-semibold">
-              {loading ? (
-                <span className="inline-block w-16 h-3 bg-orange-300/30 rounded animate-pulse" />
-              ) : (
-                data?.badgeText ?? "Our Reach"
-              )}
-            </p>
-          </div>
+         <div className="flex items-center gap-2 mb-3 sm:mb-4">
+  {/* Image instead of icon */}
+  <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
+    <Image
+      src={BadgeIcon}
+      alt="Badge Icon"
+      className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] object-contain"
+    />
+  </div>
+
+  {/* Text */}
+  <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
+    {loading ? (
+      <span className="inline-block w-28 h-4 bg-orange-200 rounded animate-pulse" />
+    ) : (
+      data?.badgeText ?? "What We Offer"
+    )}
+  </p>
+</div>
 
           {/* Heading */}
           <h2 className="text-[24px] md:text-[38px] lg:text-[46px] xl:text-[56px] font-bold leading-tight text-white">

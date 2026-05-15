@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { listContactLandingApi } from "@/app/api/ContactLanding";
 import { ListContactLandingResponse } from "@/Interfaces/ContactLanding";
+import { IconPhoneCall } from "@tabler/icons-react";
 
 const iconMap: any = {
   Phone,
@@ -165,7 +166,9 @@ const GetInTouchSection = () => {
                 text-[#F26A23]
               "
             >
-              <span>ⓘ</span>
+               <span className="flex items-center justify-center w-[20px] h-[20px] sm:w-[22px] sm:h-[22px]  border-[#F26A23] text-[#F26A23] text-[10px] sm:text-[11px] font-bold leading-none">
+                  <IconPhoneCall />
+                </span>
 
               <span>{data.badgeText}</span>
             </p>

@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Button from "@/app/components/ui/Button";
 import { listServiceLandingApi } from "@/app/api/ServiceLanding";
+import Image from "next/image";
+import BadgeIcon from "../../../public/images/home/localoffer.png"
+
+
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -203,9 +207,11 @@ const SecurityHeroSection = () => {
                 text-[#F26A23]
               "
             >
-              <span aria-hidden="true" className="text-[14px] sm:text-[16px] md:text-[18px] leading-none">
-                ⓘ
-              </span>
+               <Image
+      src={BadgeIcon}
+      alt="Badge Icon"
+      className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] object-contain"
+    />
               <span>{badgeText}</span>
             </p>
 
@@ -260,7 +266,7 @@ const SecurityHeroSection = () => {
                   <Button
                     label={btn.label}
                     variant={btn.variant as "primary" | "outline"}
-                    className={btn.variant === "outline" ? "bg-white" : ""}
+                    className={btn.variant === "outline" ? "bg-white border-none" : ""}
                   />
                 </Link>
               ))}

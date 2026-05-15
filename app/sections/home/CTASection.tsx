@@ -5,6 +5,7 @@ import { motion, useInView, Transition } from "framer-motion";
 import Button from "@/app/components/ui/Button";
 import { Phone, ArrowRight, LucideIcon } from "lucide-react";
 import { listContactCTAApi } from "@/app/api/CtaSection";
+import { IconPhoneCall } from "@tabler/icons-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -132,8 +133,8 @@ export default function CTASection() {
                 animate={isInView ? "visible" : "hidden"}
                 transition={makeTransition(0)}
               >
-                <span className="flex items-center justify-center w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] rounded-full border border-[#F26A23] text-[#F26A23] text-[10px] sm:text-[11px] font-bold leading-none">
-                  ⊙
+                <span className="flex items-center justify-center w-[20px] h-[20px] sm:w-[22px] sm:h-[22px]  border-[#F26A23] text-[#F26A23] text-[10px] sm:text-[11px] font-bold leading-none">
+                  <IconPhoneCall />
                 </span>
                 <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[13px] sm:text-sm font-semibold">
                   {data.badgeText}

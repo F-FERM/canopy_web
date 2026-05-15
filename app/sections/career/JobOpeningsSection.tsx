@@ -5,6 +5,7 @@ import Button from "@/app/components/ui/Button";
 import { IconHelpOctagon } from "@tabler/icons-react";
 import { listCareerOpeningsApi } from "@/app/api/CareerJob";
 import { ApplyNow } from "./ApplyNow";
+import { CircleQuestionMark } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -150,7 +151,7 @@ const JobOpeningsSection = () => {
           {/* Badge */}
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="flex items-center justify-center text-[#F26A23] text-[11px] font-bold leading-none">
-              <IconHelpOctagon className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
+              <CircleQuestionMark className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
             </span>
 
             <p

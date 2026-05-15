@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { listBlogSectionApi } from "@/app/api/HomeBlog";
-
+import BadgeIcon from "../../../public/images/home/Vector (1).png"
 // ── API types ──────────────────────────────────────────────────────────────
 interface Blog {
   title: string;
@@ -79,8 +79,12 @@ export default function BlogSection() {
 
           {/* Badge */}
           <div className="flex items-center justify-center gap-2 mb-3 sm:mb-3 md:mb-4 xl:mb-4">
-            <span className="flex items-center justify-center w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] md:w-[21px] md:h-[21px] xl:w-[22px] xl:h-[22px] rounded-full border border-[#F26A23] text-[#F26A23] text-[9px] sm:text-[10px] md:text-[10.5px] xl:text-[11px] font-bold leading-none">
-              ⊙
+            <span className="flex items-center justify-center w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] md:w-[21px] md:h-[21px] xl:w-[22px] xl:h-[22px]  text-[#F26A23] text-[9px] sm:text-[10px] md:text-[10.5px] xl:text-[11px] font-bold leading-none">
+              <Image
+      src={BadgeIcon}
+      alt="Badge Icon"
+      className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] object-contain"
+    />
             </span>
             <p className="text-[#F26A23] uppercase tracking-[1.5px] sm:tracking-[2px] md:tracking-[2.5px] xl:tracking-[3px] text-[11px] sm:text-[12px] md:text-[13px] xl:text-sm font-semibold">
               {loading ? (

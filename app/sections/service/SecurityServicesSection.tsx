@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import { listSecurityServicesApi } from "@/app/api/HomeService";
+import BadgeIcon from "../../../public/images/home/localoffer.png"
 
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -225,9 +226,11 @@ const SecurityServicesSection = () => {
       {/* Header */}
       <div className="mb-15 sm:mb-14 md:mb-16 lg:mb-25 px-2 sm:px-4 md:px-8 lg:px-[120px] text-center">
         <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
-          <span className="flex items-center justify-center text-[#F26A23] text-[10px] sm:text-[11px] font-bold leading-none">
-            <IconExclamationCircle className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
-          </span>
+                    <Image
+      src={BadgeIcon}
+      alt="Badge Icon"
+      className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] object-contain"
+    />
 
           <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
             {data.badgeText}

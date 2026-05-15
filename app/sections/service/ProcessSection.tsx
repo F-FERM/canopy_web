@@ -1,8 +1,9 @@
 "use client";
 
 import { listProcessSectionApi } from "@/app/api/ServiceProcess";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
-
+import BadgeIcon from "../../../public/images/home/Group.png"
 interface Process {
   title: string;
   description: string;
@@ -145,17 +146,12 @@ const ProcessSection = () => {
               text-[#F26A23]
             "
           >
-            <span
-              aria-hidden="true"
-              className="
-                text-[16px]
-                md:text-[18px]
-                font-normal
-                leading-none
-              "
-            >
-              ⓘ
-            </span>
+            <span className="text-[#F26A23] "><Image
+      src={BadgeIcon}
+      alt="Badge Icon"
+      className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] object-contain "
+    /></span>
+         
 
             <span className="text-orange-500 font-semibold text-sm md:text-base tracking-widest">
               {data.badgeText}

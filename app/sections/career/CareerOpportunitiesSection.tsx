@@ -6,6 +6,7 @@ import Button from "@/app/components/ui/Button";
 import { listCareerLandingApi } from "@/app/api/CareerLanding";
 import { ListCareerLandingResponse } from "@/Interfaces/CareerLanding";
 import DotPattern from "../../../public/images/about/Pattern1.jpg";
+import { IconTie } from "@tabler/icons-react";
 
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -173,7 +174,7 @@ export default function CareerHero() {
               aria-hidden="true"
               className="text-[16px] md:text-[18px] font-normal leading-none"
             >
-              ⓘ
+              <IconTie/>
             </span>
             {badgeText}
           </p>

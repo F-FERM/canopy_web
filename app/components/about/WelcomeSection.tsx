@@ -1,6 +1,7 @@
 "use client";
 
 import { listAboutSectionApi } from "@/app/api/AboutHero";
+import { IconExclamationCircle } from "@tabler/icons-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -121,7 +122,18 @@ export default function AboutUs() {
             tracking-[0.12em] min-[1360px]:tracking-[0.13em] 2xl:tracking-[0.14em]
             mb-2 sm:mb-2.5 md:mb-3 2xl:mb-4
           ">
-            <span aria-hidden="true" className="font-normal leading-none">ⓘ</span>
+                 <span
+              className="
+                flex items-center justify-center
+                w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]
+                text-[#F26A23]
+                text-[10px] sm:text-[11px]
+                font-bold
+                leading-none
+              "
+            >
+              <IconExclamationCircle />
+            </span>
             {data.badgeText}
           </p>
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { IconArrowNarrowRight, IconExclamationCircle } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { listSecurityServicesApi } from "@/app/api/HomeService";
+import BadgeIcon from "../../../public/images/home/localoffer.png"
 
 // ── API types ──────────────────────────────────────────────────────────────
 interface Service {
@@ -78,18 +79,25 @@ export default function ServicesSection() {
         <div className="mb-10 sm:mb-14 md:mb-16 lg:mb-20 px-2 sm:px-4 md:px-8 lg:px-10 2xl:px-[120px]">
 
           {/* Badge */}
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
-            <span className="flex items-center justify-center text-[#F26A23]">
-              <IconExclamationCircle className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
-            </span>
-            <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
-              {loading ? (
-                <span className="inline-block w-28 h-4 bg-orange-200 rounded animate-pulse" />
-              ) : (
-                data?.badgeText ?? "What We Offer"
-              )}
-            </p>
-          </div>
+      <div className="flex items-center gap-2 mb-3 sm:mb-4">
+  {/* Image instead of icon */}
+  <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10">
+    <Image
+      src={BadgeIcon}
+      alt="Badge Icon"
+      className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] object-contain"
+    />
+  </div>
+
+  {/* Text */}
+  <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
+    {loading ? (
+      <span className="inline-block w-28 h-4 bg-orange-200 rounded animate-pulse" />
+    ) : (
+      data?.badgeText ?? "What We Offer"
+    )}
+  </p>
+</div>
 
           {/* Heading — unchanged */}
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] lg:text-[56px] font-bold leading-tight text-black">

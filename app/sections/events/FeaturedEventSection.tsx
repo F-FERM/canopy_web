@@ -119,7 +119,7 @@ const FeaturedEventSection = () => {
             border border-white/30
 
             bg-[#D9D9D9]/20
-            backdrop-blur-md
+            
 
             pt-6
             sm:pt-7

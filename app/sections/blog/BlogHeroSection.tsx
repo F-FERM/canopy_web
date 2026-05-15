@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Button from "@/app/components/ui/Button";
 import { listBlogLandingApi } from "@/app/api/BlogLanding";
+import { IconZoomExclamation } from "@tabler/icons-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -109,7 +110,7 @@ const BlogHeroSection = () => {
               {/* Badge */}
               <p className="flex items-center gap-2 text-[13px] sm:text-[15px] md:text-[16px] lg:text-[18px] font-semibold tracking-[0.14em] uppercase text-[#F26A23]">
                 <span aria-hidden="true" className="text-[14px] sm:text-[16px] md:text-[18px] leading-none">
-                  ⓘ
+                  <IconZoomExclamation/>
                 </span>
                 <span>{data.badgeText}</span>
               </p>
@@ -134,7 +135,7 @@ const BlogHeroSection = () => {
                     label={btn.label}
                     variant={btn.variant}
                     href={btn.link}
-                    className={btn.variant === "outline" ? "bg-white" : ""}
+                    className={btn.variant === "outline" ? "bg-white border-none" : ""}
                   />
                 ))}
               </div>

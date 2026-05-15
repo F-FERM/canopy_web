@@ -9,6 +9,7 @@ import {
   DollarSign,
   Shield,
   LucideIcon,
+  CircleQuestionMark,
 } from "lucide-react";
 import Image from "next/image";
 import Pattern from "../../../public/images/home/HomePattern1.png";
@@ -181,8 +182,7 @@ export default function WhyChooseUsSection() {
         <div className="text-center mb-20">
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="flex items-center justify-center text-[#F26A23] text-[11px] font-bold leading-none">
-              <IconHelpOctagon />
-            </span>
+  <CircleQuestionMark className="w-5 h-5" />            </span>
             <p className="text-[#F26A23] tracking-[3px] text-[18px] font-semibold uppercase">
               {loading ? (
                 <span className="inline-block w-28 h-4 bg-orange-100 rounded animate-pulse" />
