@@ -75,7 +75,8 @@ function SectionSkeleton() {
 
 function ServiceCard({ service }: { service: ServiceItem }) {
   return (
-    <div
+    <Link
+      href={service.buttonLink || "/service-detail"}
       className="
         group
         relative
@@ -97,6 +98,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
         hover:shadow-xl
 
         transition-all duration-500
+        block
       "
     >
       {/* Image */}
@@ -153,22 +155,20 @@ function ServiceCard({ service }: { service: ServiceItem }) {
           </div>
 
           {/* Button */}
-          <Link
-            href={service.buttonLink}
+          <div
             className="
               inline-flex items-center
               text-[#F26A23]
               font-semibold
-              hover:opacity-80
               transition-all duration-300
             "
           >
             {service.buttonText}
             <span className="ml-2">→</span>
-          </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

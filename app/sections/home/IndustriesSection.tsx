@@ -69,7 +69,7 @@ export default function IndustriesSection() {
   const industries = data?.industries.filter((i) => i.isActive) ?? [];
 
   return (
-    <section className="relative bg-[#7F220E] overflow-hidden py-10 md:py-16 xl:py-20 px-4 md:px-8 lg:px-12 xl:px-40">
+    <section className="relative bg-[#7F220E]  overflow-hidden py-10 md:py-16 xl:py-20 px-4 md:px-8 lg:px-12 xl:px-40">
       <div className="relative z-10 max-w-[1920px] mx-auto">
 
         {/* HEADER */}
@@ -138,17 +138,16 @@ export default function IndustriesSection() {
                       w-full
                       min-h-[220px] md:min-h-[260px] xl:h-[291px]
 
-                      flex flex-col md:flex-row
+                      flex flex-col md:flex-row justify-center items-center
 
                       /* 🔥 FIX FOR 1274px–1396px */
                       [@media(min-width:1274px)_and_(max-width:1396px)]:flex-col
                       [@media(min-width:1274px)_and_(max-width:1396px)]:items-start
 
                       gap-4 md:gap-6
-
+ border border-gray-500
                       p-5 md:p-6 lg:p-7
 
-                      border border-[#7F220E]
                       bg-[#7F220E]/30 backdrop-blur-sm
                       rounded-[10px]
 
