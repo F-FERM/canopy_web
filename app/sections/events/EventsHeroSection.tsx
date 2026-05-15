@@ -155,7 +155,7 @@ const EventsHeroSection = () => {
               mb-5
             "
           >
-            <span className="text-[#E07B2A]">
+            <span className="text-[#F26A23]">
               {data.heading}
             </span>{" "}
             {data.headingHighlight}

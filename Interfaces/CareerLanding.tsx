@@ -23,5 +23,5 @@ interface Stat {
 interface Button {
     label: string;
     link: string;
-    variant: string;
+    variant: "primary" | "outline" | "ghost";
 }

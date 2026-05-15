@@ -156,7 +156,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
             href={service.buttonLink}
             className="
               inline-flex items-center
-              text-[#F97316]
+              text-[#F26A23]
               font-semibold
               hover:text-orange-400
               transition-colors duration-300
@@ -225,18 +225,18 @@ const SecurityServicesSection = () => {
       {/* Header */}
       <div className="mb-15 sm:mb-14 md:mb-16 lg:mb-25 px-2 sm:px-4 md:px-8 lg:px-[120px] text-center">
         <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
-          <span className="flex items-center justify-center text-[#F97316] text-[10px] sm:text-[11px] font-bold leading-none">
+          <span className="flex items-center justify-center text-[#F26A23] text-[10px] sm:text-[11px] font-bold leading-none">
             <IconExclamationCircle className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
           </span>
 
-          <p className="text-[#F97316] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
+          <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
             {data.badgeText}
           </p>
         </div>
 
         <h2 className="text-[28px] sm:text-[36px] md:text-[42px] lg:text-[56px] font-bold leading-tight text-black">
           {data.heading}{" "}
-          <span className="text-[#F97316]">{data.headingHighlight}</span>
+          <span className="text-[#F26A23]">{data.headingHighlight}</span>
         </h2>
 
         <p className="text-[#979797] text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed mt-3 sm:mt-4 font-normal max-w-[500px] mx-auto">

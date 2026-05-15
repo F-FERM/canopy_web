@@ -1,60 +1,122 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Button from "@/app/components/ui/Button";
-
-import Subtract from "../../../public/images/about/Subtract.png";
+import { listCareerLandingApi } from "@/app/api/CareerLanding";
+import { ListCareerLandingResponse } from "@/Interfaces/CareerLanding";
 import DotPattern from "../../../public/images/about/Pattern1.jpg";
-import HeroImage from "../../../public/images/about/Excelence1.jpg";
-import TopPattern from "../../../public/images/career/Pattern1.jpg";
 
-// ─── Content ────────────────────────────────────────────────────────────────
-const aboutContent = {
-  eyebrow: "CAREER OPPORTUNITIES",
 
-  headingPrefix: "Build Your",
-  headingBrand: "Future",
-  headingSuffix: "With Canopy Security Services",
+// ─── Types ───────────────────────────────────────────────────────────────────
+type CareerHeroData = ListCareerLandingResponse;
 
-  description:
-    "Join one of the leading security service providers in the UAE. We are looking for disciplined, professional, and motivated individuals ready to build a rewarding career in the security industry.",
-
-  image: {
-    src: Subtract,
-    alt: "Security officer monitoring CCTV screens",
-  },
-
-  stats: [
-    {
-      value: "500+",
-      label: "Employees Across UAE",
-    },
-    {
-      value: "24/7",
-      label: "Professional Support",
-    },
-    {
-      value: "10+",
-      label: "Years of Experience",
-    },
-    {
-      value: "100%",
-      label: "Career Growth Opportunities",
-    },
-  ],
-};
+// ─── API Fetch ────────────────────────────────────────────────────────────────
+async function fetchCareerHeroData(): Promise<CareerHeroData | null> {
+  try {
+    // Replace with your actual API endpoint
+    const res = await fetch("/api/career-hero", {
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error("Failed to fetch");
+    const data: CareerHeroData[] = await res.json();
+    return data?.[0] ?? null;
+  } catch (err) {
+    console.error("CareerHero API error:", err);
+    return null;
+  }
+}
 
 // ────────────────────────────────────────────────────────────────────────────
 
-export default function AboutUs() {
+export default function CareerHero() {
+  const [content, setContent] = useState<CareerHeroData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const data = await listCareerLandingApi({});
+        console.log(data, "herodata");
+        if (data && data.length > 0) {
+          setContent(data[0]);
+        }
+      } catch (error) {
+        console.error("HeroSection API error:", error);
+        setError("Failed to load career section data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeroData();
+  }, []);
+
+
+  // ── Loading State ──────────────────────────────────────────────────────────
+  if (loading) {
+    return (
+      <section className="w-full overflow-hidden bg-white">
+        <div
+          className="
+            grid
+            grid-cols-1
+            lg:grid-cols-[42%_1fr]
+            items-start
+            gap-12
+            lg:gap-14
+            px-5
+            sm:px-8
+            md:px-14
+            lg:pl-24
+            lg:pr-10
+            xl:pl-40
+            xl:pr-16
+            2xl:pl-60
+            2xl:pr-24
+            py-14
+            md:py-20
+            mx-auto
+            overflow-visible
+          "
+        >
+          {/* Left skeleton */}
+          <div className="w-full pt-2 md:pt-4 z-20 animate-pulse">
+            <div className="h-5 w-48 bg-gray-200 rounded mb-4" />
+            <div className="h-10 w-72 bg-gray-200 rounded mb-3" />
+            <div className="h-10 w-56 bg-gray-200 rounded mb-5" />
+            <div className="h-4 w-full bg-gray-200 rounded mb-2" />
+            <div className="h-4 w-5/6 bg-gray-200 rounded mb-2" />
+            <div className="h-4 w-4/6 bg-gray-200 rounded mb-7" />
+            <div className="flex gap-4">
+              <div className="h-11 w-36 bg-gray-200 rounded-full" />
+              <div className="h-11 w-28 bg-gray-200 rounded-full" />
+            </div>
+          </div>
+          {/* Right skeleton */}
+          <div className="relative w-full h-[260px] sm:h-[380px] md:h-[480px] lg:h-[720px] animate-pulse">
+            <div className="w-full h-full rounded-[20px] bg-gray-200" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── No Data ────────────────────────────────────────────────────────────────
+  if (!content) return null;
+
   const {
-    eyebrow,
-    headingPrefix,
-    headingBrand,
-    headingSuffix,
+    badgeText,
+    heading,
+    headingHighlight,
+    headingEnd,
     description,
+    image,
+    patternImage,
+    buttons,
+    statsTitle,
     stats,
-  } = aboutContent;
+  } = content;
 
   return (
     <section className="w-full overflow-hidden bg-white">
@@ -109,17 +171,11 @@ export default function AboutUs() {
           >
             <span
               aria-hidden="true"
-              className="
-                text-[16px]
-                md:text-[18px]
-                font-normal
-                leading-none
-              "
+              className="text-[16px] md:text-[18px] font-normal leading-none"
             >
               ⓘ
             </span>
-
-            {eyebrow}
+            {badgeText}
           </p>
 
           {/* Heading */}
@@ -142,11 +198,10 @@ export default function AboutUs() {
               md:mb-5
             "
           >
-            {headingPrefix}
+            {heading}
             <br />
-
-            <span className="text-[#E07B2A]">{headingBrand}</span>{" "}
-            {headingSuffix}
+            <span className="text-[#F26A23]">{headingHighlight}</span>{" "}
+            {headingEnd}
           </h2>
 
           {/* Description */}
@@ -154,30 +209,26 @@ export default function AboutUs() {
             className="
               text-[15px]
               md:text-[16px]
-
               leading-[1.9]
-
               text-[#979797]
-
               max-w-[680px]
             "
           >
             {description}
           </p>
+
+          {/* Buttons */}
           <div className="mt-5 sm:mt-6 md:mt-7 flex flex-wrap gap-3 sm:gap-4 md:gap-5">
-            <Button
-              label="View Openings"
-              href="#openings"
-              variant="primary"
-            />
-            <Button
-              label="Contact Us"
-              href="/contact"
-              variant="outline"
-            />
+            {buttons.map((btn) => (
+              <Button
+                key={btn.label}
+                label={btn.label}
+                href={btn.link}
+                variant={btn.variant}
+              />
+            ))}
           </div>
         </div>
-
 
         {/* ── Right Section ─────────────────── */}
         <div
@@ -199,7 +250,7 @@ export default function AboutUs() {
         >
           {/* Top Pattern */}
           <Image
-            src={TopPattern}
+            src={patternImage}
             alt=""
             width={320}
             height={320}
@@ -226,7 +277,7 @@ export default function AboutUs() {
             "
           />
 
-          {/* Mobile / Tablet Layout */}
+          {/* ── Mobile / Tablet Layout ── */}
           <div className="relative lg:hidden w-full">
             {/* Main Image */}
             <div
@@ -244,7 +295,7 @@ export default function AboutUs() {
               "
             >
               <Image
-                src={HeroImage}
+                src={image}
                 alt="Security Officer"
                 fill
                 priority
@@ -277,17 +328,7 @@ export default function AboutUs() {
                 backdrop-blur-[18px]
               "
             >
-              <div
-                className="
-                  relative
-
-                  px-5
-                  sm:px-7
-
-                  pt-8
-                  pb-6
-                "
-              >
+              <div className="relative px-5 sm:px-7 pt-8 pb-6">
                 {/* Frosted Overlay */}
                 <div className="absolute inset-0 bg-[#B8B8B8]/22 pointer-events-none" />
 
@@ -296,14 +337,12 @@ export default function AboutUs() {
                     className="
                       text-[26px]
                       sm:text-[30px]
-
                       font-bold
                       text-black
-
                       mb-5
                     "
                   >
-                    Why Join Us
+                    {statsTitle}
                   </h3>
 
                   <div className="flex flex-col border-b border-[#A9A9A9]">
@@ -311,46 +350,14 @@ export default function AboutUs() {
                       <div
                         key={item.label}
                         className={`
-                          flex
-                          items-center
-                          justify-between
-
-                          gap-4
-
-                          py-4
-
-                          ${index !== stats.length - 1
-                            ? "border-b border-[#A9A9A9]"
-                            : ""
-                          }
+                          flex items-center justify-between gap-4 py-4
+                          ${index !== stats.length - 1 ? "border-b border-[#A9A9A9]" : ""}
                         `}
                       >
-                        <p
-                          className="
-                            min-w-[70px]
-
-                            text-[18px]
-                            sm:text-[20px]
-
-                            font-semibold
-                            text-[#8D2B14]
-                          "
-                        >
+                        <p className="min-w-[70px] text-[18px] sm:text-[20px] font-semibold text-[#7F220E]">
                           {item.value}
                         </p>
-
-                        <p
-                          className="
-                            flex-1
-
-                            text-right
-
-                            text-[14px]
-                            sm:text-[16px]
-
-                            text-[#2E2E2E]
-                          "
-                        >
+                        <p className="flex-1 text-right text-[14px] sm:text-[16px] text-[#2E2E2E]">
                           {item.label}
                         </p>
                       </div>
@@ -361,25 +368,15 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* Desktop Layout */}
+          {/* ── Desktop Layout ── */}
           <div className="hidden lg:block">
             {/* Main Image */}
             <div
-              className="
-                absolute
-                top-0
-                z-10
-                overflow-hidden
-                rounded-[20px]
-              "
-              style={{
-                width: "722px",
-                height: "511px",
-                right: "20px",
-              }}
+              className="absolute top-0 z-10 overflow-hidden rounded-[20px]"
+              style={{ width: "722px", height: "511px", right: "20px" }}
             >
               <Image
-                src={HeroImage}
+                src={image}
                 alt="Security Officer"
                 fill
                 priority
@@ -409,14 +406,11 @@ export default function AboutUs() {
                 WebkitBackdropFilter: "blur(18px)",
               }}
             >
-              {/* Inner Content */}
               <div className="relative w-full h-full px-[24px] pt-[42px] pb-[28px]">
                 {/* Frosted Overlay */}
                 <div className="absolute inset-0 bg-[#B8B8B8]/22 pointer-events-none" />
 
-                {/* Content */}
                 <div className="relative z-10">
-                  {/* Heading */}
                   <h3
                     className="
                       text-[32px]
@@ -427,51 +421,22 @@ export default function AboutUs() {
                       mb-[28px]
                     "
                   >
-                    Why Join Us
+                    {statsTitle}
                   </h3>
 
-                  {/* Stats */}
                   <div className="flex flex-col border-b border-[#A9A9A9]">
                     {stats.map((item, index) => (
                       <div
                         key={item.label}
                         className={`
-                          flex
-                          items-center
-                          justify-between
-                          py-[18px]
-                          ${index !== stats.length - 1
-                            ? "border-b border-[#A9A9A9]"
-                            : ""
-                          }
+                          flex items-center justify-between py-[18px]
+                          ${index !== stats.length - 1 ? "border-b border-[#A9A9A9]" : ""}
                         `}
                       >
-                        {/* Left Value */}
-                        <p
-                          className="
-                            min-w-[86px]
-                            text-[22px]
-                            leading-none
-                            font-[600]
-                            tracking-[0.3px]
-                            text-[#8D2B14]
-                          "
-                        >
+                        <p className="min-w-[86px] text-[22px] leading-none font-[600] tracking-[0.3px] text-[#7F220E]">
                           {item.value}
                         </p>
-
-                        {/* Right Label */}
-                        <p
-                          className="
-                            flex-1
-                            text-center
-                            text-[17px]
-                            leading-none
-                            font-[400]
-                            tracking-[0.1px]
-                            text-[#2E2E2E]
-                          "
-                        >
+                        <p className="flex-1 text-center text-[17px] leading-none font-[400] tracking-[0.1px] text-[#2E2E2E]">
                           {item.label}
                         </p>
                       </div>

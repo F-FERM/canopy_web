@@ -188,7 +188,7 @@ const WhyAttendSection = () => {
 
               bg-gradient-to-br
               from-[#7F220E]
-              to-[#5E1608]
+              to-[#7F220E]
 
               text-white
 

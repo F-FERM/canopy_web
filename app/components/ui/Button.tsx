@@ -25,7 +25,7 @@ export default function Button({
   label,
   href,
   variant = "primary",
-  color = "#F97316",
+  color = "#F26A23",
   showArrow,
   icon: Icon,
   className = "",
@@ -41,8 +41,8 @@ export default function Button({
 
   // ── Shared base classes ──────────────────────────────────────────────────
   const base = `
-    inline-flex items-center justify-center gap-2
-    h-[51px] px-[45px] rounded-[40px]
+    inline-flex items-center justify-center gap-[10px]
+    w-[218px] h-[51px] px-[45px] py-[16px] rounded-[10px]
     text-[18px] font-medium
     transition-all duration-300 
     select-none whitespace-nowrap

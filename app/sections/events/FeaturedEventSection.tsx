@@ -147,7 +147,7 @@ const FeaturedEventSection = () => {
           {/* Tag */}
           <p
             className="
-              text-[#F97316]
+              text-[#F26A23]
 
               text-[12px]
               sm:text-[14px]

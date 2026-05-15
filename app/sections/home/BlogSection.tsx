@@ -79,10 +79,10 @@ export default function BlogSection() {
 
           {/* Badge */}
           <div className="flex items-center justify-center gap-2 mb-3 sm:mb-3 md:mb-4 xl:mb-4">
-            <span className="flex items-center justify-center w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] md:w-[21px] md:h-[21px] xl:w-[22px] xl:h-[22px] rounded-full border border-[#F97316] text-[#F97316] text-[9px] sm:text-[10px] md:text-[10.5px] xl:text-[11px] font-bold leading-none">
+            <span className="flex items-center justify-center w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] md:w-[21px] md:h-[21px] xl:w-[22px] xl:h-[22px] rounded-full border border-[#F26A23] text-[#F26A23] text-[9px] sm:text-[10px] md:text-[10.5px] xl:text-[11px] font-bold leading-none">
               ⊙
             </span>
-            <p className="text-[#F97316] uppercase tracking-[1.5px] sm:tracking-[2px] md:tracking-[2.5px] xl:tracking-[3px] text-[11px] sm:text-[12px] md:text-[13px] xl:text-sm font-semibold">
+            <p className="text-[#F26A23] uppercase tracking-[1.5px] sm:tracking-[2px] md:tracking-[2.5px] xl:tracking-[3px] text-[11px] sm:text-[12px] md:text-[13px] xl:text-sm font-semibold">
               {loading ? (
                 <span className="inline-block w-16 sm:w-20 h-3 bg-orange-300/30 rounded animate-pulse" />
               ) : (
@@ -98,7 +98,7 @@ export default function BlogSection() {
             ) : (
               <>
                 {data?.heading ?? "Latest"}{" "}
-                <span className="text-[#F97316]">
+                <span className="text-[#F26A23]">
                   {data?.headingHighlight ?? "Security Insights"}
                 </span>
               </>
@@ -171,7 +171,7 @@ export default function BlogSection() {
                     </p>
 
                     {/* READ MORE LINK */}
-                    <div className="flex items-center gap-2 text-[#F97316] font-semibold text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] group-hover:gap-3 transition-all duration-300">
+                    <div className="flex items-center gap-2 text-[#F26A23] font-semibold text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] xl:text-[18px] group-hover:gap-3 transition-all duration-300">
                       <span>{blog.buttonText || "Read More"}</span>
                       <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </div>

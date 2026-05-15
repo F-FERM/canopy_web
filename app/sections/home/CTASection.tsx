@@ -101,7 +101,7 @@ export default function CTASection() {
   }, []);
 
   // Resolve background color from API or fall back to brand default
-  const bgColor = data?.backgroundColor ?? "#6B0F1A";
+  const bgColor = data?.backgroundColor ?? "#7F220E";
 
   return (
     <section
@@ -132,10 +132,10 @@ export default function CTASection() {
                 animate={isInView ? "visible" : "hidden"}
                 transition={makeTransition(0)}
               >
-                <span className="flex items-center justify-center w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] rounded-full border border-[#F97316] text-[#F97316] text-[10px] sm:text-[11px] font-bold leading-none">
+                <span className="flex items-center justify-center w-[20px] h-[20px] sm:w-[22px] sm:h-[22px] rounded-full border border-[#F26A23] text-[#F26A23] text-[10px] sm:text-[11px] font-bold leading-none">
                   ⊙
                 </span>
-                <p className="text-[#F97316] uppercase tracking-[2px] sm:tracking-[3px] text-[13px] sm:text-sm font-semibold">
+                <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[13px] sm:text-sm font-semibold">
                   {data.badgeText}
                 </p>
               </motion.div>
@@ -149,7 +149,7 @@ export default function CTASection() {
                 transition={makeTransition(0.15)}
               >
                 {data.heading}{" "}
-                <span className="text-[#F97316]">{data.headingHighlight}</span>
+                <span className="text-[#F26A23]">{data.headingHighlight}</span>
               </motion.h2>
 
               {/* DESCRIPTION */}

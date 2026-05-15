@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@/app/components/ui/Button";
 import { IconHelpOctagon } from "@tabler/icons-react";
 import { listCareerOpeningsApi } from "@/app/api/CareerJob";
+import { ApplyNow } from "./ApplyNow";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -12,6 +13,7 @@ interface Requirement {
 }
 
 interface Job {
+  _id: string;
   title: string;
   description: string;
   requirements: Requirement[];
@@ -104,7 +106,7 @@ const JobOpeningsSection = () => {
           <p className="text-red-500 text-[15px] font-medium">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-6 py-2 bg-[#F97316] text-white rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors"
+            className="mt-4 px-6 py-2 bg-[#F26A23] text-white rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors"
           >
             Retry
           </button>
@@ -147,13 +149,13 @@ const JobOpeningsSection = () => {
         >
           {/* Badge */}
           <div className="flex items-center justify-center gap-2 mb-4">
-            <span className="flex items-center justify-center text-[#F97316] text-[11px] font-bold leading-none">
+            <span className="flex items-center justify-center text-[#F26A23] text-[11px] font-bold leading-none">
               <IconHelpOctagon className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
             </span>
 
             <p
               className="
-                text-[#F97316]
+                text-[#F26A23]
                 tracking-[2px]
                 sm:tracking-[3px]
                 text-[14px]
@@ -182,12 +184,12 @@ const JobOpeningsSection = () => {
           >
             {loading ? (
               <>
-                Current <span className="text-[#F97316]">Job</span> Openings
+                Current <span className="text-[#F26A23]">Job</span> Openings
               </>
             ) : (
               <>
                 {data?.heading ?? "Current"}{" "}
-                <span className="text-[#F97316]">
+                <span className="text-[#F26A23]">
                   {data?.headingHighlight ?? "Job"}
                 </span>{" "}
                 {data?.headingEnd ?? "Openings"}
@@ -303,21 +305,11 @@ const JobOpeningsSection = () => {
 
                 {/* Button */}
                 <div className="mt-auto">
-                  <Button
-                    variant="primary"
-                    label={job.buttonText ?? "Apply Now"}
-                    onClick={() => {
-                      if (job.applyLink) {
-                        window.location.href = job.applyLink;
-                      }
-                    }}
-                    className="
-                      w-full
-                      sm:w-[220px]
-                      h-[54px]
-                      rounded-xl
-                      font-semibold
-                    "
+                  <ApplyNow 
+                    jobTitle={job.title} 
+                    jobId={job._id}
+                    buttonLabel={job.buttonText ?? "Apply Now"}
+                    buttonClassName="w-[218px] h-[51px] rounded-[10px]"
                   />
                 </div>
               </div>

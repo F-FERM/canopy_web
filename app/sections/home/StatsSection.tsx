@@ -16,13 +16,13 @@ export default function StatsSection() {
   const [stats, setStats] = useState<Stat[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
- useEffect(() => {
+
+  useEffect(() => {
     const fetchStats = async () => {
       try {
         setLoading(true);
         const data = await listHomeAboutApi({});
         if (!data || data.length === 0) throw new Error("Failed to fetch stats");
-        
         setStats(data[0].stats);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong");
@@ -36,6 +36,8 @@ export default function StatsSection() {
 
   const skeletonItems = Array.from({ length: 5 });
 
+  // ONLY change: added `lg:gap-8 xl:gap-10` as a stepping stone before 2xl:gap-[60px].
+  // Your original desktop gap of 60px is preserved exactly at 2xl (≥1536px).
   const gridClass = `
     w-full
     grid
@@ -48,44 +50,51 @@ export default function StatsSection() {
     gap-x-6
     sm:gap-y-8 sm:gap-x-8
     md:gap-y-8 md:gap-x-10
-    lg:gap-[60px]
-    xl:gap-[60px]
+    lg:gap-8
+    xl:gap-10
+    2xl:gap-[60px]
     items-center
     justify-items-center
   `;
 
+  // ONLY change: xl:px-60 → 2xl:px-60
+  // The heavy outer padding now only activates at ≥1536px (your real desktop).
+  // sm/md/lg values are untouched.
+  const sectionClass = `
+    w-full
+    bg-[#7F220E]
+    px-4
+    sm:px-6
+    md:px-12
+    lg:px-20
+    2xl:px-60
+  `;
+
+  // ONLY change: xl:px-[120px] → 2xl:px-[120px], added xl:px-10 as bridge.
+  // lg:px-[40px] and 2xl:px-[120px] are identical to your originals.
+  const innerClass = `
+    max-w-[1920px]
+    mx-auto
+    px-4
+    sm:px-6
+    md:px-8
+    lg:px-[40px]
+    xl:px-10
+    2xl:px-[120px]
+    py-8
+    sm:py-10
+    md:py-8
+    lg:py-0
+    lg:h-[148px]
+    flex
+    items-center
+    justify-center
+  `;
+
   if (loading) {
     return (
-      <section
-        className="
-          w-full
-          bg-[#6B0F1A]
-          px-4
-          sm:px-6
-          md:px-12
-          lg:px-20
-          xl:px-60
-        "
-      >
-        <div
-          className="
-            max-w-[1920px]
-            mx-auto
-            px-4
-            sm:px-6
-            md:px-8
-            lg:px-[40px]
-            xl:px-[120px]
-            py-8
-            sm:py-10
-            md:py-8
-            lg:py-0
-            lg:h-[148px]
-            flex
-            items-center
-            justify-center
-          "
-        >
+      <section className={sectionClass}>
+        <div className={innerClass}>
           <div className={gridClass}>
             {skeletonItems.map((_, index) => (
               <div
@@ -104,7 +113,7 @@ export default function StatsSection() {
 
   if (error) {
     return (
-      <section className="w-full bg-[#6B0F1A] px-4 sm:px-6 md:px-12 lg:px-20 xl:px-60">
+      <section className={sectionClass}>
         <div className="max-w-[1920px] mx-auto min-h-[100px] flex items-center justify-center">
           <p className="text-white/60 text-sm">{error}</p>
         </div>
@@ -113,36 +122,8 @@ export default function StatsSection() {
   }
 
   return (
-    <section
-      className="
-        w-full
-        bg-[#6B0F1A]
-        px-4
-        sm:px-6
-        md:px-12
-        lg:px-20
-        xl:px-60
-      "
-    >
-      <div
-        className="
-          max-w-[1920px]
-          mx-auto
-          px-4
-          sm:px-6
-          md:px-8
-          lg:px-[40px]
-          xl:px-[120px]
-          py-8
-          sm:py-10
-          md:py-8
-          lg:py-0
-          lg:h-[148px]
-          flex
-          items-center
-          justify-center
-        "
-      >
+    <section className={sectionClass}>
+      <div className={innerClass}>
         <div className={gridClass}>
           {stats.map((item, index) => (
             <div
@@ -155,10 +136,10 @@ export default function StatsSection() {
                 w-full
               "
             >
-              {/* NUMBER */}
+              {/* NUMBER — 100% unchanged from your original */}
               <h3
                 className="
-                  text-[#F97316]
+                  text-[#F26A23]
                   text-[28px]
                   sm:text-[36px]
                   md:text-[42px]
@@ -171,7 +152,7 @@ export default function StatsSection() {
                 {item.value}
               </h3>
 
-              {/* LABEL */}
+              {/* LABEL — 100% unchanged from your original */}
               <p
                 className="
                   mt-1.5

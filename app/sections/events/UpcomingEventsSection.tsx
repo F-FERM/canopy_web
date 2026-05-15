@@ -46,29 +46,12 @@ const UpcomingEventsSection = () => {
     fetchUpcomingEvents();
   }, []);
 
-  // Active Events
   const activeEvents =
     data?.events?.filter((event) => event.isActive) ?? [];
 
-  // ───────────────── Loading ─────────────────
   if (loading) {
     return (
-      <section
-        className="
-          px-5
-          sm:px-8
-          md:px-12
-          lg:px-16
-          xl:px-40
-          2xl:px-60
-
-          py-14
-          md:py-20
-
-          mx-auto
-          bg-white
-        "
-      >
+      <section className="px-5 sm:px-8 md:px-12 lg:px-16 xl:px-40 2xl:px-60 py-14 md:py-20 mx-auto bg-white">
         <div className="text-center mb-12 md:mb-16 animate-pulse">
           <div className="h-12 w-72 bg-gray-200 rounded mx-auto" />
         </div>
@@ -77,13 +60,7 @@ const UpcomingEventsSection = () => {
           {[1, 2, 3, 4].map((item) => (
             <div
               key={item}
-              className="
-                w-full
-                h-[270px]
-                rounded-[20px]
-                bg-gray-200
-                animate-pulse
-              "
+              className="w-full h-[270px] rounded-[20px] bg-gray-200 animate-pulse"
             />
           ))}
         </div>
@@ -102,29 +79,15 @@ const UpcomingEventsSection = () => {
         lg:px-16
         xl:px-40
         2xl:px-60
-
         py-14
         md:py-20
-
         mx-auto
         bg-white
       "
     >
       {/* Header */}
       <div className="text-center mb-12 md:mb-16">
-        <h2
-          className="
-            text-[30px]
-            sm:text-[36px]
-            md:text-[40px]
-            lg:text-[42px]
-            xl:text-[46px]
-
-            font-semibold
-            leading-[110%]
-            tracking-[0.04em]
-          "
-        >
+        <h2 className="text-[30px] sm:text-[36px] md:text-[40px] lg:text-[42px] xl:text-[46px] font-semibold leading-[110%] tracking-[0.04em]">
           <span className="text-[#111111]">
             {data.upcomingHeading}
           </span>{" "}
@@ -134,17 +97,17 @@ const UpcomingEventsSection = () => {
         </h2>
       </div>
 
-      {/* Events Grid */}
+      {/* GRID */}
       <div
         className="
           grid
           grid-cols-1
+          md:grid-cols-2
           lg:grid-cols-2
+          xl:grid-cols-2
+          2xl:grid-cols-2
 
-          gap-5
-          lg:gap-6
-          xl:gap-8
-
+          gap-5 lg:gap-6 xl:gap-8
           items-stretch
         "
       >
@@ -160,7 +123,6 @@ const UpcomingEventsSection = () => {
 
               rounded-[20px]
               border border-[#D9D9D9]
-
               bg-white
 
               p-4
@@ -175,6 +137,7 @@ const UpcomingEventsSection = () => {
               flex
               flex-col
               sm:flex-row
+              sm:items-center
 
               gap-5
 
@@ -185,23 +148,24 @@ const UpcomingEventsSection = () => {
               hover:shadow-lg
             "
           >
-            {/* Image */}
+            {/* IMAGE (FIXED FOR TABLET + MACBOOK AIR) */}
             <div
               className="
                 relative
-
                 w-full
+
                 sm:w-[220px]
-                md:w-[240px]
+                md:w-[200px]
+                lg:w-[210px]
                 xl:w-[250px]
 
                 h-[220px]
-                sm:h-[230px]
+                md:h-[190px]
+                lg:h-[200px]
                 xl:h-[243px]
 
                 rounded-[20px]
                 overflow-hidden
-
                 flex-shrink-0
               "
             >
@@ -214,97 +178,40 @@ const UpcomingEventsSection = () => {
               />
             </div>
 
-            {/* Content */}
-            <div
-              className="
-                flex-1
-                flex
-                flex-col
-                justify-center
-              "
-            >
-              {/* Title */}
-              <h3
-                className="
-                  text-[22px]
-                  sm:text-[24px]
-                  md:text-[26px]
-                  xl:text-[30px]
-
-                  font-bold
-                  text-black
-
-                  mb-3
-                "
-              >
+            {/* CONTENT */}
+            <div className="flex-1 flex flex-col justify-center">
+              <h3 className="text-[22px] sm:text-[24px] md:text-[26px] xl:text-[30px] font-bold text-black mb-3">
                 {event.title}
               </h3>
 
-              {/* Date & Location */}
-              <p
-                className="
-                  text-[#666666]
-
-                  text-[14px]
-                  sm:text-[15px]
-                  md:text-[16px]
-                  xl:text-[18px]
-
-                  leading-[1.5]
-
-                  mb-3
-                "
-              >
+              <p className="text-[#666666] text-[14px] sm:text-[15px] md:text-[16px] xl:text-[18px] leading-[1.5] mb-3">
                 {event.date} • {event.location}
               </p>
 
-              {/* Description */}
-              <p
-                className="
-                  text-[#5C5C5C]
-
-                  text-[14px]
-                  md:text-[15px]
-                  xl:text-[16px]
-
-                  leading-[1.7]
-
-                  mb-5
-                "
-              >
+              <p className="text-[#5C5C5C] text-[14px] md:text-[15px] xl:text-[16px] leading-[1.7] mb-5">
                 {event.description}
               </p>
 
-              {/* Button */}
               <Link
                 href={event.button?.link}
                 className="
                   w-fit
-
                   h-[46px]
                   xl:h-[48px]
-
                   px-5
                   xl:px-6
-
                   inline-flex
                   items-center
                   justify-center
                   gap-2
-
                   rounded-[12px]
-
                   bg-[#F26A23]
                   text-white
-
                   text-[15px]
                   xl:text-[16px]
-
                   font-semibold
-
                   transition-all
                   duration-300
-
                   hover:bg-[#dd5d18]
                 "
               >

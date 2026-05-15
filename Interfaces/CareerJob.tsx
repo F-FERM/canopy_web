@@ -12,6 +12,7 @@ export interface ListCareerJobOpeningsResponse {
 }
 
 interface Job {
+    _id: string;
     title: string;
     description: string;
     requirements: Requirement[];
