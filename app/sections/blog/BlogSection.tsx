@@ -1,71 +1,88 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { listBlogSectionApi } from "@/app/api/HomeBlog";
+import Image from "next/image";
 
-interface BlogCard {
-  id: number;
+interface Blog {
   title: string;
-  description: string;
+  shortDescription: string;
+  content: string;
   image: string;
+  buttonText: string;
+  slug: string;
+  isActive: boolean;
+  publishedAt: string;
 }
 
-const blogPosts: BlogCard[] = [
-  {
-    id: 1,
-    title: "Security Guard Importance",
-    description:
-      "How professional guards protect people, property, and businesses from security risks.",
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
-  },
-  {
-    id: 2,
-    title: "Business Security Tips",
-    description:
-      "Simple security practices every business should follow to stay safe.",
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Modern Security Solutions",
-    description:
-      "How technology and trained guards work together for better protection.",
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
-  },
-];
+interface BlogSectionData {
+  _id: string;
+  badgeText: string;
+  heading: string;
+  headingHighlight: string;
+  description: string;
+  blogs: Blog[];
+}
 
 const BlogSection = () => {
+  const [data, setData] = useState<BlogSectionData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const data = await listBlogSectionApi({});
+        setData(data?.[0] ?? null);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
+
+  const blogs = data?.blogs.filter((blog) => blog.isActive) ?? [];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
+
   return (
     <section className="py-16 md:py-24 px-6 md:px-12 lg:px-20 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <p className="text-orange-500 font-semibold text-sm md:text-xs tracking-widest mb-2">
-            BLOG
+          <p className="text-orange-500 font-semibold text-sm md:text-xs tracking-widest mb-2 uppercase">
+            {data?.badgeText ?? "BLOG"}
           </p>
           <h2 className="text-4xl md:text-3xl font-bold mb-4">
-            <span className="text-gray-900">Latest</span>{" "}
-            <span className="text-orange-500">Security Insights</span>
+            <span className="text-gray-900">{data?.heading ?? "Latest"}</span>{" "}
+            <span className="text-orange-500">{data?.headingHighlight ?? "Security Insights"}</span>
           </h2>
           <p className="text-gray-600 text-base md:text-xs max-w-2xl mx-auto">
-            Stay informed with the latest updates, security tips, and industry
-            news from our experts.
+            {data?.description ?? "Stay informed with the latest updates, security tips, and industry news from our experts."}
           </p>
         </div>
 
         {/* Blog Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <div
-              key={post.id}
+          {blogs.map((post, index) => (
+            <Link
+              href={`/security-detail/${post.slug}`}
+              key={index}
               className="group rounded-2xl overflow-hidden bg-white border border-gray-200 hover:shadow-lg transition-shadow duration-300"
             >
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
-                <img
+                <Image
                   src={post.image}
                   alt={post.title}
+                  fill
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -78,19 +95,18 @@ const BlogSection = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 text-sm md:text-xs mb-6 leading-relaxed">
-                  {post.description}
+                <p className="text-gray-600 text-sm md:text-xs mb-6 leading-relaxed line-clamp-3">
+                  {post.shortDescription}
                 </p>
 
                 {/* Read More Link */}
-                <Link
-                  href={`/blog/${post.id}`}
-                  className="inline-flex items-center text-orange-500 font-semibold hover:text-orange-600 transition-colors"
+                <div
+                  className="inline-flex items-center text-orange-500 font-semibold group-hover:text-orange-600 transition-colors"
                 >
-                  Read More <span className="ml-2">→</span>
-                </Link>
+                  {post.buttonText || "Read More"} <span className="ml-2">→</span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

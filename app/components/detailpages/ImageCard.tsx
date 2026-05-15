@@ -3,7 +3,23 @@
 import Button from "@/app/components/ui/Button";
 import HeroBg from "../../../public/images/blog/Blog1.png";
 
-const ImageCard = () => {
+interface ImageCardProps {
+  tag?: string;
+  title?: string;
+  highlight?: string;
+  description?: string;
+  backgroundImage?: any;
+  buttonLabel?: string;
+}
+
+const ImageCard = ({
+  tag = "A PROFESSIONAL SECURITY SERVICES",
+  title = "Get In Touch With Our",
+  highlight = "Security Experts",
+  description = "Have questions? Let's build the right protection solution for your business, property, and people with our trusted security professionals.",
+  backgroundImage = HeroBg,
+  buttonLabel = "Get In Touch",
+}: ImageCardProps) => {
   return (
     <section
       className="
@@ -41,7 +57,7 @@ const ImageCard = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${HeroBg.src})`,
+            backgroundImage: `url(${backgroundImage?.src || backgroundImage})`,
           }}
         >
           {/* Overlay */}
@@ -114,7 +130,7 @@ const ImageCard = () => {
                 <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
               </svg>
 
-              <span>A PROFESSIONAL SECURITY SERVICES</span>
+              <span>{tag}</span>
             </p>
 
             {/* Heading — line 1: orange word + white text, line 2: white */}
@@ -130,13 +146,8 @@ const ImageCard = () => {
               "
             >
               {/* Line 1 */}
-              <span className="text-[#F26A23]">Get In Touch </span>
-              <span className="text-white">With Our</span>
-
-              <br />
-
-              {/* Line 2 */}
-              <span className="text-white">Security Experts</span>
+              <span className="text-[#F26A23]">{title} </span>
+              <span className="text-white">{highlight}</span>
             </h2>
 
             {/* Description */}
@@ -154,15 +165,13 @@ const ImageCard = () => {
                 max-w-[680px]
               "
             >
-              Have questions? Let's build the right protection solution for your
-              business, property, and people with our trusted security
-              professionals.
+              {description}
             </p>
 
             {/* Single centered CTA button — matches screenshot style */}
             <div className="pt-1 sm:pt-2">
               <Button
-                label="Get In Touch"
+                label={buttonLabel}
                 variant="primary"
                 className="rounded-full px-8"
                 showArrow={true}

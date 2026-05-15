@@ -13,7 +13,27 @@ const pointsRight = [
   "Preventing theft and vandalism",
 ];
 
-const SecurityWhy = () => {
+interface SecurityWhyProps {
+  title?: string;
+  highlight?: string;
+  description?: string;
+  pointsLeft?: string[];
+  pointsRight?: string[];
+}
+
+const SecurityWhy = ({
+  title = "Why",
+  highlight = "Security Guards",
+  description = "Security guards act as the first line of defense, preventing risks before they escalate into serious threats.",
+  pointsLeft = [
+    "Monitoring surveillance systems",
+    "Controlling access points",
+  ],
+  pointsRight = [
+    "Responding to emergencies",
+    "Preventing theft and vandalism",
+  ],
+}: SecurityWhyProps) => {
   return (
     <section
       className="
@@ -36,17 +56,17 @@ const SecurityWhy = () => {
 
         {/* TITLE (centered like design) */}
         <h2 className="text-center text-white text-[26px] sm:text-[34px] md:text-[46px] font-semibold leading-tight">
-          Why <span className="text-[#F26A21]">Security Guards</span> Are <br />
+          {title} <span className="text-[#F26A21]">{highlight}</span> Are <br />
           Essential
         </h2>
 
         {/* DESCRIPTION (centered like design) */}
         <p className="mt-4 text-center text-[#E9E9E9] text-[13px] md:text-[16px] max-w-[700px] mx-auto">
-          Security guards act as the first line of defense, preventing risks before they escalate into serious threats.
+          {description}
         </p>
 
         {/* POINTS GRID */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-70">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-70">
 
           {/* LEFT */}
           <div className="space-y-5">

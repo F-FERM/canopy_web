@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+
 import {
   Zap,
   Users,
@@ -10,6 +11,12 @@ import {
 } from "lucide-react";
 
 import Button from "@/app/components/ui/Button";
+import FeatureCard from "./FeatureCard";
+
+import {
+  listContactLandingApi,
+  createContactFormApi,
+} from "@/app/api/ContactLanding";
 
 // ─────────────────────────────────────────────────────────────
 // Animation Variants
@@ -27,61 +34,172 @@ const fadeUp = (delay = 0) => ({
   },
 });
 
-const scaleIn = (delay = 0) => ({
-  hidden: { opacity: 0, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.55,
-      delay,
-    },
-  },
-});
-
 // ─────────────────────────────────────────────────────────────
-// Feature Data
+// Types
 // ─────────────────────────────────────────────────────────────
 
-const features = [
-  {
-    id: 1,
-    title: "Fast Response",
-    description: "We reply within hours.",
-    icon: <Zap size={22} strokeWidth={2.2} />,
-  },
-  {
-    id: 2,
-    title: "Professional Team",
-    description: "Certified security experts.",
-    icon: <Users size={22} strokeWidth={2.2} />,
-  },
-  {
-    id: 3,
-    title: "Custom Plans",
-    description: "Tailored security solutions.",
-    icon: <Target size={22} strokeWidth={2.2} />,
-  },
-  {
-    id: 4,
-    title: "Value for Money",
-    description: "Best value for your investment.",
-    icon: <BadgeDollarSign size={22} strokeWidth={2.2} />,
-  },
-];
+interface FeatureCardItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface ContactData {
+  featureCards: FeatureCardItem[];
+}
+
+// ─────────────────────────────────────────────────────────────
+// Icon Map
+// ─────────────────────────────────────────────────────────────
+
+const iconMap: any = {
+  Zap: <Zap size={22} strokeWidth={2.2} />,
+  Users: <Users size={22} strokeWidth={2.2} />,
+  Target: <Target size={22} strokeWidth={2.2} />,
+  BadgeDollarSign: (
+    <BadgeDollarSign size={22} strokeWidth={2.2} />
+  ),
+};
 
 // ─────────────────────────────────────────────────────────────
 // Main Component
 // ─────────────────────────────────────────────────────────────
 
 export default function ContactFormSection() {
+  const [data, setData] =
+    useState<ContactData | null>(null);
+
+  const [loading, setLoading] = useState(true);
+
+  // ───────────────── FORM STATES ─────────────────
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [submitting, setSubmitting] =
+    useState(false);
+
+  // ───────────────── FETCH API ─────────────────
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response =
+          await listContactLandingApi({});
+
+        setData(response?.[0] ?? null);
+      } catch (error) {
+        console.error(
+          "Contact Form Feature API Error:",
+          error
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // ───────────────── HANDLE INPUT ─────────────────
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // ───────────────── HANDLE SUBMIT ─────────────────
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    try {
+      setSubmitting(true);
+
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      };
+
+      console.log("Payload:", payload);
+
+      // API CALL
+      await createContactFormApi(payload);
+
+      alert("Message sent successfully!");
+
+      // RESET FORM
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Contact Form Error:", error);
+
+      alert("Something went wrong!");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // ───────────────── Loading ─────────────────
+
+  if (loading) {
+    return (
+      <section
+        className="
+          px-5
+          sm:px-8
+          md:px-14
+          lg:px-24
+          xl:px-40
+          2xl:px-60
+
+          py-14
+          md:py-20
+        "
+      >
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <div className="h-[700px] rounded-[14px] bg-gray-200 animate-pulse" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-5">
+            {[1, 2, 3, 4].map((item) => (
+              <div
+                key={item}
+                className="h-[170px] rounded-[20px] bg-gray-200 animate-pulse"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       className="
         px-5
         sm:px-8
         md:px-14
-        lg:px-24
+        lg:px-20
         xl:px-40
         2xl:px-60
 
@@ -92,11 +210,19 @@ export default function ContactFormSection() {
       "
     >
       <div className="mx-auto max-w-[1400px]">
-
         {/* GRID */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+        <div
+          className="
+            grid
+            grid-cols-1
+            xl:grid-cols-2
 
+            gap-6
+            lg:gap-8
+          "
+        >
           {/* ───────────────── LEFT FORM CARD ───────────────── */}
+
           <motion.div
             variants={fadeUp(0)}
             initial="hidden"
@@ -114,7 +240,7 @@ export default function ContactFormSection() {
               px-5
               sm:px-7
               md:px-10
-              lg:px-[50px]
+              lg:px-[42px]
               xl:px-[64px]
 
               py-8
@@ -127,6 +253,7 @@ export default function ContactFormSection() {
             "
           >
             {/* TITLE */}
+
             <h2
               className="
                 text-[26px]
@@ -149,14 +276,17 @@ export default function ContactFormSection() {
             </h2>
 
             {/* FORM */}
-            <form className="space-y-5 md:space-y-7">
 
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-5 md:space-y-7"
+            >
               {/* NAME */}
+
               <div>
                 <label
                   className="
                     block
-
                     text-[16px]
                     md:text-[18px]
 
@@ -172,7 +302,11 @@ export default function ContactFormSection() {
 
                 <input
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="Your Name..."
+                  required
                   className="
                     w-full
 
@@ -203,11 +337,11 @@ export default function ContactFormSection() {
               </div>
 
               {/* EMAIL */}
+
               <div>
                 <label
                   className="
                     block
-
                     text-[16px]
                     md:text-[18px]
 
@@ -223,7 +357,11 @@ export default function ContactFormSection() {
 
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="example@gmail.com"
+                  required
                   className="
                     w-full
 
@@ -254,11 +392,11 @@ export default function ContactFormSection() {
               </div>
 
               {/* SUBJECT */}
+
               <div>
                 <label
                   className="
                     block
-
                     text-[16px]
                     md:text-[18px]
 
@@ -274,7 +412,11 @@ export default function ContactFormSection() {
 
                 <input
                   type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="Title..."
+                  required
                   className="
                     w-full
 
@@ -305,11 +447,11 @@ export default function ContactFormSection() {
               </div>
 
               {/* MESSAGE */}
+
               <div>
                 <label
                   className="
                     block
-
                     text-[16px]
                     md:text-[18px]
 
@@ -325,7 +467,11 @@ export default function ContactFormSection() {
 
                 <textarea
                   rows={5}
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Type Here..."
+                  required
                   className="
                     w-full
 
@@ -357,9 +503,16 @@ export default function ContactFormSection() {
               </div>
 
               {/* BUTTON */}
+
               <div className="pt-2">
                 <Button
-                  label="Send Now"
+                  type="submit"
+                  disabled={submitting}
+                  label={
+                    submitting
+                      ? "Sending..."
+                      : "Send Now"
+                  }
                   variant="primary"
                   className="
                     w-full
@@ -390,91 +543,27 @@ export default function ContactFormSection() {
           </motion.div>
 
           {/* ───────────────── RIGHT FEATURE CARDS ───────────────── */}
-          <div className="flex flex-col gap-5 md:gap-7">
 
-            {features.map((item, i) => (
-              <motion.div
-                key={item.id}
-                variants={scaleIn(0.1 + i * 0.12)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                whileHover={{
-                  y: -4,
-                  transition: {
-                    duration: 0.2,
-                  },
-                }}
-                className="
-                  bg-white
-                  border border-[#E8E8E8]
+          <div
+            className="
+              grid
+              grid-cols-1
+              sm:grid-cols-2
+              xl:grid-cols-1
 
-                  rounded-[20px]
-
-                  px-5
-                  sm:px-7
-                  md:px-10
-
-                  py-7
-                  md:py-10
-
-                  min-h-[140px]
-                  md:min-h-[154px]
-
-                  flex items-center
-
-                  shadow-[0_4px_18px_rgba(0,0,0,0.02)]
-
-                  transition-all
-                "
-              >
-                <div className="flex items-start gap-4 md:gap-5">
-
-                  {/* ICON */}
-                  <div className="text-[#F26A23] mt-1 shrink-0">
-                    {item.icon}
-                  </div>
-
-                  {/* TEXT */}
-                  <div>
-                    <h3
-                      className="
-                        text-[20px]
-                        sm:text-[24px]
-                        md:text-[30px]
-                        xl:text-[34px]
-
-                        font-semibold
-                        leading-[110%]
-
-                        text-[#111111]
-
-                        mb-2
-                        md:mb-3
-                      "
-                    >
-                      {item.title}
-                    </h3>
-
-                    <p
-                      className="
-                        text-[14px]
-                        md:text-[16px]
-                        xl:text-[18px]
-
-                        text-[#5B5B5B]
-
-                        leading-[160%]
-                      "
-                    >
-                      {item.description}
-                    </p>
-                  </div>
-
-                </div>
-              </motion.div>
+              gap-5
+              md:gap-7
+            "
+          >
+            {data?.featureCards?.map((item, i) => (
+              <FeatureCard
+                key={i}
+                icon={iconMap[item.icon]}
+                title={item.title}
+                description={item.description}
+                delay={0.1 + i * 0.12}
+              />
             ))}
-
           </div>
         </div>
       </div>

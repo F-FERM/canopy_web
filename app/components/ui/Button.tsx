@@ -9,7 +9,7 @@ import { isValidElement } from "react";
 export interface ButtonProps {
   label: string;
   href?: string;
-  variant?: "primary" | "outline" | "ghost";
+  variant?: string;
   color?: string;
   showArrow?: boolean;
   icon?: LucideIcon;
@@ -35,9 +35,9 @@ export default function Button({
 }: ButtonProps) {
   const isPrimary = variant === "primary";
   const isOutline = variant === "outline";
-  const isGhost   = variant === "ghost";
+  const isGhost = variant === "ghost";
 
-const displayArrow = showArrow ?? (isPrimary || isGhost);  
+  const displayArrow = showArrow ?? (isPrimary || isGhost);
 
   // ── Shared base classes ──────────────────────────────────────────────────
   const base = `
@@ -54,8 +54,8 @@ const displayArrow = showArrow ?? (isPrimary || isGhost);
   const variantClass = isOutline
     ? "border border-black bg-transparent text-black hover:bg-black hover:text-white"
     : isGhost
-    ? "text-white hover:shadow-lg bg-transparent border border-white rounded"
-    : "text-white hover:shadow-lg";  
+      ? "text-white hover:shadow-lg bg-transparent border border-white rounded"
+      : "text-white hover:shadow-lg";
 
   const inlineStyle =
     isPrimary && !disabled ? { backgroundColor: color } : undefined;

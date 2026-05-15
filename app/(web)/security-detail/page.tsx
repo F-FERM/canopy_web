@@ -6,8 +6,8 @@ const page = () => {
   return (
     <div>
       <SecurityImportance />
-      <SecurityWhy/>
-     
+      <SecurityWhy />
+
     </div>
   );
 };

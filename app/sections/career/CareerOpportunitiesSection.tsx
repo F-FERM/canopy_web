@@ -177,7 +177,7 @@ export default function AboutUs() {
             />
           </div>
         </div>
-        
+
 
         {/* ── Right Section ─────────────────── */}
         <div
@@ -319,10 +319,9 @@ export default function AboutUs() {
 
                           py-4
 
-                          ${
-                            index !== stats.length - 1
-                              ? "border-b border-[#A9A9A9]"
-                              : ""
+                          ${index !== stats.length - 1
+                            ? "border-b border-[#A9A9A9]"
+                            : ""
                           }
                         `}
                       >
@@ -441,10 +440,9 @@ export default function AboutUs() {
                           items-center
                           justify-between
                           py-[18px]
-                          ${
-                            index !== stats.length - 1
-                              ? "border-b border-[#A9A9A9]"
-                              : ""
+                          ${index !== stats.length - 1
+                            ? "border-b border-[#A9A9A9]"
+                            : ""
                           }
                         `}
                       >

@@ -51,7 +51,8 @@ function CardSkeleton() {
   return (
     <div
       className="
-        w-full max-w-[276px] h-[139px]
+        w-full
+        h-[139px]
         rounded-[30px] border border-gray-200 bg-gray-100
         animate-pulse
       "
@@ -68,8 +69,6 @@ function IndustryCard({ industry }: { industry: IndustryItem }) {
     <div
       className="
         w-full
-        max-w-[276px]
-
         h-[139px]
 
         rounded-[30px]
@@ -80,9 +79,9 @@ function IndustryCard({ industry }: { industry: IndustryItem }) {
         items-center
         justify-center
 
-        px-6
-        sm:px-8
-        lg:px-[61px]
+        px-4
+        sm:px-6
+        lg:px-8
 
         pt-[23px]
         pb-[19px]
@@ -185,15 +184,13 @@ const IndustriesSection = () => {
 
           gap-4
           md:gap-5
-
-          justify-items-center
         "
       >
         {loading
           ? Array.from({ length: 10 }).map((_, i) => <CardSkeleton key={i} />)
           : industries.map((industry, i) => (
-              <IndustryCard key={`${industry.title}-${i}`} industry={industry} />
-            ))}
+            <IndustryCard key={`${industry.title}-${i}`} industry={industry} />
+          ))}
       </div>
     </section>
   );

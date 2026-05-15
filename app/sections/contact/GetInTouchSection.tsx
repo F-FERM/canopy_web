@@ -1,10 +1,67 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Button from "@/app/components/ui/Button";
-import HeroBg from "../../../public/images/blog/Blog1.png";
-import { Phone } from "lucide-react";
+
+import {
+  Phone,
+  ArrowRight,
+} from "lucide-react";
+import { listContactLandingApi } from "@/app/api/ContactLanding";
+import { ListContactLandingResponse } from "@/Interfaces/ContactLanding";
+
+const iconMap: any = {
+  Phone,
+  ArrowRight,
+};
 
 const GetInTouchSection = () => {
+  const [data, setData] =
+    useState<ListContactLandingResponse | null>(null);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await listContactLandingApi({});
+        setData(response?.[0] ?? null);
+      } catch (error) {
+        console.error("Contact Landing API Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // ───────────────── Loading ─────────────────
+  if (loading) {
+    return (
+      <section className="px-4 sm:px-6 md:px-8 py-6 md:py-8">
+        <div
+          className="
+            w-full
+            max-w-[1760px]
+            mx-auto
+
+            h-[420px]
+            sm:h-[520px]
+            md:h-[620px]
+            lg:h-[720px]
+
+            rounded-[20px]
+            bg-gray-200
+            animate-pulse
+          "
+        />
+      </section>
+    );
+  }
+
+  if (!data) return null;
+
   return (
     <section
       className="
@@ -15,7 +72,8 @@ const GetInTouchSection = () => {
         px-4
         sm:px-6
         md:px-8
-        lg:px-8
+        lg:px-6
+        xl:px-8
 
         py-6
         md:py-8
@@ -32,24 +90,24 @@ const GetInTouchSection = () => {
           h-[420px]
           sm:h-[520px]
           md:h-[620px]
-          lg:h-[720px]
+          lg:h-[680px]
+          xl:h-[720px]
 
           rounded-[20px]
           overflow-hidden
         "
       >
-        {/* Background Image */}
+        {/* Background */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${HeroBg.src})`,
+            backgroundImage: `url(${data.backgroundImage})`,
           }}
         >
-          {/* Overlay */}
           <div className="absolute inset-0 bg-black/55" />
         </div>
 
-        {/* Content Wrapper */}
+        {/* Content */}
         <div
           className="
             relative
@@ -65,8 +123,8 @@ const GetInTouchSection = () => {
 
             px-5
             sm:px-8
-            md:px-14
-            lg:px-24
+            md:px-12
+            lg:px-16
             xl:px-[148px]
 
             py-10
@@ -74,7 +132,6 @@ const GetInTouchSection = () => {
             md:py-16
           "
         >
-          {/* Content Box */}
           <div
             className="
               flex
@@ -84,13 +141,14 @@ const GetInTouchSection = () => {
               gap-4
               sm:gap-5
               md:gap-6
-              lg:gap-[25px]
+              lg:gap-5
+              xl:gap-[25px]
 
               w-full
               max-w-[900px]
             "
           >
-            {/* Tag */}
+            {/* Badge */}
             <p
               className="
                 flex items-center gap-2
@@ -98,7 +156,8 @@ const GetInTouchSection = () => {
                 text-[13px]
                 sm:text-[15px]
                 md:text-[16px]
-                lg:text-[18px]
+                lg:text-[17px]
+                xl:text-[18px]
 
                 font-semibold
                 tracking-[0.14em]
@@ -106,20 +165,9 @@ const GetInTouchSection = () => {
                 text-[#F26A23]
               "
             >
-              <span
-                aria-hidden="true"
-                className="
-                  text-[14px]
-                  sm:text-[16px]
-                  md:text-[18px]
+              <span>ⓘ</span>
 
-                  leading-none
-                "
-              >
-                ⓘ
-              </span>
-
-              <span>GET IN TOUCH</span>
+              <span>{data.badgeText}</span>
             </p>
 
             {/* Heading */}
@@ -131,16 +179,18 @@ const GetInTouchSection = () => {
                 text-[30px]
                 sm:text-[40px]
                 md:text-[48px]
-                lg:text-[56px]
+                lg:text-[50px]
+                xl:text-[56px]
               "
             >
               <span className="text-white">
-                Get In Touch With Our
+                {data.heading}
               </span>
+
               <br />
 
               <span className="text-[#F26A23]">
-                Security Experts
+                {data.headingHighlight}
               </span>
             </h2>
 
@@ -159,9 +209,7 @@ const GetInTouchSection = () => {
                 max-w-[720px]
               "
             >
-              Have questions? Let’s build the right protection solution
-              for your business, property, and people with our trusted
-              security professionals.
+              {data.description}
             </p>
 
             {/* Buttons */}
@@ -180,24 +228,29 @@ const GetInTouchSection = () => {
                 sm:pt-4
               "
             >
-              <Button
-              icon={Phone}
-                label="Call Now"
-                variant="primary"
-                className="rounded-full"
-                showArrow={false}
-              />
+              {data.buttons?.map((btn, index) => {
+                const Icon =
+                  iconMap[btn.icon as keyof typeof iconMap];
 
-              <Button
-                label="Request Quote →"
-                variant="outline"
-                className="
-                  bg-transparent
-                  text-white
-                  border-white
-                  rounded-full
-                "
-              />
+                return (
+                  <Button
+                    key={index}
+                    icon={Icon}
+                    label={btn.label}
+                    href={btn.link}
+                    variant={btn.variant}
+                    showArrow={false}
+                    className={`
+                      rounded-full
+
+                      ${btn.variant === "outline"
+                        ? "bg-transparent text-white border-white"
+                        : ""
+                      }
+                    `}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>

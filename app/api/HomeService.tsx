@@ -2,7 +2,7 @@ import { ListHomeServiceResponse } from "@/Interfaces/HomeService";
 import axiosInstance from "@/service/axios";
 import { AxiosError } from "axios";
 
-const BASE = "/home/services-section"; 
+const BASE = "/home/services-section";
 
 // LIST
 export const listSecurityServicesApi = async (data: {
@@ -46,4 +46,4 @@ export const listSecurityServicesApi = async (data: {
 
     throw error;
   }
-};
+}

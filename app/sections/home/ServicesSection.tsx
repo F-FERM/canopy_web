@@ -51,21 +51,21 @@ export default function ServicesSection() {
   const [error, setError] = useState<string | null>(null);
 
 
-    useEffect(() => {
-      const fetchHeroData = async () => {
-        try {
-          const data = await listSecurityServicesApi({});
-          console.log(data, "herodata");
-          setData(data?.[0] ?? null);
-        } catch (error) {
-          console.error("HeroSection API error:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchHeroData();
-    }, []);
-  
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const data = await listSecurityServicesApi({});
+        console.log(data, "herodata");
+        setData(data?.[0] ?? null);
+      } catch (error) {
+        console.error("HeroSection API error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeroData();
+  }, []);
+
 
   // Active services only
   const activeServices = data?.services.filter((s) => s.isActive) ?? [];
@@ -138,13 +138,13 @@ export default function ServicesSection() {
           >
             {loading
               ? Array.from({ length: SKELETON_COUNT }).map((_, i) => (
-                  <CardSkeleton key={i} />
-                ))
+                <CardSkeleton key={i} />
+              ))
               : activeServices.map((service, index) => (
-                  <Link
-                    href={service.buttonLink || "/service-detail"}
-                    key={index}
-                    className="
+                <Link
+                  href={service.buttonLink || "/service-detail"}
+                  key={index}
+                  className="
                       group
                       relative
                       w-full
@@ -157,28 +157,28 @@ export default function ServicesSection() {
                       flex-shrink-0
                       mx-auto sm:mx-0
                     "
-                  >
-                    {/* IMAGE */}
-                    <div className="absolute inset-0">
-                      <Image
-                        src={service.image}
-                        alt={service.title}
-                        fill
-                        sizes="
+                >
+                  {/* IMAGE */}
+                  <div className="absolute inset-0">
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      fill
+                      sizes="
                           (max-width: 639px)  100vw,
                           (max-width: 1023px) 50vw,
                           335px
                         "
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
 
-                      {/* OVERLAY */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                    </div>
+                    {/* OVERLAY */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                  </div>
 
-                    {/* CONTENT — anchored to bottom */}
-                    <div
-                      className="
+                  {/* CONTENT — anchored to bottom */}
+                  <div
+                    className="
                         relative z-10
                         h-full flex flex-col justify-end
                         pl-[24px] sm:pl-[28px] md:pl-[31px]
@@ -186,25 +186,25 @@ export default function ServicesSection() {
                         pb-[32px] sm:pb-[36px] md:pb-[42px]
                         text-white
                       "
-                    >
-                      {/* TITLE */}
-                      <h3 className="text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-tight">
-                        {service.title}
-                      </h3>
+                  >
+                    {/* TITLE */}
+                    <h3 className="text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-tight">
+                      {service.title}
+                    </h3>
 
-                      {/* DESCRIPTION */}
-                      <p className="mt-[8px] sm:mt-[10px] text-[14px] sm:text-[15px] md:text-[16px] leading-[24px] sm:leading-[26px] md:leading-[28px] text-white/80 font-normal">
-                        {service.description}
-                      </p>
+                    {/* DESCRIPTION */}
+                    <p className="mt-[8px] sm:mt-[10px] text-[14px] sm:text-[15px] md:text-[16px] leading-[24px] sm:leading-[26px] md:leading-[28px] text-white/80 font-normal">
+                      {service.description}
+                    </p>
 
-                      {/* LEARN MORE / BUTTON TEXT */}
-                      <div className="flex items-center gap-2 mt-4 sm:mt-5 text-[14px] sm:text-[15px] md:text-[16px] font-medium text-[#F97316]">
-                        <span>{service.buttonText || "Learn More"}</span>
-                        <IconArrowNarrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
-                      </div>
+                    {/* LEARN MORE / BUTTON TEXT */}
+                    <div className="flex items-center gap-2 mt-4 sm:mt-5 text-[14px] sm:text-[15px] md:text-[16px] font-medium text-[#F97316]">
+                      <span>{service.buttonText || "Learn More"}</span>
+                      <IconArrowNarrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                  </Link>
-                ))}
+                  </div>
+                </Link>
+              ))}
           </div>
         </div>
 

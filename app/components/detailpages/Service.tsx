@@ -6,7 +6,20 @@ import React from "react";
 
 // ─── 1. Core Responsibilities ──────────────────────────────────────────────
 
-const responsibilities = [
+// ─── 1. Core Responsibilities ──────────────────────────────────────────────
+
+interface ResponsibilityItem {
+  title: string;
+  desc: string;
+}
+
+interface CoreResponsibilitiesProps {
+  title?: string;
+  highlight?: string;
+  items?: ResponsibilityItem[];
+}
+
+const defaultResponsibilities = [
   {
     title: "Live Monitoring",
     desc: "Monitor CCTV cameras 24/7 to ensure continuous surveillance of premises.",
@@ -25,16 +38,20 @@ const responsibilities = [
   },
 ];
 
-export function CoreResponsibilities() {
+export function CoreResponsibilities({
+  title = "Core",
+  highlight = "Responsibilities",
+  items = defaultResponsibilities,
+}: CoreResponsibilitiesProps) {
   return (
     <section className="w-full bg-white py-16 px-6">
       <h2 className="text-center text-4xl font-bold text-gray-900 mb-12 tracking-tight">
-        Core{" "}
-        <span className="text-[#B04020]">Responsibilities</span>
+        {title}{" "}
+        <span className="text-[#B04020]">{highlight}</span>
       </h2>
 
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {responsibilities.map((item) => (
+        {items.map((item) => (
           <div
             key={item.title}
             className="bg-[#7B2214] rounded-2xl px-7 py-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
@@ -52,7 +69,19 @@ export function CoreResponsibilities() {
 
 // ─── 2. Industries We Serve ────────────────────────────────────────────────
 
-const industries = [
+interface IndustryItem {
+  title: string;
+  desc: string;
+}
+
+interface IndustriesWeServeProps {
+  title?: string;
+  highlight?: string;
+  description?: string;
+  items?: IndustryItem[];
+}
+
+const defaultIndustries = [
   {
     title: "Office Buildings",
     desc: "Monitor premises, staff, and assets for a safe work environment.",
@@ -93,29 +122,28 @@ function ShieldCheck() {
   );
 }
 
-export function IndustriesWeServe() {
+export function IndustriesWeServe({
+  title = "We Serve",
+  highlight = "Industries",
+  description = "At Canopy Security Services, we combine professional expertise, trained security personnel, and reliable service standards to deliver complete protection for your business, property, and people. Our team is committed to maintaining safety, discipline, and excellent customer service while providing customized security solutions tailored to your exact operational needs across Dubai and the UAE.",
+  items = defaultIndustries,
+}: IndustriesWeServeProps) {
   return (
     <section className="w-full bg-white py-16 px-6">
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         {/* Left column */}
         <div>
           <h2 className="text-4xl font-bold text-gray-900 mb-5 leading-tight tracking-tight">
-            <span className="text-[#B04020]">Industries</span> We Serve
+            <span className="text-[#B04020]">{highlight}</span> {title}
           </h2>
           <p className="text-gray-500 text-sm leading-relaxed">
-            At Canopy Security Services, we combine professional expertise,
-            trained security personnel, and reliable service standards to
-            deliver complete protection for your business, property, and people.
-            Our team is committed to maintaining safety, discipline, and
-            excellent customer service while providing customized security
-            solutions tailored to your exact operational needs across Dubai and
-            the UAE.
+            {description}
           </p>
         </div>
 
         {/* Right column */}
         <div className="flex flex-col gap-5">
-          {industries.map((item) => (
+          {items.map((item) => (
             <div key={item.title} className="flex items-start gap-3 group">
               <ShieldCheck />
               <div>

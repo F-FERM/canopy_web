@@ -27,9 +27,31 @@ const content = {
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function WhyCCTVOperators() {
-    const { headingLine1Word1, headingLine1Accent, headingLine2Accent, headingLine2Suffix, paragraphs, cta, image } = content;
+interface WhyServiceProps {
+    headingLine1Word1?: string;
+    headingLine1Accent?: string;
+    headingLine2Accent?: string;
+    headingLine2Suffix?: string;
+    paragraphs?: string[];
+    ctaLabel?: string;
+    image?: any;
+    imageAlt?: string;
+}
 
+export default function WhyCCTVOperators({
+    headingLine1Word1 = "Why",
+    headingLine1Accent = "CCTV",
+    headingLine2Accent = "Operators",
+    headingLine2Suffix = "Matters",
+    paragraphs = [
+        "CCTV monitoring is one of the most effective ways to prevent incidents and ensure quick response when needed.",
+        "Our trained CCTV operators monitor live feeds 24/7, identify suspicious activities, verify alarms, and coordinate with security personnel for immediate action.",
+        "Their vigilance and quick decision-making help reduce risks, protect assets, and ensure a safe environment for everyone.",
+    ],
+    ctaLabel = "Contact Us",
+    image = HeroImage,
+    imageAlt = "CCTV security operators at reception desk",
+}: WhyServiceProps) {
     return (
         <section className="w-full overflow-x-hidden bg-white">
             <div
@@ -107,7 +129,7 @@ export default function WhyCCTVOperators() {
                     <div className="pt-2">
                         <Button
                             icon={Phone}
-                            label={cta.label}
+                            label={ctaLabel}
                             variant="primary"
                             className="rounded-full"
                             showArrow={false}
@@ -128,8 +150,8 @@ export default function WhyCCTVOperators() {
           "
                 >
                     <Image
-                        src={image.src}
-                        alt={image.alt}
+                        src={image?.src || image}
+                        alt={imageAlt}
                         fill
                         className="object-cover object-center"
                         sizes="(max-width: 1024px) 100vw, 50vw"
@@ -139,4 +161,4 @@ export default function WhyCCTVOperators() {
             </div>
         </section>
     );
-}
+}

@@ -1,70 +1,105 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import Event1 from "../../../public/images/events/Event2.jpg";
-import Event2 from "../../../public/images/events/Event2.jpg";
-import Event3 from "../../../public/images/events/Event2.jpg";
-import Event4 from "../../../public/images/events/Event2.jpg";
+import { listUpcomingEventsApi } from "@/app/api/UpcomingEvents";
+
+interface EventButton {
+  label: string;
+  link: string;
+}
 
 interface EventCard {
-  id: number;
   title: string;
   date: string;
   location: string;
   description: string;
-  image: any;
+  image: string;
+  button: EventButton;
+  isActive: boolean;
 }
 
-const upcomingEvents: EventCard[] = [
-  {
-    id: 1,
-    title: "Indoor Events",
-    date: "22 April 2026",
-    location: "Dubai",
-    description:
-      "Corporate meetings, conferences, exhibitions, award functions, product launches, and private indoor gatherings.",
-    image: Event1,
-  },
-  {
-    id: 2,
-    title: "Night Parties & VIP Events",
-    date: "10 May 2026",
-    location: "Dubai Marina",
-    description:
-      "Private parties, luxury gatherings, nightlife events, celebrity appearances, and VIP functions.",
-    image: Event2,
-  },
-  {
-    id: 3,
-    title: "Sports Events",
-    date: "28 May 2026",
-    location: "Dubai Stadium",
-    description:
-      "Stadium events, tournaments, competitions, and large sporting gatherings.",
-    image: Event3,
-  },
-  {
-    id: 4,
-    title: "Emergency Response Training",
-    date: "5 June 2026",
-    location: "Canopy HQ",
-    description:
-      "Hands-on emergency response and first aid safety training sessions.",
-    image: Event4,
-  },
-];
+interface UpcomingEventsData {
+  upcomingHeading: string;
+  upcomingHeadingHighlight: string;
+  events: EventCard[];
+}
 
 const UpcomingEventsSection = () => {
+  const [data, setData] = useState<UpcomingEventsData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUpcomingEvents = async () => {
+      try {
+        const response = await listUpcomingEventsApi({});
+        setData(response?.[0] ?? null);
+      } catch (error) {
+        console.error("Upcoming Events API Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUpcomingEvents();
+  }, []);
+
+  // Active Events
+  const activeEvents =
+    data?.events?.filter((event) => event.isActive) ?? [];
+
+  // ───────────────── Loading ─────────────────
+  if (loading) {
+    return (
+      <section
+        className="
+          px-5
+          sm:px-8
+          md:px-12
+          lg:px-16
+          xl:px-40
+          2xl:px-60
+
+          py-14
+          md:py-20
+
+          mx-auto
+          bg-white
+        "
+      >
+        <div className="text-center mb-12 md:mb-16 animate-pulse">
+          <div className="h-12 w-72 bg-gray-200 rounded mx-auto" />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {[1, 2, 3, 4].map((item) => (
+            <div
+              key={item}
+              className="
+                w-full
+                h-[270px]
+                rounded-[20px]
+                bg-gray-200
+                animate-pulse
+              "
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (!data) return null;
+
   return (
     <section
       className="
         px-5
         sm:px-8
-        md:px-14
-        lg:px-24
+        md:px-12
+        lg:px-16
         xl:px-40
         2xl:px-60
 
@@ -79,29 +114,47 @@ const UpcomingEventsSection = () => {
       <div className="text-center mb-12 md:mb-16">
         <h2
           className="
-            text-[32px]
-            sm:text-[38px]
-            md:text-[42px]
-            lg:text-[46px]
+            text-[30px]
+            sm:text-[36px]
+            md:text-[40px]
+            lg:text-[42px]
+            xl:text-[46px]
 
             font-semibold
             leading-[110%]
             tracking-[0.04em]
           "
         >
-          <span className="text-[#111111]">Upcoming</span>{" "}
-          <span className="text-[#F26A23]">Events</span>
+          <span className="text-[#111111]">
+            {data.upcomingHeading}
+          </span>{" "}
+          <span className="text-[#F26A23]">
+            {data.upcomingHeadingHighlight}
+          </span>
         </h2>
       </div>
 
       {/* Events Grid */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        {upcomingEvents.map((event) => (
+      <div
+        className="
+          grid
+          grid-cols-1
+          lg:grid-cols-2
+
+          gap-5
+          lg:gap-6
+          xl:gap-8
+
+          items-stretch
+        "
+      >
+        {activeEvents.map((event, index) => (
           <div
-            key={event.id}
+            key={index}
             className="
               w-full
-              max-w-[722px]
+              max-w-full
+              xl:max-w-[722px]
 
               min-h-[269px]
 
@@ -110,19 +163,20 @@ const UpcomingEventsSection = () => {
 
               bg-white
 
-              pt-[10px]
-              pr-5
-              sm:pr-[33px]
+              p-4
+              sm:p-5
+              lg:p-4
 
-              pb-[10px]
-
-              pl-[15px]
+              xl:pt-[10px]
+              xl:pr-[33px]
+              xl:pb-[10px]
+              xl:pl-[15px]
 
               flex
               flex-col
               sm:flex-row
 
-              gap-[18px]
+              gap-5
 
               transition-all
               duration-300
@@ -137,10 +191,13 @@ const UpcomingEventsSection = () => {
                 relative
 
                 w-full
-                sm:w-[250px]
+                sm:w-[220px]
+                md:w-[240px]
+                xl:w-[250px]
 
                 h-[220px]
-                sm:h-[243px]
+                sm:h-[230px]
+                xl:h-[243px]
 
                 rounded-[20px]
                 overflow-hidden
@@ -169,13 +226,15 @@ const UpcomingEventsSection = () => {
               {/* Title */}
               <h3
                 className="
-                  text-[26px]
-                  md:text-[30px]
+                  text-[22px]
+                  sm:text-[24px]
+                  md:text-[26px]
+                  xl:text-[30px]
 
                   font-bold
                   text-black
 
-                  mb-4
+                  mb-3
                 "
               >
                 {event.title}
@@ -186,12 +245,14 @@ const UpcomingEventsSection = () => {
                 className="
                   text-[#666666]
 
-                  text-[16px]
-                  md:text-[18px]
+                  text-[14px]
+                  sm:text-[15px]
+                  md:text-[16px]
+                  xl:text-[18px]
 
                   leading-[1.5]
 
-                
+                  mb-3
                 "
               >
                 {event.date} • {event.location}
@@ -202,12 +263,13 @@ const UpcomingEventsSection = () => {
                 className="
                   text-[#5C5C5C]
 
-                  text-[15px]
-                  md:text-[16px]
+                  text-[14px]
+                  md:text-[15px]
+                  xl:text-[16px]
 
                   leading-[1.7]
 
-                  mb-6
+                  mb-5
                 "
               >
                 {event.description}
@@ -215,13 +277,15 @@ const UpcomingEventsSection = () => {
 
               {/* Button */}
               <Link
-                href={`/events/${event.id}`}
+                href={event.button?.link}
                 className="
                   w-fit
 
-                  h-[48px]
+                  h-[46px]
+                  xl:h-[48px]
 
-                  px-6
+                  px-5
+                  xl:px-6
 
                   inline-flex
                   items-center
@@ -233,7 +297,9 @@ const UpcomingEventsSection = () => {
                   bg-[#F26A23]
                   text-white
 
-                  text-[16px]
+                  text-[15px]
+                  xl:text-[16px]
+
                   font-semibold
 
                   transition-all
@@ -242,7 +308,7 @@ const UpcomingEventsSection = () => {
                   hover:bg-[#dd5d18]
                 "
               >
-                View Details
+                {event.button?.label}
                 <span>→</span>
               </Link>
             </div>
