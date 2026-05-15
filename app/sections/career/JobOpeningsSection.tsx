@@ -119,6 +119,7 @@ const JobOpeningsSection = () => {
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <section
+      id="job-openings"
       className="
         px-5
         sm:px-8

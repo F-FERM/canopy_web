@@ -134,7 +134,7 @@ const BlogHeroSection = () => {
                     key={btn.label}
                     label={btn.label}
                     variant={btn.variant}
-                    href={btn.link}
+                    href={btn.label.toLowerCase().includes("blog") ? "#blog-posts" : btn.link}
                     className={btn.variant === "outline" ? "bg-white border-none" : ""}
                   />
                 ))}

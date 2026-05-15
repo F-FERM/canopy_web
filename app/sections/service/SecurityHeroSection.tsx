@@ -262,13 +262,13 @@ const SecurityHeroSection = () => {
               "
             >
               {buttons.map((btn) => (
-                <Link key={btn.label} href={btn.link}>
-                  <Button
-                    label={btn.label}
-                    variant={btn.variant as "primary" | "outline"}
-                    className={btn.variant === "outline" ? "bg-white border-none" : ""}
-                  />
-                </Link>
+                <Button
+                  key={btn.label}
+                  label={btn.label}
+                  href={btn.label.toLowerCase().includes("explore") ? "#services-list" : btn.link}
+                  variant={btn.variant as "primary" | "outline"}
+                  className={btn.variant === "outline" ? "bg-white border-none" : ""}
+                />
               ))}
             </div>
           </div>

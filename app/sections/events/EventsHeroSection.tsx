@@ -197,7 +197,7 @@ const EventsHeroSection = () => {
               <Button
                 key={index}
                 label={btn.label}
-                href={btn.link}
+                href={btn.label.toLowerCase().includes("event") ? "#upcoming-events" : btn.link}
                 variant={btn.variant}
               />
             ))}

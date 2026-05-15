@@ -224,7 +224,7 @@ export default function CareerHero() {
               <Button
                 key={btn.label}
                 label={btn.label}
-                href={btn.link}
+                href={btn.label.toLowerCase() === "view openings" ? "#job-openings" : btn.link}
                 variant={btn.variant}
               />
             ))}

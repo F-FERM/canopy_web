@@ -71,7 +71,7 @@ export default function BlogSection() {
   const blogs = data?.blogs.filter((blog) => blog.isActive) ?? [];
 
   return (
-    <section className="relative overflow-hidden pt-10 sm:pt-14 md:pt-16 lg:pt-20 xl:pt-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-40 pb-10 sm:pb-14 md:pb-16 lg:pb-20 xl:pb-20">
+    <section id="blog-posts" className="relative overflow-hidden pt-10 sm:pt-14 md:pt-16 lg:pt-20 xl:pt-20 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-40 pb-10 sm:pb-14 md:pb-16 lg:pb-20 xl:pb-20">
       <div className="relative z-10 max-w-[1920px] mx-auto">
 
         {/* ── SECTION HEADER ────────────────────────────────────────────── */}

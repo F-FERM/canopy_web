@@ -72,6 +72,7 @@ const UpcomingEventsSection = () => {
 
   return (
     <section
+      id="upcoming-events"
       className="
         px-5
         sm:px-8

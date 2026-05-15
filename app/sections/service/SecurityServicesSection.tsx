@@ -208,7 +208,7 @@ const SecurityServicesSection = () => {
   const activeServices = data.services.filter((s) => s.isActive);
 
   return (
-    <section
+    <section id="services-list"
       className="
         px-5
         sm:px-8
