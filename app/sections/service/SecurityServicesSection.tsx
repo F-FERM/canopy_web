@@ -159,8 +159,8 @@ function ServiceCard({ service }: { service: ServiceItem }) {
               inline-flex items-center
               text-[#F26A23]
               font-semibold
-              hover:text-orange-400
-              transition-colors duration-300
+              hover:opacity-80
+              transition-all duration-300
             "
           >
             {service.buttonText}

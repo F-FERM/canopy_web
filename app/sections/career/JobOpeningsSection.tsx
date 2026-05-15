@@ -107,7 +107,7 @@ const JobOpeningsSection = () => {
           <p className="text-red-500 text-[15px] font-medium">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-6 py-2 bg-[#F26A23] text-white rounded-lg text-sm font-semibold hover:bg-orange-600 transition-colors"
+            className="mt-4 px-6 py-2 bg-[#F26A23] text-white rounded-lg text-sm font-semibold hover:opacity-90 transition-all"
           >
             Retry
           </button>

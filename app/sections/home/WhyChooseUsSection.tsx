@@ -256,7 +256,7 @@ export default function WhyChooseUsSection() {
                       }}
                     >
                       {/* HOVER LINE — unchanged */}
-                      <div className="absolute bottom-0 left-0 h-[4px] w-0 bg-[#D97354] transition-all duration-500 group-hover:w-full rounded-b-[10px] z-30" />
+                      <div className="absolute bottom-0 left-0 h-[4px] w-0 bg-[#F26A23] transition-all duration-500 group-hover:w-full rounded-b-[10px] z-30" />
 
                       <NumberBadge number={feature.number} isSmallCard={isSmallCard} />
 

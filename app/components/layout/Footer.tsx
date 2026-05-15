@@ -168,7 +168,7 @@ export default function Footer() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={social.platform}
-                        className="text-[#C65A1E] hover:text-white transition-all duration-300"
+                        className="text-[#F26A23] hover:text-white transition-all duration-300"
                       >
                         <Icon stroke={1.7} className="w-[26px] h-[26px]" />
                       </Link>
@@ -187,7 +187,7 @@ export default function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.link}
-                        className="text-[#C8B8B8] text-[18px] hover:text-[#C65A1E] transition-all duration-300 flex items-center gap-3 hover:translate-x-1.5"
+                        className="text-[#C8B8B8] text-[18px] hover:text-[#F26A23] transition-all duration-300 flex items-center gap-3 hover:translate-x-1.5"
                       >
                         <span className="text-white text-[10px]">•</span>
                         {item.label}
@@ -207,7 +207,7 @@ export default function Footer() {
                     <li key={item.label}>
                       <Link
                         href={item.link}
-                        className="text-[#C8B8B8] text-[18px] hover:text-[#C65A1E] transition-colors duration-300 flex items-center gap-3"
+                        className="text-[#C8B8B8] text-[18px] hover:text-[#F26A23] transition-colors duration-300 flex items-center gap-3"
                       >
                         <span className="text-white text-[10px]">•</span>
                         {item.label}
@@ -221,14 +221,14 @@ export default function Footer() {
               <div className="space-y-8">
                 {/* PHONE */}
                 <div className="flex items-start gap-5">
-                  <div className="w-[52px] h-[52px] rounded-xl border border-[#A53F10] flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-[#C65A1E]" />
+                  <div className="w-[52px] h-[52px] rounded-xl border border-[#7F220E] flex items-center justify-center shrink-0">
+                    <Phone className="w-5 h-5 text-[#F26A23]" />
                   </div>
                   <div>
                     <p className="text-[#B9A7A7] text-[15px] mb-1">Phone</p>
                     <a
                       href={`tel:${data.contactInfo.phone.replace(/\s/g, "")}`}
-                      className="text-white text-[18px] leading-relaxed hover:text-[#C65A1E] transition-colors"
+                      className="text-white text-[18px] leading-relaxed hover:text-[#F26A23] transition-colors"
                     >
                       {data.contactInfo.phone}
                     </a>
@@ -237,14 +237,14 @@ export default function Footer() {
 
                 {/* EMAIL */}
                 <div className="flex items-start gap-5">
-                  <div className="w-[52px] h-[52px] rounded-xl border border-[#A53F10] flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-[#C65A1E]" />
+                  <div className="w-[52px] h-[52px] rounded-xl border border-[#7F220E] flex items-center justify-center shrink-0">
+                    <Mail className="w-5 h-5 text-[#F26A23]" />
                   </div>
                   <div>
                     <p className="text-[#B9A7A7] text-[15px] mb-1">Email</p>
                     <a
                       href={`mailto:${data.contactInfo.email}`}
-                      className="text-white text-[18px] leading-relaxed hover:text-[#C65A1E] transition-colors"
+                      className="text-white text-[18px] leading-relaxed hover:text-[#F26A23] transition-colors"
                     >
                       {data.contactInfo.email}
                     </a>
@@ -253,8 +253,8 @@ export default function Footer() {
 
                 {/* ADDRESS */}
                 <div className="flex items-start gap-5">
-                  <div className="w-[52px] h-[52px] rounded-xl border border-[#A53F10] flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-[#C65A1E]" />
+                  <div className="w-[52px] h-[52px] rounded-xl border border-[#7F220E] flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5 text-[#F26A23]" />
                   </div>
                   <div>
                     <p className="text-[#B9A7A7] text-[15px] mb-1">Address</p>
@@ -277,7 +277,7 @@ export default function Footer() {
                     <Link
                       key={item.label}
                       href={item.link}
-                      className="text-[#C8B8B8] text-[15px] hover:text-[#C65A1E] transition-colors"
+                      className="text-[#C8B8B8] text-[15px] hover:text-[#F26A23] transition-colors"
                     >
                       {item.label}
                     </Link>

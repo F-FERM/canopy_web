@@ -148,12 +148,12 @@ export default function IndustriesSection() {
 
                       p-5 md:p-6 lg:p-7
 
-                      border border-[#A52A2A]
-                      bg-[#8B0000]/30 backdrop-blur-sm
+                      border border-[#7F220E]
+                      bg-[#7F220E]/30 backdrop-blur-sm
                       rounded-[10px]
 
                       transition-all duration-300
-                      hover:bg-[#8B0000]/50 hover:shadow-lg
+                      hover:bg-[#7F220E]/50 hover:shadow-lg
                     "
                   >
                     {/* TEXT */}
