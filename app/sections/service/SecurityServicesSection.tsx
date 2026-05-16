@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconExclamationCircle } from "@tabler/icons-react";
-import { listSecurityServicesApi } from "@/app/api/HomeService";
+import { listSecurityServicesApi, listSeviceSecurityServicesApi } from "@/app/api/HomeService";
 import BadgeIcon from "../../../public/images/home/localoffer.png"
 
 
@@ -182,7 +182,7 @@ const SecurityServicesSection = () => {
   useEffect(() => {
     const fetchServicesData = async () => {
       try {
-        const res = await listSecurityServicesApi({});
+        const res = await listSeviceSecurityServicesApi({});
         setData(res?.[0] ?? null);
       } catch (err) {
         console.error("SecurityServicesSection API error:", err);

@@ -151,8 +151,12 @@ export default function IndustriesSection() {
                       bg-[#7F220E]/30 backdrop-blur-sm
                       rounded-[10px]
 
-                      transition-all duration-300
-                      hover:bg-[#7F220E]/50 hover:shadow-lg
+                     transition-all duration-300
+hover:bg-[#7F220E]/50 hover:shadow-lg
+hover:[border-top-left-radius:0px] hover:[border-bottom-left-radius:0px]
+hover:[border-left-color:#4b5563] hover:[border-bottom-color:#4b5563]
+hover:[border-top-right-radius:0px]
+hover:[border-right-color:gray-500] hover:[border-top-color:gray-500]
                     "
                   >
                     {/* TEXT */}
