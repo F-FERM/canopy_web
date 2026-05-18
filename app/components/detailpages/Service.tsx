@@ -47,14 +47,14 @@ export function CoreResponsibilities({
     <section className="w-full bg-white py-16 px-6">
       <h2 className="text-center text-4xl font-bold text-gray-900 mb-12 tracking-tight">
         {title}{" "}
-        <span className="text-[#B04020]">{highlight}</span>
+        <span className="text-[#7F220E]">{highlight}</span>
       </h2>
 
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
         {items.map((item) => (
           <div
             key={item.title}
-            className="bg-[#7B2214] rounded-2xl px-7 py-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="bg-[#7F220E] rounded-2xl px-7 py-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             <h3 className="text-white font-semibold text-lg mb-2 tracking-wide">
               {item.title}
@@ -77,7 +77,7 @@ interface IndustryItem {
 interface IndustriesWeServeProps {
   title?: string;
   highlight?: string;
-  description?: string;
+  description?: string | string[];
   items?: IndustryItem[];
 }
 
@@ -104,6 +104,11 @@ const defaultIndustries = [
   },
 ];
 
+const defaultDescription = [
+  "At Canopy Security Services, we combine professional expertise, trained security personnel, and reliable service standards to deliver complete protection for your business, property, and people.",
+  "Our team is committed to maintaining safety, discipline, and excellent customer service while providing customized security solutions tailored to your exact operational needs across Dubai and the UAE."
+];
+
 // Simple shield-check icon SVG
 function ShieldCheck() {
   return (
@@ -125,37 +130,45 @@ function ShieldCheck() {
 export function IndustriesWeServe({
   title = "We Serve",
   highlight = "Industries",
-  description = "At Canopy Security Services, we combine professional expertise, trained security personnel, and reliable service standards to deliver complete protection for your business, property, and people. Our team is committed to maintaining safety, discipline, and excellent customer service while providing customized security solutions tailored to your exact operational needs across Dubai and the UAE.",
+  description = defaultDescription,
   items = defaultIndustries,
 }: IndustriesWeServeProps) {
-  return (
-    <section className="w-full bg-white py-16 px-6">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* Left column */}
-        <div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-5 leading-tight tracking-tight">
-            <span className="text-[#B04020]">{highlight}</span> {title}
-          </h2>
-          <p className="text-gray-500 text-sm leading-relaxed">
-            {description}
-          </p>
-        </div>
+  const descriptions = Array.isArray(description) ? description : [description];
 
-        {/* Right column */}
-        <div className="flex flex-col gap-5">
-          {items.map((item) => (
-            <div key={item.title} className="flex items-start gap-3 group">
-              <ShieldCheck />
-              <div>
-                <h4 className="font-bold text-gray-900 text-base group-hover:text-[#B04020] transition-colors duration-200">
-                  {item.title}
-                </h4>
-                <p className="text-gray-500 text-sm mt-0.5 leading-snug">
-                  {item.desc}
+  return (
+    <section className="w-full bg-white py-16">
+      <div className="px-5 sm:px-8 md:px-14 lg:px-24 xl:px-40 2xl:px-60 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Left column */}
+          <div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-5 leading-tight tracking-tight">
+              <span className="text-[#F26A23]">{highlight}</span> {title}
+            </h2>
+            <div className="flex flex-col gap-4">
+              {descriptions.map((desc, index) => (
+                <p key={index} className="text-gray-500 text-[16px] leading-relaxed">
+                  {desc}
                 </p>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Right column */}
+          <div className="flex flex-col gap-5">
+            {items.map((item) => (
+              <div key={item.title} className="flex items-start gap-3 group">
+                <ShieldCheck />
+                <div>
+                  <h4 className="font-bold text-gray-900 text-base group-hover:text-[#B04020] transition-colors duration-200">
+                    {item.title}
+                  </h4>
+                  <p className="text-gray-500 text-sm mt-0.5 leading-snug">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

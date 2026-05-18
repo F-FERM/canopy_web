@@ -9,6 +9,7 @@ import BadgeIcon from "../../../public/images/home/localoffer.png"
 
 // ── API types ──────────────────────────────────────────────────────────────
 interface Service {
+  _id: string;
   title: string;
   description: string;
   image: string;
@@ -152,8 +153,8 @@ export default function ServicesSection() {
               ))
               : activeServices.map((service, index) => (
                 <Link
-                  href={service.buttonLink || "/service-detail"}
-                  key={index}
+                  href="/services"
+                  key={service._id || index}
                   className="
                     group
                     relative

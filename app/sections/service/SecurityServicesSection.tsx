@@ -10,25 +10,72 @@ import BadgeIcon from "../../../public/images/home/localoffer.png"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-interface ServiceItem {
-  title: string;
-  image: string;
-  description: string;
-  buttonText: string;
-  buttonLink: string;
-  isActive: boolean;
-}
-
-interface SecurityServicesAPIResponse {
+interface RootObject {
   _id: string;
   badgeText: string;
   heading: string;
   headingHighlight: string;
   description: string;
-  services: ServiceItem[];
+  services: Service[];
   createdAt: string;
   updatedAt: string;
   __v: number;
+}
+
+interface Service {
+  title: string;
+  slug?: string;
+  image: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  isActive: boolean;
+  detailPage?: DetailPage;
+}
+
+interface DetailPage {
+  heroSection: HeroSection;
+  whyChooseSection: WhyChooseSection;
+  responsibilitiesSection: ResponsibilitiesSection;
+  industriesSection: IndustriesSection;
+}
+
+interface IndustriesSection {
+  heading: string;
+  headingHighlight: string;
+  description: string;
+  industries: Responsibility[];
+}
+
+interface ResponsibilitiesSection {
+  heading: string;
+  headingHighlight: string;
+  responsibilities: Responsibility[];
+}
+
+interface Responsibility {
+  title: string;
+  description: string;
+}
+
+interface WhyChooseSection {
+  heading: string;
+  headingHighlight: string;
+  descriptionOne: string;
+  descriptionTwo: string;
+  image: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+interface HeroSection {
+  badgeText: string;
+  heading: string;
+  headingHighlight: string;
+  description: string;
+  backgroundImage: string;
+  buttonText: string;
+  buttonLink: string;
 }
 
 // ─── Skeleton ─────────────────────────────────────────────────────────────────
@@ -73,10 +120,10 @@ function SectionSkeleton() {
 
 // ─── Service Card ─────────────────────────────────────────────────────────────
 
-function ServiceCard({ service }: { service: ServiceItem }) {
+function ServiceCard({ service }: { service: Service }) {
   return (
     <Link
-      href={service.buttonLink || "/service-detail"}
+      href={`/services/${service.slug}`}
       className="
         group
         relative
@@ -102,14 +149,16 @@ function ServiceCard({ service }: { service: ServiceItem }) {
       "
     >
       {/* Image */}
-      <div className="relative w-full h-full overflow-hidden">
-        <Image
-          src={service.image}
-          alt={service.title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
-          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-        />
+      <div className="relative w-full h-full overflow-hidden bg-gray-200">
+        {service.image && (
+          <Image
+            src={service.image}
+            alt={service.title || "Service"}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          />
+        )}
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
@@ -175,7 +224,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
 // ─── Main Section ─────────────────────────────────────────────────────────────
 
 const SecurityServicesSection = () => {
-  const [data, setData] = useState<SecurityServicesAPIResponse | null>(null);
+  const [data, setData] = useState<RootObject | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -261,8 +310,8 @@ const SecurityServicesSection = () => {
           justify-items-center
         "
       >
-        {activeServices.map((service) => (
-          <ServiceCard key={service.title} service={service} />
+        {activeServices.map((service, index) => (
+          <ServiceCard key={service.slug || index} service={service} />
         ))}
       </div>
     </section>

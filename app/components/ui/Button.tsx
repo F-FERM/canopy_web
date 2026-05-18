@@ -44,7 +44,7 @@ export default function Button({
     inline-flex items-center justify-center gap-[10px]
     w-[218px] h-[51px] px-[45px] py-[16px] rounded-[10px]
     text-[18px] font-medium
-    transition-all duration-300 
+    transition-all duration-300 cursor-pointer
     select-none whitespace-nowrap
     disabled:opacity-50 disabled:pointer-events-none
     hover:-translate-y-1

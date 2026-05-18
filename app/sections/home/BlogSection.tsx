@@ -7,6 +7,24 @@ import { useEffect, useState } from "react";
 import { listBlogSectionApi } from "@/app/api/HomeBlog";
 import BadgeIcon from "../../../public/images/home/Vector (1).png"
 // ── API types ──────────────────────────────────────────────────────────────
+interface BlogDetailPage {
+  heroSection: {
+    heading: string;
+    headingHighlight: string;
+    description: string;
+    image: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+  importanceSection: {
+    heading: string;
+    headingHighlight: string;
+    description: string;
+    leftFeatures: { text: string }[];
+    rightFeatures: { text: string }[];
+  };
+}
+
 interface Blog {
   title: string;
   shortDescription: string;
@@ -16,6 +34,7 @@ interface Blog {
   slug: string;
   isActive: boolean;
   publishedAt: string;
+  detailPage?: BlogDetailPage;
 }
 
 interface BlogSectionData {

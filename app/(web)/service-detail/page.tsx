@@ -35,14 +35,14 @@ export function CoreResponsibilities() {
         <section className="w-full bg-white py-16 px-6">
             <h2 className="text-center text-4xl font-bold text-gray-900 mb-12 tracking-tight">
                 Core{" "}
-                <span className="text-[#B04020]">Responsibilities</span>
+                <span className="text-[#7F220E]">Responsibilities</span>
             </h2>
 
             <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {responsibilities.map((item) => (
                     <div
                         key={item.title}
-                        className="bg-[#7B2214] rounded-2xl px-7 py-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                        className="bg-[#7F220E] rounded-2xl px-7 py-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                     >
                         <h3 className="text-white font-semibold text-lg mb-2 tracking-wide">
                             {item.title}
@@ -84,7 +84,7 @@ const industries = [
 function ShieldCheck() {
     return (
         <svg
-            className="w-5 h-5 text-[#B04020] flex-shrink-0 mt-0.5"
+            className="w-5 h-5 text-[#7F220E] flex-shrink-0 mt-0.5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -105,7 +105,7 @@ export function IndustriesWeServe() {
                 {/* Left column */}
                 <div>
                     <h2 className="text-4xl font-bold text-gray-900 mb-5 leading-tight tracking-tight">
-                        <span className="text-[#B04020]">Industries</span> We Serve
+                        <span className="text-[#7F220E]">Industries</span> We Serve
                     </h2>
                     <p className="text-[#979797] text-[16px] leading-relaxed">
                         At Canopy Security Services, we combine professional expertise,
@@ -124,7 +124,7 @@ export function IndustriesWeServe() {
                         <div key={item.title} className="flex items-start gap-3 group">
                            <Image src={Point} width={30} height={30} alt="Point"/>
                             <div>
-                                <h4 className="font-bold text-gray-900 text-[20px] group-hover:text-[#B04020] transition-colors duration-200">
+                                <h4 className="font-bold text-gray-900 text-[20px] group-hover:text-[#7F220E] transition-colors duration-200">
                                     {item.title}
                                 </h4>
                                 <p className="text-[#737373] text-[16px] mt-0.5 leading-snug">

@@ -10,7 +10,8 @@ export interface ListHomeServiceResponse {
   __v: number;
 }
 
-interface Service {
+export interface Service {
+  _id: string;
   title: string;
   description: string;
   image: string;

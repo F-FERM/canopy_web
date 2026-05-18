@@ -4,6 +4,7 @@ import Image from "next/image";
 import Button from "@/app/components/ui/Button";
 import { Phone } from "lucide-react";
 import HeroImage from "../../../public/images/about/Excelence1.jpg";
+import Link from "next/link";
 // 👆 Replace with the correct image import for your CCTV operators photo
 
 // ─── Content ─────────────────────────────────────────────────────────────────
@@ -39,18 +40,14 @@ interface WhyServiceProps {
 }
 
 export default function WhyCCTVOperators({
-    headingLine1Word1 = "Why",
-    headingLine1Accent = "CCTV",
-    headingLine2Accent = "Operators",
-    headingLine2Suffix = "Matters",
-    paragraphs = [
-        "CCTV monitoring is one of the most effective ways to prevent incidents and ensure quick response when needed.",
-        "Our trained CCTV operators monitor live feeds 24/7, identify suspicious activities, verify alarms, and coordinate with security personnel for immediate action.",
-        "Their vigilance and quick decision-making help reduce risks, protect assets, and ensure a safe environment for everyone.",
-    ],
+    headingLine1Word1,
+    headingLine1Accent,
+    headingLine2Accent,
+    headingLine2Suffix,
+    paragraphs = [],
     ctaLabel = "Contact Us",
-    image = HeroImage,
-    imageAlt = "CCTV security operators at reception desk",
+    image,
+    imageAlt = "Service image",
 }: WhyServiceProps) {
     return (
         <section className="w-full overflow-x-hidden bg-white">
@@ -76,7 +73,6 @@ export default function WhyCCTVOperators({
           md:py-20
 
           mx-auto
-          max-w-[1760px]
         "
             >
                 {/* ── Left: Text Column ─────────────────────────────────────── */}
@@ -86,7 +82,7 @@ export default function WhyCCTVOperators({
                     <h2
                         className="
               font-bold
-              leading-[1.15]
+              leading-[1.70]
               tracking-[-0.01em]
               text-[36px]
               sm:text-[44px]
@@ -97,9 +93,7 @@ export default function WhyCCTVOperators({
                     >
                         {/* Line 1: "Why CCTV" */}
                         <span>{headingLine1Word1} </span>
-                        <span className="text-[#F26A23]">{headingLine1Accent}</span>
-
-                        <br />
+                        <span className="text-[#F26A23]">{headingLine1Accent}</span>{" "}
 
                         {/* Line 2: "Operators Matters" */}
                         <span className="text-[#F26A23]">{headingLine2Accent}</span>
@@ -127,6 +121,7 @@ export default function WhyCCTVOperators({
 
                     {/* CTA Button */}
                     <div className="pt-2">
+                        <Link href="/contact-us">
                         <Button
                             icon={Phone}
                             label={ctaLabel}
@@ -134,6 +129,8 @@ export default function WhyCCTVOperators({
                             className="rounded-full"
                             showArrow={false}
                         />
+                        </Link>
+                        
                     </div>
                 </div>
 
@@ -144,21 +141,24 @@ export default function WhyCCTVOperators({
             w-full
             rounded-[20px]
             overflow-hidden
+            bg-gray-200
 
             aspect-[4/3]
             lg:aspect-[16/11]
           "
                 >
-                    <Image
-                        src={image?.src || image}
-                        alt={imageAlt}
-                        fill
-                        className="object-cover object-center"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        priority
-                    />
+                    {(image?.src || image) && (
+                        <Image
+                            src={image?.src || image}
+                            alt={imageAlt}
+                            fill
+                            className="object-cover object-center"
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            priority
+                        />
+                    )}
                 </div>
             </div>
         </section>
     );
-}
+}

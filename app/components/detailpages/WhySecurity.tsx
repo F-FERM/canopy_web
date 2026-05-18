@@ -56,8 +56,7 @@ const SecurityWhy = ({
 
         {/* TITLE (centered like design) */}
         <h2 className="text-center text-white text-[26px] sm:text-[34px] md:text-[46px] font-semibold leading-tight">
-          {title} <span className="text-[#F26A21]">{highlight}</span> Are <br />
-          Essential
+          {title} <span className="text-[#F26A21]">{highlight}</span>
         </h2>
 
         {/* DESCRIPTION (centered like design) */}

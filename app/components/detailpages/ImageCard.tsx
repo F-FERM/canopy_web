@@ -2,6 +2,7 @@
 
 import Button from "@/app/components/ui/Button";
 import HeroBg from "../../../public/images/blog/Blog1.png";
+import Link from "next/link";
 
 interface ImageCardProps {
   tag?: string;
@@ -55,10 +56,12 @@ const ImageCard = ({
       >
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${backgroundImage?.src || backgroundImage})`,
-          }}
+          className="absolute inset-0 bg-cover bg-center bg-gray-800"
+          style={
+            (backgroundImage?.src || backgroundImage) 
+              ? { backgroundImage: `url(${backgroundImage?.src || backgroundImage})` } 
+              : undefined
+          }
         >
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/55" />
@@ -170,12 +173,15 @@ const ImageCard = ({
 
             {/* Single centered CTA button — matches screenshot style */}
             <div className="pt-1 sm:pt-2">
-              <Button
+              <Link href="/contact-us">
+               <Button
                 label={buttonLabel}
                 variant="primary"
                 className="rounded-full px-8"
                 showArrow={true}
               />
+              </Link>
+             
             </div>
           </div>
         </div>

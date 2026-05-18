@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import guardImg from "../../../public/images/about/Excelence1.jpg"; // change path
 import Button from "@/app/components/ui/Button";
+import Link from "next/link";
 
 interface SecurityImportanceProps {
   title?: string;
@@ -29,7 +30,7 @@ const SecurityImportance = ({
           <div>
             <h2 className="text-[30px] sm:text-[36px] md:text-[44px] font-bold leading-tight text-black">
               {title}{" "}
-              <span className="text-[#F26A21]">{highlight}</span>
+              <span className="text-[#F26A23]">{highlight}</span>
             </h2>
 
             <p className="mt-4 text-[14px] md:text-[16px] text-[#6B6B6B] max-w-[520px]">
@@ -37,23 +38,27 @@ const SecurityImportance = ({
             </p>
 
             <div className="mt-8">
-              <Button
-                label="Contact Us"
-                variant="primary"
-                className="w-[160px] h-[46px] rounded-full"
-              />
+              <Link href="/contact-us">
+                <Button
+                  label="Contact Us"
+                  variant="primary"
+                  className="w-[160px] h-[46px] rounded-full"
+                />
+              </Link>
             </div>
           </div>
 
           {/* RIGHT IMAGE */}
           <div className="w-full">
-            <div className="relative w-full h-[280px] sm:h-[350px] md:h-[420px] rounded-[18px] overflow-hidden">
-              <Image
-                src={image}
-                alt={title}
-                fill
-                className="object-cover"
-              />
+            <div className="relative w-full h-[280px] sm:h-[350px] md:h-[420px] rounded-[18px] overflow-hidden bg-gray-200">
+              {(image?.src || image) && (
+                <Image
+                  src={image?.src || image}
+                  alt={title || "Security Image"}
+                  fill
+                  className="object-cover"
+                />
+              )}
             </div>
           </div>
 

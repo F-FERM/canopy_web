@@ -5,6 +5,24 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { listBlogSectionApi } from "@/app/api/HomeBlog";
 
+interface BlogDetailPage {
+  heroSection: {
+    heading: string;
+    headingHighlight: string;
+    description: string;
+    image: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+  importanceSection: {
+    heading: string;
+    headingHighlight: string;
+    description: string;
+    leftFeatures: { text: string }[];
+    rightFeatures: { text: string }[];
+  };
+}
+
 interface Blog {
   title: string;
   shortDescription: string;
@@ -14,6 +32,7 @@ interface Blog {
   slug: string;
   isActive: boolean;
   publishedAt: string;
+  detailPage?: BlogDetailPage;
 }
 
 const BlogDetailPage = () => {
@@ -57,26 +76,30 @@ const BlogDetailPage = () => {
     );
   }
 
-  // Split title into title and highlight (optional logic)
-  const titleWords = blog.title.split(" ");
-  const highlight = titleWords.pop();
-  const mainTitle = titleWords.join(" ");
+  if (!blog.detailPage) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h1 className="text-2xl font-bold">Detail page not available</h1>
+      </div>
+    );
+  }
+
+  const { heroSection, importanceSection } = blog.detailPage;
 
   return (
     <div>
       <SecurityImportance
-        title={mainTitle}
-        highlight={highlight}
-        description={blog.shortDescription}
-        image={blog.image}
+        title={heroSection?.heading}
+        highlight={heroSection?.headingHighlight}
+        description={heroSection?.description}
+        image={heroSection?.image}
       />
       <SecurityWhy
-        title=""
-        highlight={blog.title}
-        description={blog.content}
-      // Since blog content is a single string, we just pass it as description
-      // and keep the default points or hide them if needed.
-      // For now, let's keep it simple.
+        title={importanceSection?.heading}
+        highlight={importanceSection?.headingHighlight}
+        description={importanceSection?.description}
+        pointsLeft={importanceSection?.leftFeatures?.map(f => f.text) || []}
+        pointsRight={importanceSection?.rightFeatures?.map(f => f.text) || []}
       />
     </div>
   );
