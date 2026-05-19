@@ -31,9 +31,6 @@ function SkeletonLoader() {
       <div
         className="
         grid grid-cols-1 lg:grid-cols-[42%_1fr] items-start
-        gap-10 sm:gap-12 md:gap-14
-        lg:gap-10 min-[1280px]:gap-11 min-[1360px]:gap-12 2xl:gap-14
-        px-4 sm:px-6 md:px-10
         lg:px-16 min-[1280px]:px-20 min-[1360px]:px-32 2xl:px-60
         py-12 sm:py-14 md:py-16
         lg:py-16 min-[1280px]:py-17 min-[1360px]:py-18 2xl:py-20

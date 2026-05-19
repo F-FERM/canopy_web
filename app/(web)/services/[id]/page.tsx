@@ -59,7 +59,6 @@ const ServiceDetailPage = () => {
         setLoading(true);
         const result: any = await listSeviceSecurityServicesApi({});
         const root = result?.[0];
-
         if (!root || !root.services) {
           throw new Error("No data found");
         }
