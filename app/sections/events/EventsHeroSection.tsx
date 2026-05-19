@@ -1,11 +1,93 @@
+// ─────────────────────────────────────────────
+// app/components/events/EventsHeroSection.tsx
+// ─────────────────────────────────────────────
+
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Button from "@/app/components/ui/Button";
+import { listEventsLandingApi } from "@/app/api/web/EventLanding";
+import { IconBriefcase, IconZoomExclamation } from "@tabler/icons-react";
 
-import HeroImage from "../../../public/images/about/Excelence1.jpg";
+interface EventButton {
+  label: string;
+  link: string;
+  variant: "primary" | "outline";
+}
+
+interface EventImage {
+  image: string;
+}
+
+interface EventsHeroData {
+  badgeText: string;
+  heading: string;
+  headingHighlight: string;
+  headingEnd: string;
+  description: string;
+  buttons: EventButton[];
+  images: EventImage[];
+}
 
 const EventsHeroSection = () => {
+  const [data, setData] = useState<EventsHeroData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const response = await listEventsLandingApi({});
+        setData(response?.[0] ?? null);
+      } catch (error) {
+        console.error("Hero API Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHeroData();
+  }, []);
+
+  // ───────────────── Loading ─────────────────
+  if (loading) {
+    return (
+      <section className="w-full bg-white">
+        <div
+          className="
+            grid grid-cols-1 lg:grid-cols-[42%_1fr]
+            gap-10 lg:gap-14
+            items-center
+
+            px-5 sm:px-8 md:px-14
+            lg:pl-24 lg:pr-10
+            xl:pl-40 xl:pr-16
+            2xl:px-60
+
+            py-14 md:py-20
+            animate-pulse
+          "
+        >
+          <div className="space-y-5">
+            <div className="h-4 w-40 bg-gray-200 rounded" />
+            <div className="h-12 w-full max-w-[500px] bg-gray-200 rounded" />
+            <div className="h-12 w-[80%] bg-gray-200 rounded" />
+            <div className="h-28 w-full bg-gray-200 rounded" />
+
+            <div className="flex gap-4">
+              <div className="h-12 w-32 bg-gray-200 rounded" />
+              <div className="h-12 w-32 bg-gray-200 rounded" />
+            </div>
+          </div>
+
+          <div className="h-[420px] sm:h-[600px] lg:h-[760px] bg-gray-200 rounded-[30px]" />
+        </div>
+      </section>
+    );
+  }
+
+  if (!data) return null;
+
   return (
     <section className="w-full overflow-hidden bg-white">
       <div
@@ -15,7 +97,8 @@ const EventsHeroSection = () => {
           lg:grid-cols-[42%_1fr]
           items-center
 
-          gap-12
+          gap-10
+          md:gap-12
           lg:gap-14
 
           px-5
@@ -34,25 +117,36 @@ const EventsHeroSection = () => {
           mx-auto
         "
       >
-        {/* ── Left Content ───────────────────── */}
-        <div className="w-full pt-2 md:pt-4 z-20">
-          {/* Eyebrow */}
-          <p
-            className="
-              text-[#F26A23]
-              uppercase
-              tracking-[0.16em]
-              font-semibold
+        {/* ── Left Content ───────────────── */}
+        <div className="w-full z-20 order-2 lg:order-1">
+          {/* Badge */}
 
-              text-[14px]
-              sm:text-[16px]
-              md:text-[18px]
+          <div className="flex items-center  gap-2 mb-4">
+            <span
+              aria-hidden="true"
+              className="text-[#F26A23] flex items-center justify-center"
+            >
+              <IconBriefcase className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]" />
+            </span>
 
-              mb-4
-            "
-          >
-            UPCOMING EVENTS
-          </p>
+            <p
+              className="
+      text-[#F26A23]
+      uppercase
+      tracking-[0.16em]
+      font-semibold
+
+      text-[13px]
+      sm:text-[15px]
+      md:text-[17px]
+      lg:text-[18px]
+
+      leading-none
+    "
+            >
+              {data.badgeText}
+            </p>
+          </div>
 
           {/* Heading */}
           <h2
@@ -72,20 +166,17 @@ const EventsHeroSection = () => {
               mb-5
             "
           >
-            <span className="text-[#E07B2A]">
-              Security Events
-            </span>{" "}
-            We Did,
+            <span className="text-[#F26A23]">{data.heading}</span>{" "}
+            {data.headingHighlight}
             <br />
-            Training Programs &
-            <br />
-            Community Activities
+            {data.headingEnd}
           </h2>
 
           {/* Description */}
           <p
             className="
-              text-[15px]
+              text-[14px]
+              sm:text-[15px]
               md:text-[16px]
 
               leading-[1.9]
@@ -95,176 +186,54 @@ const EventsHeroSection = () => {
               max-w-[680px]
             "
           >
-            Our event security services follow strict SIRA guidelines
-            to ensure safe and well-managed events. We provide risk
-            assessment, access control, crowd management, and trained
-            SIRA-certified security personnel. With on-site supervision,
-            continuous monitoring, and quick emergency response, we
-            ensure the safety of guests, staff, and assets at all times.
+            {data.description}
           </p>
 
           {/* Buttons */}
           <div className="mt-6 flex flex-wrap gap-4">
-            <Button
-              label="View Events"
-              href="#events"
-              variant="primary"
-            />
-
-            <Button
-              label="Contact"
-              href="/contact"
-              variant="outline"
-            />
+            {data.buttons?.map((btn, index) => (
+              <Button
+                key={index}
+                label={btn.label}
+                href={
+                  btn.label.toLowerCase().includes("event")
+                    ? "#upcoming-events"
+                    : btn.link
+                }
+                variant={btn.variant}
+              />
+            ))}
           </div>
         </div>
 
-        {/* ── Right Section ─────────────────── */}
-        {/* ── Right Section ─────────────────── */}
-<div
-  className="
-    relative
-    w-full
+        {/* ── Right Image ───────────────── */}
+        <div
+          className="
+            relative
+            w-full
 
-    h-[620px]
-    sm:h-[700px]
-    lg:h-[760px]
+            h-[420px]
+            sm:h-[550px]
+            md:h-[650px]
+            lg:h-[760px]
 
-    overflow-visible
+            mt-2
+            lg:mt-0
 
-    mt-10
-    lg:mt-0
-  "
->
-  {/* Top Right Piece */}
-{/* First Piece */}
-<div
-  className="
-    relative
-    w-[325.5px]
-    h-[172px]
-    overflow-hidden
-    rounded-[25px]
-    bg-[#D9D9D9]
-  "
->
-  <Image
-    src={HeroImage}
-    alt="Security Team"
-    fill
-    className="object-cover"
-  />
-</div>
+            rounded-[30px]
+            overflow-hidden
 
-  {/* Left Large Piece */}
-  <div
-    className="
-      absolute
-
-      left-0
-      top-[145px]
-
-      sm:top-[175px]
-      lg:top-[185px]
-
-      w-[280px]
-      sm:w-[360px]
-      lg:w-[430px]
-
-      h-[190px]
-      sm:h-[240px]
-      lg:h-[270px]
-
-      overflow-hidden
-
-      rounded-[28px]
-      rounded-tr-[80px]
-
-      z-10
-    "
-  >
-    <Image
-      src={HeroImage}
-      alt="Training Program"
-      fill
-      className="object-cover scale-[1.8]"
-      style={{ objectPosition: "left center" }}
-    />
-  </div>
-
-  {/* Center Square Piece */}
-  <div
-    className="
-      absolute
-
-      left-[170px]
-      sm:left-[230px]
-      lg:left-[449px]
-
-      top-[185px]
-      sm:top-[220px]
-      lg:top-[225px]
-
-      w-[200px]
-      sm:w-[250px]
-      lg:w-[290px]
-
-      h-[200px]
-      sm:h-[250px]
-      lg:h-[290px]
-
-      overflow-hidden
-
-      rounded-[24px]
-
-      z-30
-    "
-  >
-    <Image
-      src={HeroImage}
-      alt="Community Activity"
-      fill
-      className="object-cover scale-[1.8]"
-      style={{ objectPosition: "center center" }}
-    />
-  </div>
-
-  {/* Bottom Right Piece */}
-  <div
-    className="
-      absolute
-
-      right-[10px]
-      sm:right-[40px]
-      lg:right-[70px]
-
-      bottom-[20px]
-
-      w-[260px]
-      sm:w-[320px]
-      lg:w-[390px]
-
-      h-[150px]
-      sm:h-[190px]
-      lg:h-[220px]
-
-      overflow-hidden
-
-      rounded-[28px]
-      rounded-tr-[80px]
-
-      z-20
-    "
-  >
-    <Image
-      src={HeroImage}
-      alt="Event Security"
-      fill
-      className="object-cover scale-[1.8]"
-      style={{ objectPosition: "center bottom" }}
-    />
-  </div>
-</div>
+            order-1 lg:order-2
+          "
+        >
+          <Image
+            src={data.images?.[0]?.image}
+            alt="Events Hero"
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
       </div>
     </section>
   );
