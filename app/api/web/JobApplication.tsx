@@ -1,10 +1,11 @@
 import axiosInstance from "@/service/web/axios";
 import { AxiosError } from "axios";
 export interface JobApplicationData {
-  name: string;
-  email: string;
-  cvUrl: string;
   jobId: string;
+  jobTitle: string;
+  applicantName: string;
+  applicantEmail: string;
+  cvUrl: string;
 }
 
 export const SubmitJobApplicationApi = async (data: JobApplicationData) => {

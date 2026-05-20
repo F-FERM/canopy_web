@@ -71,10 +71,11 @@ export const ApplyNow = ({
 
       // STEP 2: Send application
       return await SubmitJobApplicationApi({
-        name,
-        email,
+        applicantName: name,
+        applicantEmail: email,
         cvUrl,
         jobId: jobId,
+        jobTitle: jobTitle || "",
       });
     },
     onSuccess: () => {
