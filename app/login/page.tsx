@@ -34,7 +34,7 @@ export default function LoginPage() {
         // Add a small delay to ensure cookie is set before navigation
         setRedirecting(true);
         setTimeout(() => {
-          router.push("/admin/about/hero");
+          router.push("/admin/home/hero");
         }, 500);
       } else {
         setError("No access token received from server");

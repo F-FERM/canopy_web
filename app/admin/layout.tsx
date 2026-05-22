@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Home,
   Image,
@@ -13,8 +13,11 @@ import {
   ChevronDown,
   ShieldCheck,
   Anchor,
+  LogOut,
+  ChevronUp,
 } from "lucide-react";
 import { useState } from "react";
+import { LocalStorage } from "@/utility/LocalStorage";
 import "./globals.css";
 
 const sidebarItems = [
@@ -32,8 +35,7 @@ const sidebarItems = [
       },
       { label: "Industry", href: "/admin/home/home-industry", icon: Ship },
       { label: "Blog", href: "/admin/home/home-blog", icon: Image },
-      { label: "Workflow", href: "/admin/home/workflow", icon: Workflow },
-      { label: "FAQ", href: "/admin/home/faq", icon: Info },
+ 
     ],
   },
   {
@@ -112,6 +114,11 @@ const sidebarItems = [
     icon: Briefcase,
     children: [{ label: "Manage", href: "/admin/contact-details", icon: Image }],
   },
+    {
+    label: "Job Application",
+    icon: Briefcase,
+    children: [{ label: "Manage", href: "/admin/job-applications", icon: Image }],
+  },
   {
     label: "Footer",
     icon: Briefcase,
@@ -121,10 +128,16 @@ const sidebarItems = [
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [openMenu, setOpenMenu] = useState<string | null>("Home");
 
   const toggleMenu = (label: string) => {
     setOpenMenu(openMenu === label ? null : label);
+  };
+
+  const handleLogout = () => {
+    LocalStorage.removeItem("access_token");
+    router.replace("/login");
   };
 
   return (
@@ -152,7 +165,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <Icon size={20} />
                     <span className="text-sm font-medium">{item.label}</span>
                   </div>
-                  <ChevronDown
+                  <ChevronUp
                     size={16}
                     className={`transition-transform ${
                       isOpen ? "rotate-180" : ""
@@ -191,8 +204,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
+
       </aside>
-      <main className="flex-1 bg-[#F6F8FA] p-8 overflow-auto">{children}</main>
+      <main className="flex-1 bg-[#F6F8FA] flex flex-col h-screen overflow-hidden">
+        {/* Top Header */}
+        <header className="flex justify-end items-center px-8 py-4 bg-white border-b shadow-sm shrink-0">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors font-medium text-sm"
+          >
+            <LogOut size={18} />
+            <span>Logout</span>
+          </button>
+        </header>
+
+        {/* Content Area */}
+        <div className="flex-1 p-8 overflow-auto">
+          {children}
+        </div>
+      </main>
     </div>
   );
 }
