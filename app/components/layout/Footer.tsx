@@ -6,9 +6,10 @@ import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import {
   IconBrandFacebook,
-  IconBrandTwitter,
+  // IconBrandTwitter,
   IconBrandInstagram,
   IconBrandLinkedin,
+  IconBrandYoutube,
 } from "@tabler/icons-react";
 import { listFooterApi } from "@/app/api/web/Footer";
 
@@ -47,7 +48,7 @@ interface FooterData {
 
 const SOCIAL_ICON_MAP: Record<string, React.ElementType> = {
   Facebook: IconBrandFacebook,
-  Twitter: IconBrandTwitter,
+  Youtube: IconBrandYoutube,
   Instagram: IconBrandInstagram,
   Linkedin: IconBrandLinkedin,
 };
