@@ -231,8 +231,8 @@ export default function AboutUs() {
               px-3 sm:px-4
               lg:px-4 min-[1280px]:px-5 min-[1360px]:px-6 2xl:px-[38px]
 
-              py-3 sm:py-4 md:py-[18px]
-              lg:py-[18px] min-[1280px]:py-[20px] min-[1360px]:py-[22px] 2xl:py-[26px]
+              py-1 sm:py-3 md:py-[18px]
+              lg:py-[8px] min-[1280px]:py-[20px] min-[1360px]:py-[22px] 2xl:py-[4px]
 
               left-1/2 2xl:left-[2%]
               -translate-x-1/2 2xl:-translate-x-[50%]
@@ -250,19 +250,34 @@ export default function AboutUs() {
               >
                 <p
                   className="
-                  font-semibold text-[#7F220E] leading-tight
-                  text-[17px] sm:text-[19px] md:text-[20px]
-                  lg:text-[19px] min-[1280px]:text-[21px] min-[1360px]:text-[23px] 2xl:text-[1.75rem]
-                "
+    font-bold
+    text-[#7F220E]
+    leading-tight
+    text-[40px]
+    sm:text-[42px]
+    md:text-[44px]
+    lg:text-[46px]
+    xl:text-[48px]
+    2xl:text-[50px]
+  "
                 >
                   {stat.value}
                 </p>
                 <p
                   className="
-                  text-[#979797] font-medium tracking-wide text-center mt-0.5 sm:mt-1
-                  text-[11px] sm:text-[12px] md:text-[13px]
-                  lg:text-[12px] min-[1280px]:text-[13px] min-[1360px]:text-[14px] 2xl:text-[16px]
-                "
+    text-[#979797]
+    whitespace-nowrap
+    font-medium
+    tracking-wide
+    text-center
+    mt-0.5 sm:mt-1
+    text-[18px]
+    sm:text-[20px]
+    md:text-[22px]
+    lg:text-[24px]
+    xl:text-[28px]
+    2xl:text-[32px]
+  "
                 >
                   {stat.label}
                 </p>
