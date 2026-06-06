@@ -12,7 +12,7 @@ const navItems = [
   "Services",
   "Career",
   "Blog",
-  "Events",
+  // "Events",
   "Contact Us",
 ];
 
