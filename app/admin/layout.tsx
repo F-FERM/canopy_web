@@ -77,18 +77,18 @@ const sidebarItems = [
       { label: "Jobs", href: "/admin/career/job", icon: Image },
     ],
   },
-  {
-    label: "Events",
-    icon: Workflow,
-    children: [
-      { label: "Landing", href: "/admin/events", icon: Image },
-      {
-        label: "Upcoming Events",
-        href: "/admin/events/upcoming-events",
-        icon: Image,
-      },
-    ],
-  },
+  // {
+  //   label: "Events",
+  //   icon: Workflow,
+  //   children: [
+  //     { label: "Landing", href: "/admin/events", icon: Image },
+  //     {
+  //       label: "Upcoming Events",
+  //       href: "/admin/events/upcoming-events",
+  //       icon: Image,
+  //     },
+  //   ],
+  // },
   {
     label: "Blog",
     icon: Workflow,
