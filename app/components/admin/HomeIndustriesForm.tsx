@@ -32,9 +32,7 @@ interface IndustriesWeServeSection {
 
 type Props = {
   initialData?: Partial<IndustriesWeServeSection>;
-  onSubmit: (
-    data: Partial<IndustriesWeServeSection>
-  ) => Promise<void>;
+  onSubmit: (data: Partial<IndustriesWeServeSection>) => Promise<void>;
 };
 
 // ─────────────────────────────────────────────
@@ -70,26 +68,16 @@ function Section({
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between px-6 py-4 border-b bg-gray-50 hover:bg-gray-100 transition-colors"
       >
-        <h3 className="text-base font-semibold text-gray-800">
-          {title}
-        </h3>
+        <h3 className="text-base font-semibold text-gray-800">{title}</h3>
 
         {open ? (
-          <ChevronUp
-            size={18}
-            className="text-gray-500"
-          />
+          <ChevronUp size={18} className="text-gray-500" />
         ) : (
-          <ChevronDown
-            size={18}
-            className="text-gray-500"
-          />
+          <ChevronDown size={18} className="text-gray-500" />
         )}
       </button>
 
-      {open && (
-        <div className="p-6 space-y-4">{children}</div>
-      )}
+      {open && <div className="p-6 space-y-4">{children}</div>}
     </div>
   );
 }
@@ -102,28 +90,21 @@ export default function IndustriesWeServeForm({
   initialData,
   onSubmit,
 }: Props) {
-  const [form, setForm] =
-    useState<
-      Partial<IndustriesWeServeSection>
-    >(
-      initialData || {
-        badgeText: "",
-        heading: "",
-        headingHighlight: "",
-        description: "",
-        industries: [defaultIndustry()],
-      }
-    );
+  const [form, setForm] = useState<Partial<IndustriesWeServeSection>>(
+    initialData || {
+      badgeText: "",
+      heading: "",
+      headingHighlight: "",
+      description: "",
+      industries: [defaultIndustry()],
+    },
+  );
 
-  const [submitting, setSubmitting] =
-    useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // ─────────────────────────────────────────────
 
-  const set = (
-    key: keyof IndustriesWeServeSection,
-    value: any
-  ) =>
+  const set = (key: keyof IndustriesWeServeSection, value: any) =>
     setForm((prev) => ({
       ...prev,
       [key]: value,
@@ -134,33 +115,22 @@ export default function IndustriesWeServeForm({
   // ─────────────────────────────────────────────
 
   const addIndustry = () =>
-    set("industries", [
-      ...(form.industries || []),
-      defaultIndustry(),
-    ]);
+    set("industries", [...(form.industries || []), defaultIndustry()]);
 
   const removeIndustry = (i: number) =>
     set(
       "industries",
-      (form.industries || []).filter(
-        (_, idx) => idx !== i
-      )
+      (form.industries || []).filter((_, idx) => idx !== i),
     );
 
-  const updateIndustry = (
-    i: number,
-    key: keyof IndustryItem,
-    value: any
-  ) => {
-    const updated = (
-      form.industries || []
-    ).map((industry, idx) =>
+  const updateIndustry = (i: number, key: keyof IndustryItem, value: any) => {
+    const updated = (form.industries || []).map((industry, idx) =>
       idx === i
         ? {
             ...industry,
             [key]: value,
           }
-        : industry
+        : industry,
     );
 
     set("industries", updated);
@@ -170,9 +140,7 @@ export default function IndustriesWeServeForm({
   // Submit
   // ─────────────────────────────────────────────
 
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setSubmitting(true);
@@ -196,10 +164,7 @@ export default function IndustriesWeServeForm({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6 max-w-4xl"
-    >
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
       {/* ───────────────────────── */}
       {/* Section Content */}
       {/* ───────────────────────── */}
@@ -209,41 +174,28 @@ export default function IndustriesWeServeForm({
           className="input"
           placeholder="Badge Text"
           value={form.badgeText || ""}
-          onChange={(e) =>
-            set("badgeText", e.target.value)
-          }
+          onChange={(e) => set("badgeText", e.target.value)}
         />
 
         <input
           className="input"
           placeholder="Heading"
           value={form.heading || ""}
-          onChange={(e) =>
-            set("heading", e.target.value)
-          }
+          onChange={(e) => set("heading", e.target.value)}
         />
 
         <input
           className="input"
           placeholder="Heading Highlight"
-          value={
-            form.headingHighlight || ""
-          }
-          onChange={(e) =>
-            set(
-              "headingHighlight",
-              e.target.value
-            )
-          }
+          value={form.headingHighlight || ""}
+          onChange={(e) => set("headingHighlight", e.target.value)}
         />
 
         <textarea
           className="input min-h-[120px]"
           placeholder="Description"
           value={form.description || ""}
-          onChange={(e) =>
-            set("description", e.target.value)
-          }
+          onChange={(e) => set("description", e.target.value)}
         />
       </Section>
 
@@ -251,139 +203,83 @@ export default function IndustriesWeServeForm({
       {/* Industries */}
       {/* ───────────────────────── */}
 
-      <Section
-        title={`Industries (${(form.industries || []).length})`}
-      >
+      <Section title={`Industries (${(form.industries || []).length})`}>
         <div className="space-y-6">
-          {(form.industries || []).map(
-            (industry, ii) => (
-              <div
-                key={ii}
-                className="border rounded-xl overflow-hidden"
-              >
-                {/* Header */}
-                <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b">
-                  <div className="flex items-center gap-2">
-                    <GripVertical
-                      size={16}
-                      className="text-gray-400"
-                    />
+          {(form.industries || []).map((industry, ii) => (
+            <div key={ii} className="border rounded-xl overflow-hidden">
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b">
+                <div className="flex items-center gap-2">
+                  <GripVertical size={16} className="text-gray-400" />
 
-                    <span className="font-medium text-gray-700 text-sm">
-                      Industry {ii + 1}
-                      {industry.title
-                        ? ` — ${industry.title}`
-                        : ""}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={
-                          industry.isActive
-                        }
-                        onChange={(e) =>
-                          updateIndustry(
-                            ii,
-                            "isActive",
-                            e.target.checked
-                          )
-                        }
-                        className="accent-blue-600 w-4 h-4"
-                      />
-
-                      Active
-                    </label>
-
-                    <button
-                      type="button"
-                      onClick={() =>
-                        removeIndustry(ii)
-                      }
-                      disabled={
-                        (
-                          form.industries ||
-                          []
-                        ).length <= 1
-                      }
-                      className="p-1.5 text-red-500 hover:bg-red-50 rounded-md disabled:opacity-30 transition-colors"
-                    >
-                      <Trash2 size={15} />
-                    </button>
-                  </div>
+                  <span className="font-medium text-gray-700 text-sm">
+                    Industry {ii + 1}
+                    {industry.title ? ` — ${industry.title}` : ""}
+                  </span>
                 </div>
 
-                {/* Body */}
-                <div className="p-4 space-y-4">
-                  <input
-                    className="input"
-                    placeholder="Industry Title"
-                    value={industry.title}
-                    onChange={(e) =>
-                      updateIndustry(
-                        ii,
-                        "title",
-                        e.target.value
-                      )
-                    }
-                  />
+                <div className="flex items-center gap-3">
+                  <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={industry.isActive}
+                      onChange={(e) =>
+                        updateIndustry(ii, "isActive", e.target.checked)
+                      }
+                      className="accent-blue-600 w-4 h-4"
+                    />
+                    Active
+                  </label>
 
-                  <textarea
-                    className="input min-h-[100px]"
-                    placeholder="Industry Description"
-                    value={
-                      industry.description
-                    }
-                    onChange={(e) =>
-                      updateIndustry(
-                        ii,
-                        "description",
-                        e.target.value
-                      )
-                    }
-                  />
-
-                  <select
-                    className="input"
-                    value={industry.icon}
-                    onChange={(e) =>
-                      updateIndustry(
-                        ii,
-                        "icon",
-                        e.target.value
-                      )
-                    }
+                  <button
+                    type="button"
+                    onClick={() => removeIndustry(ii)}
+                    disabled={(form.industries || []).length <= 1}
+                    className="p-1.5 text-red-500 hover:bg-red-50 rounded-md disabled:opacity-30 transition-colors"
                   >
-                    <option value="Construction">
-                      Construction
-                    </option>
-
-                    <option value="Home">
-                      Home
-                    </option>
-
-                    <option value="ShoppingBag">
-                      ShoppingBag
-                    </option>
-
-                    <option value="Briefcase">
-                      Briefcase
-                    </option>
-
-                    <option value="Building">
-                      Building
-                    </option>
-
-                    <option value="Factory">
-                      Factory
-                    </option>
-                  </select>
+                    <Trash2 size={15} />
+                  </button>
                 </div>
               </div>
-            )
-          )}
+
+              {/* Body */}
+              <div className="p-4 space-y-4">
+                <input
+                  className="input"
+                  placeholder="Industry Title"
+                  value={industry.title}
+                  onChange={(e) => updateIndustry(ii, "title", e.target.value)}
+                />
+
+                <textarea
+                  className="input min-h-[100px]"
+                  placeholder="Industry Description"
+                  value={industry.description}
+                  onChange={(e) =>
+                    updateIndustry(ii, "description", e.target.value)
+                  }
+                />
+
+                <select
+                  className="input"
+                  value={industry.icon}
+                  onChange={(e) => updateIndustry(ii, "icon", e.target.value)}
+                >
+                  <option value="Construction">Construction</option>
+
+                  <option value="Home">Home</option>
+
+                  <option value="ShoppingBag">ShoppingBag</option>
+
+                  <option value="Briefcase">Briefcase</option>
+
+                  <option value="Building">Building</option>
+
+                  <option value="Factory">Factory</option>
+                </select>
+              </div>
+            </div>
+          ))}
         </div>
 
         <button
