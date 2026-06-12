@@ -278,6 +278,7 @@ export default function IndustriesWeServeForm({
                   <option value="Factory">Factory</option>
                   <option value="Sheild">Sheild</option>
                   <option value="Clean">Clean</option>
+                  <option value="Hotel">Hotel</option>
                 </select>
               </div>
             </div>

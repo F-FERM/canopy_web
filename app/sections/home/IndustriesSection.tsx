@@ -8,6 +8,7 @@ import Vector3 from "../../../public/images/home/Vector3.png";
 import Vector4 from "../../../public/images/home/Vector4.png";
 import Vector5 from "../../../public/images/home/Vector5.png";
 import Vector6 from "../../../public/images/home/Vector6.png";
+import Vectorhotel from "../../../public/images/home/Vector hotel.png"
 import { listIndustriesApi } from "@/app/api/web/HomeIndustry";
 import BadgeIcon from "../../../public/images/home/Group.png";
 
@@ -36,6 +37,7 @@ const ICON_IMAGE_MAP: Record<string, StaticImageData> = {
   Briefcase: Vector4,
   Sheild: Vector5,
   Clean: Vector6,
+  Hotel:Vectorhotel,
 };
 
 function resolveImage(icon: string): StaticImageData {
