@@ -3,6 +3,7 @@
 import Button from "@/app/components/ui/Button";
 import HeroBg from "../../../public/images/blog/Blog1.png";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ImageCardProps {
   tag?: string;
@@ -55,18 +56,15 @@ const ImageCard = ({
         "
       >
         {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-center bg-no-repeat"
-          style={
-            backgroundImage?.src || backgroundImage
-              ? {
-                  backgroundImage: `url(${backgroundImage?.src || backgroundImage})`,
-                  backgroundSize: "100% 100%",
-                  backgroundPosition: "center",
-                }
-              : undefined
-          }
-        >
+        <div className="absolute inset-0">
+          <Image
+            src={backgroundImage?.src || backgroundImage}
+            alt="Security services background"
+            fill
+            className="object-cover object-top"
+            priority
+            sizes="(max-width: 1760px) 100vw, 1760px"
+          />
           {/* Overlay */}
           <div className="absolute inset-0 bg-black/55" />
         </div>
