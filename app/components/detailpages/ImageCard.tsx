@@ -56,10 +56,14 @@ const ImageCard = ({
       >
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-gray-800"
+          className="absolute inset-0 bg-center bg-no-repeat"
           style={
-            (backgroundImage?.src || backgroundImage) 
-              ? { backgroundImage: `url(${backgroundImage?.src || backgroundImage})` } 
+            backgroundImage?.src || backgroundImage
+              ? {
+                  backgroundImage: `url(${backgroundImage?.src || backgroundImage})`,
+                  backgroundSize: "100% 100%",
+                  backgroundPosition: "center",
+                }
               : undefined
           }
         >
@@ -174,14 +178,13 @@ const ImageCard = ({
             {/* Single centered CTA button — matches screenshot style */}
             <div className="pt-1 sm:pt-2">
               <Link href="/contact-us">
-               <Button
-                label={buttonLabel}
-                variant="primary"
-                className="rounded-full px-8"
-                showArrow={true}
-              />
+                <Button
+                  label={buttonLabel}
+                  variant="primary"
+                  className="rounded-full px-8"
+                  showArrow={true}
+                />
               </Link>
-             
             </div>
           </div>
         </div>
