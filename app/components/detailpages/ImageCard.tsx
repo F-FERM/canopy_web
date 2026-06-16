@@ -56,12 +56,13 @@ const ImageCard = ({
       >
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-gray-800"
+          className="absolute inset-0 bg-center bg-no-repeat"
           style={
             backgroundImage?.src || backgroundImage
               ? {
                   backgroundImage: `url(${backgroundImage?.src || backgroundImage})`,
-                  backgroundSize: "contain",
+                  backgroundSize: "100% 100%",
+                  backgroundPosition: "center",
                 }
               : undefined
           }
