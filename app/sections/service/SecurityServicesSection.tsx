@@ -9,6 +9,8 @@ import {
   listSeviceSecurityServicesApi,
 } from "@/app/api/web/HomeService";
 import BadgeIcon from "../../../public/images/home/localoffer.png";
+import DotPatternLeftImg from "../../../public/images/home/dot-pattern-left.jpg";
+import DotPatternRightImg from "../../../public/images/home/dot-pattern-right.jpg";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -32,6 +34,7 @@ interface Service {
   buttonText: string;
   buttonLink: string;
   isActive: boolean;
+  subtitle?: string;
   detailPage?: DetailPage;
 }
 
@@ -84,35 +87,29 @@ interface HeroSection {
 
 function ServiceCardSkeleton() {
   return (
-    <div
-      className="
-        w-full max-w-[425px]
-        h-[360px] sm:h-[390px] lg:h-[426px]
-        rounded-[20px] overflow-hidden
-        bg-gray-200 animate-pulse
-      "
-    />
+    <div className="w-full max-w-[425px] rounded-[20px] overflow-hidden border border-gray-100 bg-white shadow-sm">
+      <div className="w-full h-[220px] bg-gray-200 animate-pulse rounded-t-[20px]" />
+      <div className="px-5 py-5 flex flex-col gap-3">
+        <div className="h-5 w-40 bg-gray-200 animate-pulse rounded" />
+        <div className="h-3.5 w-24 bg-orange-100 animate-pulse rounded mt-1" />
+      </div>
+    </div>
   );
 }
 
 function SectionSkeleton() {
   return (
-    <section
-      className="
-        px-5 sm:px-8 md:px-14 lg:px-24 xl:px-40 2xl:px-60
-        py-14 md:py-20 mx-auto
-      "
-    >
+    <section className="relative overflow-hidden bg-white px-5 sm:px-8 md:px-14 lg:px-24 xl:px-40 2xl:px-60 py-14 md:py-20">
       {/* Header skeleton */}
-      <div className="mb-15 sm:mb-14 md:mb-16 lg:mb-25 px-2 sm:px-4 md:px-8 lg:px-[120px] text-center flex flex-col items-center gap-4">
+      <div className="mb-12 text-center flex flex-col items-center gap-4">
         <div className="h-4 w-32 rounded bg-gray-200 animate-pulse" />
         <div className="h-10 w-72 rounded bg-gray-200 animate-pulse" />
-        <div className="h-4 w-[500px] max-w-full rounded bg-gray-200 animate-pulse" />
+        <div className="h-4 w-[380px] max-w-full rounded bg-gray-200 animate-pulse" />
       </div>
 
       {/* Cards skeleton */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
-        {Array.from({ length: 6 }).map((_, i) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 justify-items-center max-w-[900px] mx-auto">
+        {Array.from({ length: 4 }).map((_, i) => (
           <ServiceCardSkeleton key={i} />
         ))}
       </div>
@@ -128,94 +125,72 @@ function ServiceCard({ service }: { service: Service }) {
       href={`/services/${service.slug}`}
       className="
         group
-        relative
-
-        w-full
-        max-w-[425px]
-
-        h-[360px]
-        sm:h-[390px]
-        lg:h-[426px]
-
-        rounded-[20px]
-        overflow-hidden
-
+        w-full max-w-[425px]
+        rounded-[20px] overflow-hidden
         bg-white
-        border border-gray-200
-
-        shadow
-        hover:shadow-xl
-
-        transition-all duration-500
+        border border-gray-100
+        shadow-[0_2px_12px_rgba(0,0,0,0.07)]
+        hover:shadow-[0_8px_32px_rgba(0,0,0,0.13)]
+        transition-all duration-300
         block
       "
     >
       {/* Image */}
-      <div className="relative w-full h-full overflow-hidden bg-gray-200">
+      <div className="relative w-full h-[220px] sm:h-[230px] lg:h-[240px] overflow-hidden bg-gray-100">
         {service.image && (
           <Image
             src={service.image}
             alt={service.title || "Service"}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 425px"
           />
         )}
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="absolute inset-0 flex flex-col justify-end px-6 pb-[27px]">
-        <div className="flex flex-col transition-all duration-500">
+      <div className="px-5 pt-[18px] pb-[20px] bg-white">
+        <h3 className="text-[17px] font-bold text-[#111111] leading-snug mb-[10px]">
           {/* Title */}
-          <h3
-            className="
-              text-[22px]
-              md:text-[24px]
-              font-semibold
-              text-white
-              transition-all duration-500
-            "
-          >
-            {service.title}
-          </h3>
+          {service.title}
+        </h3>
 
-          {/* Description — reveal on hover */}
-          <div
-            className="
-              overflow-hidden
-              max-h-0 opacity-0
-              group-hover:max-h-[250px] group-hover:opacity-100
-              transition-all duration-500 ease-in-out
-            "
-          >
-            <p
-              className="
-                text-[14px]
-                md:text-[15px]
-                text-[#E5E5E5]
-                leading-[1.8]
-                mt-3 mb-4
-              "
-            >
-              {service.description}
-            </p>
-          </div>
+        {/* Description — reveal on hover */}
+        {service.subtitle && (
+          <p className="text-[12px] text-gray-400 font-medium mb-[6px] -mt-1">
+            {service.subtitle}
+          </p>
+        )}
 
-          {/* Button */}
-          <div
-            className="
-              inline-flex items-center
-              text-[#F26A23]
-              font-semibold
-              transition-all duration-300
-            "
+        <div
+          className="
+            overflow-hidden
+            max-h-0 opacity-0
+            group-hover:max-h-[120px] group-hover:opacity-100
+            transition-all duration-400 ease-in-out
+            mb-0 group-hover:mb-[12px]
+          "
+        >
+          <p className="text-[13px] text-[#6B7280] leading-[1.65]">
+            {service.description}
+          </p>
+        </div>
+
+        {/* Button */}
+        <div className="inline-flex items-center gap-[6px] text-[#F26A23] font-semibold text-[13px]">
+          {service.buttonText || "View Details"}
+          <svg
+            className="w-[15px] h-[15px] transition-transform duration-200 group-hover:translate-x-[4px]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            {service.buttonText}
-            <span className="ml-2">→</span>
-          </div>
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
         </div>
       </div>
     </Link>
@@ -255,64 +230,90 @@ const SecurityServicesSection = () => {
     );
   }
 
-  const activeServices = data.services.filter((s) => s.isActive);
+  const services = data.services;
 
   return (
     <section
       id="services-list"
       className="
-        px-5
-        sm:px-8
-        md:px-14
-        lg:px-24
-        xl:px-40
-        2xl:px-60
-
-        py-14
-        md:py-20
-
+        relative overflow-hidden
+        bg-white
+        px-5 sm:px-8 md:px-14 lg:px-24 xl:px-40 2xl:px-60
+        py-14 md:py-20
         mx-auto
       "
     >
       {/* Header */}
-      <div className="mb-15 sm:mb-14 md:mb-16 lg:mb-25 px-2 sm:px-4 md:px-8 lg:px-[120px] text-center">
-        <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+      <div
+        className="
+          pointer-events-none select-none
+          absolute left-0 bottom-0
+          w-[260px] sm:w-[300px] lg:w-[340px]
+          h-[260px] sm:h-[300px] lg:h-[340px]
+          opacity-[0.18]
+          z-0
+        "
+      >
+        <Image
+          src={DotPatternLeftImg}
+          alt=""
+          fill
+          className="object-cover object-right-top"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className="
+          pointer-events-none select-none
+          absolute right-0 top-0
+          w-[260px] sm:w-[300px] lg:w-[340px]
+          h-[260px] sm:h-[300px] lg:h-[340px]
+          opacity-[0.18]
+          z-0
+        "
+      >
+        <Image
+          src={DotPatternRightImg}
+          alt=""
+          fill
+          className="object-cover object-left-bottom"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div className="relative z-10 mb-10 sm:mb-12 md:mb-14 lg:mb-16 text-center">
+        <div className="flex items-center justify-center gap-[7px] mb-[14px]">
           <Image
             src={BadgeIcon}
             alt="Badge Icon"
-            className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px] object-contain"
+            className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] object-contain"
           />
-
-          <p className="text-[#F26A23] uppercase tracking-[2px] sm:tracking-[3px] text-[14px] sm:text-[16px] md:text-[18px] font-semibold">
+          <p className="text-[#F26A23] uppercase tracking-[2.5px] text-[12px] sm:text-[13px] md:text-[14px] font-semibold">
             {data.badgeText}
           </p>
         </div>
 
-        <h2 className="text-[28px] sm:text-[36px] md:text-[42px] lg:text-[56px] font-bold leading-tight text-black">
+        <h2 className="text-[28px] sm:text-[36px] md:text-[42px] lg:text-[50px] font-bold leading-tight text-black">
           {data.heading}{" "}
           <span className="text-[#F26A23]">{data.headingHighlight}</span>
         </h2>
 
-        <p className="text-[#979797] text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed mt-3 sm:mt-4 font-normal max-w-[500px] mx-auto">
+        <p className="text-[#979797] text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed mt-3 sm:mt-4 font-normal max-w-[420px] mx-auto">
           {data.description}
         </p>
       </div>
 
-      {/* Grid */}
       <div
         className="
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          xl:grid-cols-3
-
-          gap-6
-          lg:gap-8
-
+          relative z-10
+          grid grid-cols-1 sm:grid-cols-2
+          gap-5 lg:gap-6
           justify-items-center
+          max-w-[900px] mx-auto
         "
       >
-        {activeServices.map((service, index) => (
+        {services.map((service, index) => (
           <ServiceCard key={service.slug || index} service={service} />
         ))}
       </div>
