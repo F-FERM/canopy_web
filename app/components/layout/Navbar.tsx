@@ -29,7 +29,7 @@ function Navbar() {
       pathname === "/" ? "Home" : pathname.slice(1).replace(/-/g, " ");
 
     const matchedItem = navItems.find(
-      (item) => item.toLowerCase() === currentPath.toLowerCase()
+      (item) => item.toLowerCase() === currentPath.toLowerCase(),
     );
 
     if (matchedItem) {
@@ -75,14 +75,27 @@ function Navbar() {
         className="
           max-w-[1920px]
           mx-auto
-          h-[80px] sm:h-[100px] lg:h-[120px]
-          px-4 sm:px-6 lg:px-[100px]
+          h-[64px]           
+          sm:h-[80px]       
+          md:h-[90px]       
+          lg:h-[120px]
+          px-3              
+          sm:px-6
+          lg:px-[100px]
           flex items-center justify-between
         "
       >
         {/* LOGO */}
         <div className="shrink-0 flex items-center">
-          <div className="h-[56px] sm:h-[75px] lg:h-[95px] flex items-center">
+          <div
+            className="
+            h-[40px]          
+            sm:h-[55px]      
+            md:h-[65px]      
+            lg:h-[95px] 
+            flex items-center
+          "
+          >
             <Image
               src={logo}
               alt="Canopy Security Services"
@@ -169,11 +182,14 @@ function Navbar() {
             className="
               bg-[#7F220E]
               text-white
-              w-[44px]
-              h-[44px]
+              w-[38px]           
+              h-[38px]          
+              sm:w-[44px]     
+              sm:h-[44px]       
               rounded-xl
               flex flex-col items-center justify-center
-              gap-[5px]
+              gap-[4px]        
+              sm:gap-[5px]     
               transition-all duration-300
               hover:bg-[#6b1d0c]
               active:scale-95
@@ -181,16 +197,18 @@ function Navbar() {
           >
             <span
               className={`
-                block w-[22px] h-[2px]
+                block w-[18px] h-[2px]  
+                sm:w-[22px]              
                 bg-white rounded-full
                 transition-all duration-300
-                ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}
+                ${menuOpen ? "rotate-45 translate-y-[6px]" : ""} 
               `}
             />
 
             <span
               className={`
-                block w-[22px] h-[2px]
+                block w-[18px] h-[2px]  
+                sm:w-[22px]            
                 bg-white rounded-full
                 transition-all duration-300
                 ${menuOpen ? "opacity-0" : ""}
@@ -199,10 +217,11 @@ function Navbar() {
 
             <span
               className={`
-                block w-[22px] h-[2px]
+                block w-[18px] h-[2px]  
+                sm:w-[22px]            
                 bg-white rounded-full
                 transition-all duration-300
-                ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}
+                ${menuOpen ? "-rotate-45 -translate-y-[6px]" : ""}  
               `}
             />
           </button>
@@ -215,11 +234,7 @@ function Navbar() {
           2xl:hidden
           overflow-hidden
           transition-all duration-300 ease-in-out
-          ${
-            menuOpen
-              ? "max-h-[700px] opacity-100"
-              : "max-h-0 opacity-0"
-          }
+          ${menuOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"}
         `}
       >
         <nav
@@ -245,9 +260,11 @@ function Navbar() {
               }}
               className={`
                 text-white
-                text-[16px]
+                text-[14px]      
+                sm:text-[16px]   
                 font-medium
-                px-5 py-3
+                px-5 py-2.5       
+                sm:py-3          
                 rounded-xl
                 transition-all duration-200
                 ${
@@ -264,13 +281,16 @@ function Navbar() {
           {/* CTA BUTTON */}
           <button
             className="
-              mt-3
+              mt-2 
+              sm:mt-3
               w-full
-              h-[48px]
+              h-[44px] 
+              sm:h-[48px]     
               rounded-xl
               bg-secondary
               text-white
-              text-[16px]
+              text-[14px]       
+              sm:text-[16px]   
               font-semibold
               transition-all duration-300
               hover:bg-[#d55a1d]
