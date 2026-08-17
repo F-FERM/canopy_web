@@ -45,19 +45,85 @@ export default function AboutSection() {
   // ── Loading State ────────────────────────────────────────────────────────
   if (loading) {
     return (
-      <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-28 px-4 sm:px-6 md:px-12 lg:px-20 mb-16 sm:mb-20 md:mb-24 lg:mb-30">
-        <div className="relative z-10 max-w-[1400px] mx-auto px-2 sm:px-4 md:px-6 animate-pulse">
+      <section
+        className="
+          relative
+          overflow-x-hidden
+          py-12
+          sm:py-16
+          md:py-20
+          lg:py-28
+          px-4
+          sm:px-6
+          md:px-12
+          lg:px-20
+          mb-16
+          sm:mb-20
+          md:mb-24
+          lg:mb-30
+        "
+      >
+        <div
+          className="
+            relative
+            z-10
+            max-w-[1400px]
+            mx-auto
+            px-2
+            sm:px-4
+            md:px-6
+            animate-pulse
+          "
+        >
           {/* Title skeleton */}
-          <div className="text-center mb-10 sm:mb-14 md:mb-16 lg:mb-20">
+          <div
+            className="
+              text-center
+              mb-10
+              sm:mb-14
+              md:mb-16
+              lg:mb-20
+            "
+          >
             <div className="flex items-center justify-center gap-2 mb-4">
               <div className="h-5 w-5 bg-gray-200 rounded-full" />
               <div className="h-5 w-16 bg-gray-200 rounded" />
             </div>
+
             <div className="h-10 w-72 bg-gray-200 rounded mx-auto" />
           </div>
+
           {/* Grid skeleton */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 lg:gap-[90px]">
-            <div className="relative w-full max-w-[705px] mx-auto h-[280px] sm:h-[340px] md:h-[380px] lg:h-[421px] bg-gray-200 rounded-[10px]" />
+          <div
+            className="
+              grid
+              grid-cols-1
+              lg:grid-cols-2
+              gap-12
+              sm:gap-16
+              md:gap-20
+              lg:gap-10
+              xl:gap-14
+              2xl:gap-[90px]
+            "
+          >
+            <div
+              className="
+                relative
+                w-full
+                max-w-[705px]
+                mx-auto
+                h-[360px]
+                sm:h-[420px]
+                md:h-[450px]
+                lg:h-[380px]
+                xl:h-[400px]
+                2xl:h-[421px]
+                bg-gray-200
+                rounded-[10px]
+              "
+            />
+
             <div className="flex flex-col gap-4">
               <div className="h-4 w-full bg-gray-200 rounded" />
               <div className="h-4 w-5/6 bg-gray-200 rounded" />
@@ -72,7 +138,8 @@ export default function AboutSection() {
     );
   }
 
-  // ── No Data ──────────────────────────────────────────────────────────────
+  // ── No Data ────────────────────────────────────────────────────────────────
+
   if (!content) return null;
 
   const {
@@ -89,19 +156,54 @@ export default function AboutSection() {
   } = content;
 
   return (
-    <section className="relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-28 px-4 sm:px-6 md:px-12 lg:px-20 mb-16 sm:mb-20 md:mb-24 lg:mb-30">
-      {/* TOP RIGHT dot pattern */}
+    <section
+      className="
+        relative
+        overflow-x-hidden
+        py-12
+        sm:py-16
+        md:py-20
+        lg:py-28
+        px-4
+        sm:px-6
+        md:px-12
+        lg:px-20
+        mb-16
+        sm:mb-20
+        md:mb-24
+        lg:mb-30
+      "
+    >
+      {/* ═══════════════════════════════════════════════════════════════════
+          TOP RIGHT DOT PATTERN
+      ═══════════════════════════════════════════════════════════════════ */}
+
       <Image
         src={patternImageTop}
         alt="pattern"
         width={320}
         height={320}
+        aria-hidden="true"
         className="
           absolute
-          top-[-2%] sm:top-[-3%] lg:top-[-4%]
-          right-[10%] sm:right-[20%] lg:right-[29%]
-          w-[160px] sm:w-[220px] md:w-[280px] lg:w-[320px]
-          opacity-40 sm:opacity-50 lg:opacity-60
+          top-[-2%]
+          sm:top-[-3%]
+          lg:top-[-4%]
+
+          right-[5%]
+          sm:right-[15%]
+          md:right-[22%]
+          lg:right-[29%]
+
+          w-[160px]
+          sm:w-[220px]
+          md:w-[280px]
+          lg:w-[320px]
+
+          opacity-40
+          sm:opacity-50
+          lg:opacity-60
+
           pointer-events-none
           select-none
           z-0
@@ -114,40 +216,100 @@ export default function AboutSection() {
         alt="pattern"
         width={320}
         height={320}
+        aria-hidden="true"
         className="
           absolute
-          bottom-[-40px] sm:bottom-[-50px] lg:bottom-[-70px]
-          left-[5%] sm:left-[12%] lg:left-[22%]
-          w-[160px] sm:w-[220px] md:w-[280px] lg:w-[320px]
-          opacity-15 sm:opacity-20 lg:opacity-25
+          bottom-[-40px]
+          sm:bottom-[-50px]
+          lg:bottom-[-70px]
+
+          left-[2%]
+          sm:left-[8%]
+          md:left-[15%]
+          lg:left-[22%]
+
+          w-[160px]
+          sm:w-[220px]
+          md:w-[280px]
+          lg:w-[320px]
+
+          opacity-15
+          sm:opacity-20
+          md:opacity-20
+          lg:opacity-25
+
           pointer-events-none
           select-none
           z-0
         "
       />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-2 sm:px-4 md:px-6">
-        {/* SECTION TITLE */}
-        <div className="text-center mb-10 sm:mb-14 md:mb-16 lg:mb-20">
-          <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+      {/* ═══════════════════════════════════════════════════════════════════
+          MAIN CONTAINER
+      ═══════════════════════════════════════════════════════════════════ */}
+
+      <div
+        className="
+          relative
+          z-10
+          max-w-[1400px]
+          mx-auto
+          px-2
+          sm:px-4
+          md:px-6
+        "
+      >
+        {/* ═════════════════════════════════════════════════════════════════
+            SECTION TITLE
+        ═════════════════════════════════════════════════════════════════ */}
+
+        <div
+          className="
+            text-center
+            mb-10
+            sm:mb-14
+            md:mb-16
+            lg:mb-20
+          "
+        >
+          <div
+            className="
+              flex
+              items-center
+              justify-center
+              gap-2
+              mb-3
+              sm:mb-4
+            "
+          >
             <span
               className="
-                flex items-center justify-center
-                w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]
+                flex
+                items-center
+                justify-center
+                w-[18px]
+                h-[18px]
+                sm:w-[20px]
+                sm:h-[20px]
                 text-[#F26A23]
-                text-[10px] sm:text-[11px]
+                text-[10px]
+                sm:text-[11px]
                 font-bold
                 leading-none
               "
             >
               <IconExclamationCircle />
             </span>
+
             <p
               className="
                 text-[#F26A23]
                 uppercase
-                tracking-[2px] sm:tracking-[3px]
-                text-[14px] sm:text-[16px] md:text-[18px]
+                tracking-[2px]
+                sm:tracking-[3px]
+                text-[14px]
+                sm:text-[16px]
+                md:text-[18px]
                 font-semibold
               "
             >
@@ -157,9 +319,12 @@ export default function AboutSection() {
 
           <h2
             className="
-              text-[28px] sm:text-[36px] md:text-[42px] lg:text-[56px]
+              text-[28px]
+              sm:text-[36px]
+              md:text-[42px]
+              lg:text-[56px]
               font-bold
-              leading-tight
+              leading-[1.15]
               text-black
               px-4
             "
@@ -185,54 +350,134 @@ export default function AboutSection() {
             grid-cols-1
             lg:grid-cols-2
             items-start
-            gap-8 sm:gap-12 md:gap-16 lg:gap-10 xl:gap-14 2xl:gap-[90px]
+
+            gap-14
+            sm:gap-16
+            md:gap-20
+
+            lg:gap-12
+            xl:gap-16
+            2xl:gap-[90px]
           "
         >
-          {/* ── LEFT: OVERLAPPING IMAGES ── */}
+          {/* ═══════════════════════════════════════════════════════════════
+              LEFT — IMAGE AREA
+          ═══════════════════════════════════════════════════════════════ */}
+
           <div
             className="
               relative
               w-full
               max-w-[705px]
               mx-auto
-              h-[280px] sm:h-[340px] md:h-[380px] lg:h-[380px] xl:h-[400px] 2xl:h-[421px]
+
+              /*
+               * Reserved height.
+               * The text will NEVER start inside this area.
+               */
+              h-[360px]
+              sm:h-[420px]
+              md:h-[450px]
+
+              lg:h-[400px]
+              xl:h-[410px]
+              2xl:h-[421px]
             "
           >
-            {/* FIRST IMAGE — top-left */}
             <div
               className="
                 absolute
                 top-0
                 left-0
-                w-[55%] lg:w-[52%] xl:w-[54%] 2xl:w-[377px]
-                h-[72%] sm:h-[75%] lg:h-[78%] xl:h-[79%] 2xl:h-[349px]
-                rounded-[8px] sm:rounded-[10px]
+
+                w-[55%]
+                sm:w-[53%]
+                md:w-[52%]
+
+                lg:w-[53%]
+                xl:w-[54%]
+                2xl:w-[54%]
+
+                h-[75%]
+                sm:h-[78%]
+                md:h-[80%]
+
+                lg:h-[82%]
+                xl:h-[83%]
+                2xl:h-[83%]
+
+                rounded-[8px]
+                sm:rounded-[10px]
+
                 overflow-hidden
-                shadow-lg sm:shadow-xl
-                z-20
+
+                shadow-lg
+                sm:shadow-xl
+
+                z-10
               "
             >
               <Image
                 src={secondaryImage}
                 alt="Security Guards"
                 fill
+                priority
                 className="object-cover"
-                sizes="(max-width: 640px) 55vw, (max-width: 1024px) 54vw, (max-width: 1536px) 54vw, 377px"
+                sizes="
+                  (max-width: 640px) 55vw,
+                  (max-width: 768px) 53vw,
+                  (max-width: 1024px) 52vw,
+                  (max-width: 1280px) 54vw,
+                  54vw
+                "
               />
             </div>
 
-            {/* SECOND IMAGE — offset bottom-right */}
             <div
               className="
                 absolute
-                top-[32px] sm:top-[38px] md:top-[40px] lg:top-[42px] xl:top-[44px] 2xl:top-[42px]
-                left-[42%] sm:left-[44%] lg:left-[44%] xl:left-[44%] 2xl:left-[321px]
-                w-[57%] lg:w-[55%] xl:w-[56%] 2xl:w-[384px]
-                h-[75%] sm:h-[80%] lg:h-[86%] xl:h-[87%] 2xl:h-[384px]
-                rounded-[8px] sm:rounded-[10px]
+
+                top-[38px]
+                sm:top-[42px]
+                md:top-[46px]
+
+                lg:top-[44px]
+                xl:top-[46px]
+                2xl:top-[42px]
+
+                left-[40%]
+                sm:left-[41%]
+                md:left-[42%]
+
+                lg:left-[42%]
+                xl:left-[42%]
+                2xl:left-[42%]
+
+                w-[57%]
+                sm:w-[56%]
+                md:w-[55%]
+
+                lg:w-[55%]
+                xl:w-[55%]
+                2xl:w-[55%]
+
+                h-[78%]
+                sm:h-[81%]
+                md:h-[83%]
+
+                lg:h-[87%]
+                xl:h-[88%]
+                2xl:h-[91%]
+
+                rounded-[8px]
+                sm:rounded-[10px]
+
                 overflow-hidden
-                shadow-xl sm:shadow-2xl
-                z-10
+
+                shadow-xl
+                sm:shadow-2xl
+
+                z-20
               "
             >
               <Image
@@ -240,7 +485,13 @@ export default function AboutSection() {
                 alt="Security Officer"
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 57vw, (max-width: 1024px) 55vw, (max-width: 1536px) 56vw, 384px"
+                sizes="
+                  (max-width: 640px) 57vw,
+                  (max-width: 768px) 56vw,
+                  (max-width: 1024px) 55vw,
+                  (max-width: 1280px) 55vw,
+                  55vw
+                "
               />
             </div>
           </div>
@@ -248,26 +499,57 @@ export default function AboutSection() {
           {/* ── RIGHT: TEXT CONTENT ── */}
           <div
             className="
+              relative
+              z-30
+
               w-full
               max-w-[705px]
-              mx-auto lg:mx-0
+
+              mx-auto
+              lg:mx-0
+
+              /*
+               * Extra left protection on desktop.
+               * This guarantees visual breathing room between
+               * the images and the text.
+               */
+              lg:pl-3
+              xl:pl-4
+              2xl:pl-5
+
               flex
               flex-col
-              gap-6 sm:gap-8 md:gap-10 lg:gap-[40px]
+
+              gap-6
+              sm:gap-8
+              md:gap-10
+              lg:gap-[40px]
             "
           >
             <div
               className="
                 flex
                 flex-col
-                gap-4 sm:gap-5 md:gap-6 lg:gap-[24px]
+
+                gap-4
+                sm:gap-5
+                md:gap-6
+                lg:gap-[24px]
+
                 text-[#979797]
-                text-[14px] sm:text-[15px] md:text-[16px]
-                leading-[1.7] sm:leading-[1.75] md:leading-[1.85]
+
+                text-[14px]
+                sm:text-[15px]
+                md:text-[16px]
+
+                leading-[1.7]
+                sm:leading-[1.75]
+                md:leading-[1.85]
+
                 font-normal
               "
             >
-              {descriptions.map((para, i) => (
+              {descriptions?.map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
             </div>
