@@ -19,7 +19,6 @@ export interface HeroSectionProps {
   headingHighlight?: string;
   subtext?: string;
   buttons?: HeroButton[];
-
   slides?: (
     | HeroSlide
     | {
@@ -29,69 +28,54 @@ export interface HeroSectionProps {
         isActive?: boolean;
       }
   )[];
-
   slideInterval?: number;
-
   patternImage?: StaticImageData | string;
-
   accentColor?: string;
   bgColor?: string;
 }
 
-// ─── Skeleton ─────────────────────────────────────────────────────────────────
+// ─── Skeleton ──────────────────────────────────────────────────────────────
 
 function HeroSkeleton() {
   return (
-    <section className="relative w-full overflow-hidden bg-white px-4 py-8 sm:px-6 sm:py-12 md:px-10 lg:px-16 lg:py-20 xl:px-60">
-      <div className="mx-auto max-w-[1920px] py-4 sm:py-8 md:py-12 lg:py-24">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[2fr_3fr] lg:gap-5">
+    <section className="relative overflow-hidden w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-60 py-8 sm:py-12 lg:py-20">
+      <div className="max-w-[1920px] mx-auto py-4 sm:py-8 md:py-12 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6 sm:gap-8 lg:gap-5 items-center">
           {/* Left: copy skeleton */}
-          <div className="relative z-30 space-y-4 sm:space-y-5">
+          <div className="relative z-10 space-y-4 sm:space-y-5">
             <div className="flex items-center gap-2">
-              <div className="h-4 w-4 animate-pulse rounded-full bg-gray-200 sm:h-5 sm:w-5" />
-
-              <div className="h-4 w-36 animate-pulse rounded bg-gray-200" />
+              <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gray-200 animate-pulse" />
+              <div className="h-4 w-36 rounded bg-gray-200 animate-pulse" />
             </div>
-
-            <div className="mt-3 space-y-2 sm:mt-4">
-              <div className="h-7 w-3/4 animate-pulse rounded-lg bg-gray-200 sm:h-9 md:h-10 lg:h-12" />
-
-              <div className="h-7 w-1/2 animate-pulse rounded-lg bg-gray-200 sm:h-9 md:h-10 lg:h-12" />
+            <div className="space-y-2 mt-3 sm:mt-4">
+              <div className="h-7 sm:h-9 md:h-10 lg:h-12 w-3/4 rounded-lg bg-gray-200 animate-pulse" />
+              <div className="h-7 sm:h-9 md:h-10 lg:h-12 w-1/2 rounded-lg bg-gray-200 animate-pulse" />
             </div>
-
-            <div className="mt-3 space-y-2 sm:mt-4">
-              <div className="h-3 w-full max-w-[520px] animate-pulse rounded bg-gray-200 sm:h-4" />
-
-              <div className="h-3 w-5/6 max-w-[440px] animate-pulse rounded bg-gray-200 sm:h-4" />
-
-              <div className="h-3 w-2/3 max-w-[360px] animate-pulse rounded bg-gray-200 sm:h-4" />
+            <div className="space-y-2 mt-3 sm:mt-4">
+              <div className="h-3 sm:h-4 w-full max-w-[520px] rounded bg-gray-200 animate-pulse" />
+              <div className="h-3 sm:h-4 w-5/6 max-w-[440px] rounded bg-gray-200 animate-pulse" />
+              <div className="h-3 sm:h-4 w-2/3 max-w-[360px] rounded bg-gray-200 animate-pulse" />
             </div>
-
-            <div className="mt-5 flex flex-wrap gap-3 sm:mt-6 sm:gap-4 md:mt-7">
-              <div className="h-10 w-28 animate-pulse rounded-full bg-gray-200 sm:h-11 sm:w-32" />
-
-              <div className="h-10 w-28 animate-pulse rounded-full bg-gray-200 sm:h-11 sm:w-32" />
+            <div className="mt-5 sm:mt-6 md:mt-7 flex flex-wrap gap-3 sm:gap-4">
+              <div className="h-10 sm:h-11 w-28 sm:w-32 rounded-full bg-gray-200 animate-pulse" />
+              <div className="h-10 sm:h-11 w-28 sm:w-32 rounded-full bg-gray-200 animate-pulse" />
             </div>
           </div>
 
           {/* Right: image slider skeleton */}
           <div className="relative w-full">
-            <div className="relative h-[190px] w-full animate-pulse overflow-hidden rounded-[18px] bg-gray-200 sm:h-[230px] sm:rounded-[24px] md:h-[300px] lg:h-[400px] lg:rounded-[30px] xl:h-[440px] 2xl:h-[480px]">
+            <div className="relative w-full h-[200px] sm:h-[260px] md:h-[340px] lg:h-[440px] xl:h-[500px] overflow-hidden rounded-2xl sm:rounded-[28px] lg:rounded-[36px] bg-gray-200 animate-pulse">
               <div className="absolute inset-0 -translate-x-full animate-[shimmer_1.6s_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-
-              <div className="absolute bottom-4 left-4 z-10 space-y-2 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 lg:bottom-10 lg:left-10">
-                <div className="h-5 w-40 animate-pulse rounded-lg bg-gray-300/60 sm:h-6 sm:w-52 md:h-8 md:w-64" />
-
-                <div className="h-3 w-56 animate-pulse rounded bg-gray-300/60 sm:h-4 sm:w-68 md:w-80" />
-
-                <div className="h-3 w-44 animate-pulse rounded bg-gray-300/60 sm:h-4 sm:w-56 md:w-72" />
+              <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 left-4 sm:left-6 md:left-8 lg:left-10 z-10 space-y-2 pr-4">
+                <div className="h-5 sm:h-6 md:h-8 w-40 sm:w-52 md:w-64 rounded-lg bg-gray-300/60 animate-pulse" />
+                <div className="h-3 sm:h-4 w-56 sm:w-68 md:w-80 rounded bg-gray-300/60 animate-pulse" />
+                <div className="h-3 sm:h-4 w-44 sm:w-56 md:w-72 rounded bg-gray-300/60 animate-pulse" />
               </div>
-
-              <div className="absolute bottom-4 right-4 z-10 flex gap-1.5 sm:bottom-5 sm:right-5 sm:gap-2">
+              <div className="absolute bottom-4 sm:bottom-5 md:bottom-6 right-4 sm:right-5 md:right-6 flex gap-1.5 sm:gap-2 z-10">
                 {[0, 1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className={`h-2 animate-pulse rounded-full bg-gray-300/60 sm:h-2.5 ${
+                    className={`h-2 sm:h-2.5 rounded-full bg-gray-300/60 animate-pulse ${
                       i === 0 ? "w-7 sm:w-9 md:w-10" : "w-2 sm:w-2.5"
                     }`}
                   />
@@ -101,7 +85,6 @@ function HeroSkeleton() {
           </div>
         </div>
       </div>
-
       <style jsx>{`
         @keyframes shimmer {
           100% {
@@ -116,19 +99,11 @@ function HeroSkeleton() {
 // ─── Defaults ─────────────────────────────────────────────────────────────────
 
 const DEFAULT_BUTTONS: HeroButton[] = [
-  {
-    label: "Explore",
-    href: "/services",
-    variant: "primary",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    variant: "outline",
-  },
+  { label: "Explore", href: "/services", variant: "primary" },
+  { label: "Contact", href: "/contact", variant: "outline" },
 ];
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+// ─── Main Component ────────────────────────────────────────────────────────────
 
 export default function HeroSection({
   badgeText: propBadgeText = "Trusted Security Partner",
@@ -145,18 +120,14 @@ export default function HeroSection({
 }: HeroSectionProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setLoading] = useState(true);
-
   const [apiData, setApiData] = useState<ListHomeHeroSection | null>(null);
 
   // ── Fetch API data ────────────────────────────────────────────────────────
-
   useEffect(() => {
     const fetchHeroData = async () => {
       try {
         const data = await listHomeHeroApi({});
-
         console.log(data, "herodata");
-
         setApiData(data?.[0] ?? null);
       } catch (error) {
         console.error("HeroSection API error:", error);
@@ -164,47 +135,32 @@ export default function HeroSection({
         setLoading(false);
       }
     };
-
     fetchHeroData();
   }, []);
 
   // ── Merge API data with prop fallbacks ────────────────────────────────────
-
   const badgeText = apiData?.badgeText ?? propBadgeText;
-
   const badgeIcon = apiData?.badgeIcon ?? propBadgeIcon;
-
   const heading = apiData?.heading ?? propHeading;
-
   const headingHighlight = apiData?.headingHighlight ?? propHeadingHighlight;
-
   const subtext = apiData?.subtext ?? propSubtext;
-
   const buttons = apiData?.buttons ?? propButtons;
-
   const slides = (apiData?.slides ?? propSlides).filter(
     (s) => s.isActive !== false,
   );
-
   const slideInterval = apiData?.slideInterval ?? propSlideInterval;
-
   const patternImage = apiData?.patternImage ?? propPatternImage;
-
   const accentColor = apiData?.accentColor ?? propAccentColor;
 
-  // ── Slide auto advance ───────────────────────────────────────────────────
-
+  // ── Slide auto-advance ────────────────────────────────────────────────────
   useEffect(() => {
     if (slides.length <= 1) return;
-
-    const id = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, slideInterval);
-
+    const id = setInterval(
+      () => setCurrentSlide((prev) => (prev + 1) % slides.length),
+      slideInterval,
+    );
     return () => clearInterval(id);
   }, [slides.length, slideInterval]);
-
-  // ── Reset slide ──────────────────────────────────────────────────────────
 
   useEffect(() => {
     setCurrentSlide(0);
@@ -212,315 +168,68 @@ export default function HeroSection({
 
   const activeSlide = slides[currentSlide];
 
-  // ── Loading ──────────────────────────────────────────────────────────────
+  if (loading) return <HeroSkeleton />;
 
-  if (loading) {
-    return <HeroSkeleton />;
-  }
-
-  // ─── Render ───────────────────────────────────────────────────────────────
-
+  // ─── Render ──────────────────────────────────────────────────────────────
   return (
-    <section className="relative w-full overflow-hidden bg-white">
-      {/* ================================================================
-          ANNIVERSARY DECORATION
-          ================================================================ */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-0
-          top-0
-          z-0
-          select-none
-        "
-      >
-        <picture>
-          {/* ============================================================
-              MOBILE
-              700 × 487
-              <= 639px
-              ============================================================ */}
-
-          <source
-            media="(max-width: 639px)"
-            srcSet="/images/home/anniversary-mobile.png"
-          />
-
-          {/* ============================================================
-              TABLET
-              1200 × 835
-              640px - 1023px
-              ============================================================ */}
-
-          <source
-            media="(max-width: 1023px)"
-            srcSet="/images/home/anniversary-tablet.png"
-          />
-
-          {/* ============================================================
-              DESKTOP
-              2048 × 1426
-              >= 1024px
-              ============================================================ */}
-
-          <img
-            src="/images/home/anniversary.png"
-            alt=""
-            aria-hidden="true"
-            className="
-              h-auto
-              w-[235px]
-
-              sm:w-[285px]
-
-              md:w-[350px]
-
-              lg:w-[470px]
-
-              xl:w-[520px]
-
-              2xl:w-[570px]
-            "
-          />
-        </picture>
-      </div>
-
-      {/* ================================================================
-          DECORATIVE PATTERN
-          ================================================================ */}
-
+    <section className="relative overflow-hidden w-full px-4 sm:px-6 md:px-10 lg:px-16 xl:px-60 py-8 sm:py-12 lg:py-20">
+      {/* Decorative pattern */}
       {patternImage && (
         <Image
           src={typeof patternImage === "string" ? patternImage : patternImage}
           alt=""
-          aria-hidden="true"
+          aria-hidden
           width={420}
           height={420}
-          className="
-            pointer-events-none
-            absolute
-            bottom-0
-            right-0
-            z-0
-            hidden
-            w-[120px]
-            select-none
-            opacity-90
-
-            sm:block
-            sm:w-[180px]
-
-            md:w-[240px]
-
-            lg:w-[320px]
-
-            xl:w-[420px]
-          "
+          className="absolute top-0 left-0 w-[120px] sm:w-[180px] md:w-[240px] lg:w-[320px] xl:w-[420px] opacity-90 pointer-events-none select-none"
         />
       )}
 
-      {/* ================================================================
-          MAIN HERO CONTENT
-          ================================================================ */}
-
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          w-full
-          max-w-[1920px]
-
-          px-4
-          pb-10
-          pt-[245px]
-
-          sm:px-6
-          sm:pb-12
-          sm:pt-[270px]
-
-          md:px-10
-          md:pb-16
-          md:pt-[300px]
-
-          lg:px-16
-          lg:pb-20
-          lg:pt-40
-
-          xl:px-60
-          xl:pb-24
-          xl:pt-44
-        "
-      >
-        {/* ================================================================
-            HERO GRID
-            ================================================================ */}
-
-        <div
-          className="
-            grid
-            grid-cols-1
-            items-center
-
-            gap-8
-
-            sm:gap-10
-
-            md:gap-12
-
-            lg:grid-cols-[2fr_3fr]
-            lg:gap-6
-
-            xl:gap-8
-          "
-        >
-          {/* ============================================================
-              LEFT CONTENT
-              ============================================================ */}
-
-          <div
-            className="
-              relative
-              z-30
-              min-w-0
-            "
-          >
-            {/* ----------------------------------------------------------
-                BADGE
-                ---------------------------------------------------------- */}
-
+      {/* Main grid */}
+      <div className="max-w-[1920px] mx-auto py-4 sm:py-8 md:py-12 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6 sm:gap-8 lg:gap-5 items-center">
+          {/* ── Left: copy ── */}
+          <div className="relative z-10">
+            {/* Badge */}
             {badgeText && (
               <div className="flex items-center gap-2">
                 {badgeIcon && (
                   <Image
                     src={badgeIcon}
                     alt=""
-                    aria-hidden="true"
+                    aria-hidden
                     width={20}
                     height={20}
-                    className="
-                      h-4
-                      w-4
-                      shrink-0
-
-                      sm:h-5
-                      sm:w-5
-                    "
+                    className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
                   />
                 )}
-
                 <p
-                  className="
-                    text-[10px]
-                    font-semibold
-                    uppercase
-                    tracking-wide
-
-                    sm:text-xs
-
-                    md:text-sm
-
-                    lg:text-base
-                  "
-                  style={{
-                    color: accentColor,
-                  }}
+                  className="uppercase tracking-wide text-[11px] sm:text-sm md:text-base lg:text-[18px] font-semibold"
+                  style={{ color: accentColor }}
                 >
                   {badgeText}
                 </p>
               </div>
             )}
 
-            {/* ----------------------------------------------------------
-                HEADING
-                ---------------------------------------------------------- */}
-
-            <h1
-              className="
-                mt-3
-                max-w-[620px]
-                text-[27px]
-                font-semibold
-                leading-[1.15]
-                text-black
-
-                sm:mt-4
-                sm:text-[32px]
-
-                md:text-[38px]
-
-                lg:text-[42px]
-
-                xl:text-[46px]
-              "
-            >
-              {heading}
-
+            {/* Heading */}
+            <h1 className="mt-3 sm:mt-4 text-[24px] sm:text-[30px] md:text-[36px] lg:text-[42px] xl:text-[46px] font-semibold text-black leading-tight whitespace-pre-line">
+              {heading}{" "}
               {headingHighlight && (
-                <>
-                  {" "}
-                  <span
-                    style={{
-                      color: accentColor,
-                    }}
-                  >
-                    {headingHighlight}
-                  </span>
-                </>
+                <span style={{ color: accentColor }}>{headingHighlight}</span>
               )}
             </h1>
 
-            {/* ----------------------------------------------------------
-                DESCRIPTION
-                ---------------------------------------------------------- */}
-
+            {/* Subtext */}
             {subtext && (
-              <p
-                className="
-                  mt-4
-                  max-w-[560px]
-                  text-[12px]
-                  font-normal
-                  leading-5
-                  text-[#979797]
-
-                  sm:text-[13px]
-                  sm:leading-6
-
-                  md:text-[14px]
-                  md:leading-7
-
-                  lg:text-[15px]
-                  lg:leading-7
-
-                  xl:text-[16px]
-                  xl:leading-8
-                "
-              >
+              <p className="mt-3 sm:mt-4 max-w-full sm:max-w-[480px] md:max-w-[560px] lg:max-w-[620px] text-[#979797] text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] leading-6 sm:leading-7 md:leading-8 font-normal">
                 {subtext}
               </p>
             )}
 
-            {/* ----------------------------------------------------------
-                BUTTONS
-                ---------------------------------------------------------- */}
-
+            {/* Buttons */}
             {buttons.length > 0 && (
-              <div
-                className="
-                  mt-5
-                  flex
-                  flex-wrap
-                  gap-3
-
-                  sm:mt-6
-                  sm:gap-4
-
-                  md:mt-7
-                "
-              >
+              <div className="mt-5 sm:mt-6 md:mt-7 flex flex-wrap gap-3 sm:gap-4 md:gap-5">
                 {buttons.map((btn) => (
                   <Button
                     key={btn.href}
@@ -534,50 +243,11 @@ export default function HeroSection({
             )}
           </div>
 
-          {/* ============================================================
-              RIGHT IMAGE SLIDER
-              ============================================================ */}
-
+          {/* ── Right: image slider ── */}
           {slides.length > 0 && (
-            <div
-              className="
-                relative
-                z-20
-                mt-2
-                w-full
-
-                sm:mt-4
-
-                lg:mt-0
-              "
-            >
-              <div
-                className="
-                  relative
-                  w-full
-                  overflow-hidden
-
-                  h-[190px]
-
-                  rounded-[18px]
-
-                  sm:h-[230px]
-                  sm:rounded-[24px]
-
-                  md:h-[300px]
-
-                  lg:h-[400px]
-                  lg:rounded-[30px]
-
-                  xl:h-[440px]
-
-                  2xl:h-[480px]
-                "
-              >
-                {/* ------------------------------------------------------
-                    SLIDES
-                    ------------------------------------------------------ */}
-
+            <div className="relative w-full mt-2 sm:mt-4 lg:mt-0">
+              <div className="relative w-full h-[200px] sm:h-[260px] md:h-[340px] lg:h-[440px] xl:h-[500px] overflow-hidden rounded-2xl sm:rounded-[28px] lg:rounded-[36px]">
+                {/* Slides */}
                 {slides.map((slide, index) => (
                   <img
                     key={index}
@@ -587,146 +257,39 @@ export default function HeroSection({
                         : (slide.image as StaticImageData).src
                     }
                     alt={slide.title}
-                    className={`
-                        absolute
-                        inset-0
-                        h-full
-                        w-full
-                        object-cover
-                        transition-opacity
-                        duration-1000
-
-                        ${currentSlide === index ? "opacity-100" : "opacity-0"}
-                      `}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                      currentSlide === index ? "opacity-100" : "opacity-0"
+                    }`}
                   />
                 ))}
 
-                {/* ------------------------------------------------------
-                    GRADIENT OVERLAY
-                    ------------------------------------------------------ */}
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/70
-                    via-black/10
-                    to-transparent
-                  "
-                />
-
-                {/* ------------------------------------------------------
-                    SLIDE TEXT
-                    ------------------------------------------------------ */}
-
+                {/* Slide copy */}
                 {activeSlide && (
-                  <div
-                    className="
-                      absolute
-                      bottom-4
-                      left-4
-                      z-10
-                      pr-4
-                      text-white
-
-                      sm:bottom-6
-                      sm:left-6
-
-                      md:bottom-8
-                      md:left-8
-
-                      lg:bottom-9
-                      lg:left-9
-
-                      xl:bottom-10
-                      xl:left-10
-                    "
-                  >
-                    <h3
-                      className="
-                        line-clamp-2
-                        text-base
-                        font-semibold
-                        leading-tight
-
-                        sm:text-lg
-
-                        md:text-2xl
-
-                        lg:text-3xl
-
-                        xl:text-4xl
-                      "
-                    >
+                  <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 left-4 sm:left-6 md:left-8 lg:left-10 text-white z-10 pr-4 sm:pr-6">
+                    <h3 className="text-base sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl font-semibold leading-tight line-clamp-2">
                       {activeSlide.title}
                     </h3>
-
-                    <p
-                      className="
-                        mt-1
-                        line-clamp-2
-                        max-w-[280px]
-                        text-[10px]
-                        leading-4
-                        text-white/90
-
-                        sm:mt-2
-                        sm:max-w-[420px]
-                        sm:text-xs
-                        sm:leading-5
-
-                        md:max-w-[520px]
-                        md:text-sm
-                        md:leading-6
-
-                        lg:text-base
-                        lg:leading-7
-                      "
-                    >
+                    <p className="mt-1 sm:mt-2 md:mt-3 max-w-[280px] sm:max-w-[420px] md:max-w-[520px] lg:max-w-[600px] text-xs sm:text-sm md:text-base lg:text-lg text-white/90 leading-5 sm:leading-6 md:leading-7 line-clamp-2 sm:line-clamp-3">
                       {activeSlide.description}
                     </p>
                   </div>
                 )}
 
-                {/* ------------------------------------------------------
-                    SLIDE INDICATORS
-                    ------------------------------------------------------ */}
-
-                <div
-                  className="
-                    absolute
-                    bottom-3
-                    right-3
-                    z-10
-                    flex
-                    gap-1.5
-
-                    sm:bottom-5
-                    sm:right-5
-                    sm:gap-2
-                  "
-                >
+                {/* Dot indicators */}
+                <div className="absolute bottom-3 sm:bottom-5 md:bottom-6 right-3 sm:right-5 md:right-6 flex gap-1.5 sm:gap-2 z-10">
                   {slides.map((_, index) => (
                     <button
                       key={index}
-                      type="button"
                       onClick={() => setCurrentSlide(index)}
                       aria-label={`Go to slide ${index + 1}`}
-                      className={`
-                          h-1.5
-                          rounded-full
-                          transition-all
-                          duration-300
-
-                          sm:h-2
-
-                          ${
-                            currentSlide === index
-                              ? "w-6 bg-white sm:w-8"
-                              : "w-1.5 bg-white/50 sm:w-2"
-                          }
-                        `}
+                      className={`h-1.5 sm:h-2 md:h-3 rounded-full transition-all duration-300 ${
+                        currentSlide === index
+                          ? "w-6 sm:w-8 md:w-10 bg-white"
+                          : "w-1.5 sm:w-2 md:w-3 bg-white/50"
+                      }`}
                     />
                   ))}
                 </div>
