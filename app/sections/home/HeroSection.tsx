@@ -555,178 +555,281 @@ export default function HeroSection({
       {/* ============================================================
           TRUST BAR + ANNIVERSARY
           ============================================================ */}
-
       <div
         className="
-          relative
-          mt-10
-          w-full
+    relative
+    mt-10
+    w-full
+    overflow-visible
 
-          sm:mt-12
-
-          md:mt-14
-
-          lg:mt-10
-
-          xl:mt-12
-        "
+    sm:mt-12
+    md:mt-14
+    lg:mt-10
+    xl:mt-12
+  "
       >
-        {/* ============================================================
-            TRUST BAR
-
-            Desktop:
-            One continuous red bar.
-
-            Mobile:
-            2 x 2 readable layout.
-
-            Anniversary image gets dedicated left-side space.
-            ============================================================ */}
-
         <div
           className="
-            relative
-            z-10
-            w-full
-            overflow-hidden
-            rounded-r-[12px]
-            bg-[#7F220E]
+      relative
+      z-10
+      w-full
+      overflow-hidden
+      rounded-r-[12px]
+      bg-[#7F220E]
 
-            /* MOBILE */
+      grid grid-cols-[3fr_2fr] items-center
+      gap-1.5
+      px-4
+      py-4
 
-            min-h-[118px]
-            pl-[78px]
-            pr-2
-            py-2
-
-            /* SMALL */
-
-            sm:min-h-[105px]
-            sm:pl-[100px]
-            sm:pr-3
-            sm:py-3
-
-            /* TABLET */
-
-            md:min-h-[90px]
-            md:pl-[125px]
-            md:pr-4
-            md:py-0
-
-            /* DESKTOP */
-
-            lg:h-[90px]
-            lg:min-h-0
-            lg:pl-[190px]
-            lg:pr-5
-
-            /* LARGE DESKTOP */
-
-            xl:h-[95px]
-            xl:pl-[215px]
-            xl:pr-6
-
-            /* 2XL */
-
-            2xl:h-[100px]
-            2xl:pl-[235px]
-            2xl:pr-7
-          "
+      sm:block
+      sm:h-auto
+      sm:gap-0
+      sm:py-3
+      sm:pl-[clamp(210px,13vw+165px,430px)]
+      sm:pr-3
+      md:pr-4
+      lg:h-[105px]
+      lg:py-0
+      xl:h-[125px]
+      xl:pr-6
+      2xl:h-[140px]
+      2xl:pr-8
+    "
         >
+          {/* --------------------------------------------------------
+        MOBILE-ONLY: logo + caption — LEFT column, bigger
+        -------------------------------------------------------- */}
+          <div
+            className="
+        flex flex-col items-center
+        text-center
+        sm:hidden
+      "
+          >
+            <img
+              src="/images/home/anniversarylogo.png"
+              alt="10 Years Logo"
+              className="
+          block
+          h-auto
+          w-[120px]
+          max-w-full
+          object-contain
+        "
+            />
+            <p className=" text-[15px] font-bold leading-snug text-white">
+              A Decade Trust And Protection
+            </p>
+            <p className="mt-1 text-[11px] leading-snug text-white/70">
+              Thank You To Our Clients, Partners And Team For being Part Of Our
+              Journey
+            </p>
+          </div>
+
+          {/* --------------------------------------------------------
+        MOBILE-ONLY: icon cards — RIGHT column, fixed small squares
+        -------------------------------------------------------- */}
+          <div
+            className="
+        flex flex-col items-center gap-2
+        sm:hidden
+      "
+          >
+            {/* Licensed & Certified */}
+            <div
+              className="
+          flex h-11 w-11 shrink-0 items-center justify-center
+          rounded-[6px] border border-white/15 bg-white/[0.025]
+        "
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-[26px] w-[26px] text-[#F26A23]"
+              >
+                <path
+                  d="M12 3L20 6V11C20 16.2 16.5 20 12 21C7.5 20 4 16.2 4 11V6L12 3Z"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M8.5 12L10.8 14.3L15.5 9.5"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+
+            {/* Trained Professionals */}
+            <div
+              className="
+          flex h-11 w-11 shrink-0 items-center justify-center
+          rounded-[6px] border border-white/15 bg-white/[0.025]
+        "
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-[26px] w-[26px] text-[#F26A23]"
+              >
+                <circle
+                  cx="9"
+                  cy="8"
+                  r="3"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+                <circle
+                  cx="17"
+                  cy="9"
+                  r="2.3"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+                <path
+                  d="M3.5 19C3.5 15.7 5.8 13.5 9 13.5C12.2 13.5 14.5 15.7 14.5 19"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M14.5 14.2C15.2 13.8 16 13.6 17 13.6C19.6 13.6 21 15.3 21 18"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+
+            {/* 24/7 Protection */}
+            <div
+              className="
+          flex h-11 w-11 shrink-0 items-center justify-center
+          rounded-[6px] border border-white/15 bg-white/[0.025]
+        "
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-[26px] w-[26px] text-[#F26A23]"
+              >
+                <path
+                  d="M12 3V7"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M12 17V21"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M3 12H7"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M17 12H21"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+              </svg>
+            </div>
+
+            {/* Trusted By Clients */}
+            <div
+              className="
+          flex h-11 w-11 shrink-0 items-center justify-center
+          rounded-[6px] border border-white/15 bg-white/[0.025]
+        "
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-[26px] w-[26px] text-[#F26A23]"
+              >
+                <path
+                  d="M12 3L14.8 8.2L20.5 9L16.3 13.1L17.3 18.8L12 16.1L6.7 18.8L7.7 13.1L3.5 9L9.2 8.2L12 3Z"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M9 12L11 14L15.5 9.5"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+
           {/* ============================================================
-              TRUST ITEMS
-              ============================================================ */}
+        TRUST ITEMS — sm+ only: full cards (icon + text) in original grid
+        ============================================================ */}
 
           <div
             className="
-              grid
-              h-full
-              w-full
+        hidden
 
-              grid-cols-2
-              gap-1
+        sm:grid
+        sm:h-full
+        sm:w-full
+        sm:grid-cols-2
+        sm:gap-2
 
-              sm:grid-cols-2
-              sm:gap-1.5
+        md:grid-cols-2
+        md:gap-2
 
-              md:grid-cols-4
-              md:gap-0
-            "
+        lg:grid-cols-4
+        lg:gap-0
+      "
           >
             {/* ==========================================================
-                LICENSED & CERTIFIED
-                ========================================================== */}
-
+          LICENSED & CERTIFIED
+          ========================================================== */}
             <div
               className="
-                flex
-                min-w-0
-                items-center
-
-                rounded-[5px]
-                border
-                border-white/15
-                bg-white/[0.025]
-
-                px-2
-                py-2
-
-                sm:px-2.5
-                sm:py-2.5
-
-                md:rounded-none
-                md:border-0
-                md:border-r
-                md:border-white/25
-                md:px-3
-                md:py-0
-
-                lg:px-4
-
-                xl:px-5
-
-                2xl:px-6
-              "
+          flex min-w-0 items-center
+          rounded-[5px] border border-white/15 bg-white/[0.025]
+          px-2.5 py-2.5
+          lg:rounded-none lg:border-0 lg:border-r lg:border-white/25 lg:px-4 lg:py-0
+          xl:px-5 2xl:px-6
+        "
             >
-              {/* Icon */}
-
               <div
                 className="
-                  mr-2
-                  flex
-                  shrink-0
-                  items-center
-                  justify-center
-                  text-[#F26A23]
-
-                  sm:mr-2.5
-
-                  md:mr-2.5
-
-                  lg:mr-3
-
-                  xl:mr-3.5
-                "
+            mr-2.5 flex shrink-0 items-center justify-center text-[#F26A23]
+            md:mr-2.5 lg:mr-3 xl:mr-3.5
+          "
               >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   className="
-                    h-[20px]
-                    w-[20px]
-
-                    sm:h-[22px]
-                    sm:w-[22px]
-
-                    md:h-[23px]
-                    md:w-[23px]
-
-                    lg:h-[25px]
-                    lg:w-[25px]
-
-                    xl:h-[27px]
-                    xl:w-[27px]
-                  "
+              h-[22px] w-[22px]
+              md:h-[23px] md:w-[23px]
+              lg:h-[25px] lg:w-[25px]
+              xl:h-[27px] xl:w-[27px]
+            "
                 >
                   <path
                     d="M12 3L20 6V11C20 16.2 16.5 20 12 21C7.5 20 4 16.2 4 11V6L12 3Z"
@@ -735,7 +838,6 @@ export default function HeroSection({
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-
                   <path
                     d="M8.5 12L10.8 14.3L15.5 9.5"
                     stroke="currentColor"
@@ -745,55 +847,20 @@ export default function HeroSection({
                   />
                 </svg>
               </div>
-
-              {/* Text */}
-
               <div className="min-w-0 flex-1">
                 <h3
                   className="
-                    truncate
-                    whitespace-nowrap
-                    font-semibold
-                    leading-[1.15]
-                    text-white
-
-                    text-[10px]
-
-                    sm:text-[11px]
-
-                    md:text-[12px]
-
-                    lg:text-[13px]
-
-                    xl:text-[14px]
-
-                    2xl:text-[15px]
-                  "
+              truncate whitespace-nowrap font-semibold leading-[1.15] text-white
+              text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px]
+            "
                 >
                   Licensed & Certified
                 </h3>
-
                 <p
                   className="
-                    mt-[4px]
-                    truncate
-                    whitespace-nowrap
-                    font-normal
-                    leading-none
-                    text-white/70
-
-                    text-[6px]
-
-                    sm:text-[7px]
-
-                    md:text-[7px]
-
-                    lg:text-[8px]
-
-                    xl:text-[9px]
-
-                    2xl:text-[10px]
-                  "
+              mt-[4px] truncate whitespace-nowrap font-normal leading-none text-white/70
+              text-[7px] md:text-[7px] lg:text-[8px] xl:text-[9px] 2xl:text-[10px]
+            "
                 >
                   SIRA Approved Security Company
                 </p>
@@ -801,79 +868,32 @@ export default function HeroSection({
             </div>
 
             {/* ==========================================================
-                TRAINED PROFESSIONALS
-                ========================================================== */}
-
+          TRAINED PROFESSIONALS
+          ========================================================== */}
             <div
               className="
-                flex
-                min-w-0
-                items-center
-
-                rounded-[5px]
-                border
-                border-white/15
-                bg-white/[0.025]
-
-                px-2
-                py-2
-
-                sm:px-2.5
-                sm:py-2.5
-
-                md:rounded-none
-                md:border-0
-                md:border-r
-                md:border-white/25
-                md:px-3
-                md:py-0
-
-                lg:px-4
-
-                xl:px-5
-
-                2xl:px-6
-              "
+          flex min-w-0 items-center
+          rounded-[5px] border border-white/15 bg-white/[0.025]
+          px-2.5 py-2.5
+          lg:rounded-none lg:border-0 lg:border-r lg:border-white/25 lg:px-4 lg:py-0
+          xl:px-5 2xl:px-6
+        "
             >
-              {/* Icon */}
-
               <div
                 className="
-                  mr-2
-                  flex
-                  shrink-0
-                  items-center
-                  justify-center
-                  text-[#F26A23]
-
-                  sm:mr-2.5
-
-                  md:mr-2.5
-
-                  lg:mr-3
-
-                  xl:mr-3.5
-                "
+            mr-2.5 flex shrink-0 items-center justify-center text-[#F26A23]
+            md:mr-2.5 lg:mr-3 xl:mr-3.5
+          "
               >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   className="
-                    h-[20px]
-                    w-[20px]
-
-                    sm:h-[22px]
-                    sm:w-[22px]
-
-                    md:h-[23px]
-                    md:w-[23px]
-
-                    lg:h-[25px]
-                    lg:w-[25px]
-
-                    xl:h-[27px]
-                    xl:w-[27px]
-                  "
+              h-[22px] w-[22px]
+              md:h-[23px] md:w-[23px]
+              lg:h-[25px] lg:w-[25px]
+              xl:h-[27px] xl:w-[27px]
+            "
                 >
                   <circle
                     cx="9"
@@ -882,7 +902,6 @@ export default function HeroSection({
                     stroke="currentColor"
                     strokeWidth="1.8"
                   />
-
                   <circle
                     cx="17"
                     cy="9"
@@ -890,14 +909,12 @@ export default function HeroSection({
                     stroke="currentColor"
                     strokeWidth="1.8"
                   />
-
                   <path
                     d="M3.5 19C3.5 15.7 5.8 13.5 9 13.5C12.2 13.5 14.5 15.7 14.5 19"
                     stroke="currentColor"
                     strokeWidth="1.8"
                     strokeLinecap="round"
                   />
-
                   <path
                     d="M14.5 14.2C15.2 13.8 16 13.6 17 13.6C19.6 13.6 21 15.3 21 18"
                     stroke="currentColor"
@@ -906,55 +923,20 @@ export default function HeroSection({
                   />
                 </svg>
               </div>
-
-              {/* Text */}
-
               <div className="min-w-0 flex-1">
                 <h3
                   className="
-                    truncate
-                    whitespace-nowrap
-                    font-semibold
-                    leading-[1.15]
-                    text-white
-
-                    text-[10px]
-
-                    sm:text-[11px]
-
-                    md:text-[12px]
-
-                    lg:text-[13px]
-
-                    xl:text-[14px]
-
-                    2xl:text-[15px]
-                  "
+              truncate whitespace-nowrap font-semibold leading-[1.15] text-white
+              text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px]
+            "
                 >
                   Trained Professionals
                 </h3>
-
                 <p
                   className="
-                    mt-[4px]
-                    truncate
-                    whitespace-nowrap
-                    font-normal
-                    leading-none
-                    text-white/70
-
-                    text-[6px]
-
-                    sm:text-[7px]
-
-                    md:text-[7px]
-
-                    lg:text-[8px]
-
-                    xl:text-[9px]
-
-                    2xl:text-[10px]
-                  "
+              mt-[4px] truncate whitespace-nowrap font-normal leading-none text-white/70
+              text-[7px] md:text-[7px] lg:text-[8px] xl:text-[9px] 2xl:text-[10px]
+            "
                 >
                   Well Trained & Experienced Staff
                 </p>
@@ -962,79 +944,32 @@ export default function HeroSection({
             </div>
 
             {/* ==========================================================
-                24/7 PROTECTION
-                ========================================================== */}
-
+          24/7 PROTECTION
+          ========================================================== */}
             <div
               className="
-                flex
-                min-w-0
-                items-center
-
-                rounded-[5px]
-                border
-                border-white/15
-                bg-white/[0.025]
-
-                px-2
-                py-2
-
-                sm:px-2.5
-                sm:py-2.5
-
-                md:rounded-none
-                md:border-0
-                md:border-r
-                md:border-white/25
-                md:px-3
-                md:py-0
-
-                lg:px-4
-
-                xl:px-5
-
-                2xl:px-6
-              "
+          flex min-w-0 items-center
+          rounded-[5px] border border-white/15 bg-white/[0.025]
+          px-2.5 py-2.5
+          lg:rounded-none lg:border-0 lg:border-r lg:border-white/25 lg:px-4 lg:py-0
+          xl:px-5 2xl:px-6
+        "
             >
-              {/* Icon */}
-
               <div
                 className="
-                  mr-2
-                  flex
-                  shrink-0
-                  items-center
-                  justify-center
-                  text-[#F26A23]
-
-                  sm:mr-2.5
-
-                  md:mr-2.5
-
-                  lg:mr-3
-
-                  xl:mr-3.5
-                "
+            mr-2.5 flex shrink-0 items-center justify-center text-[#F26A23]
+            md:mr-2.5 lg:mr-3 xl:mr-3.5
+          "
               >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   className="
-                    h-[20px]
-                    w-[20px]
-
-                    sm:h-[22px]
-                    sm:w-[22px]
-
-                    md:h-[23px]
-                    md:w-[23px]
-
-                    lg:h-[25px]
-                    lg:w-[25px]
-
-                    xl:h-[27px]
-                    xl:w-[27px]
-                  "
+              h-[22px] w-[22px]
+              md:h-[23px] md:w-[23px]
+              lg:h-[25px] lg:w-[25px]
+              xl:h-[27px] xl:w-[27px]
+            "
                 >
                   <path
                     d="M12 3V7"
@@ -1042,28 +977,24 @@ export default function HeroSection({
                     strokeWidth="1.8"
                     strokeLinecap="round"
                   />
-
                   <path
                     d="M12 17V21"
                     stroke="currentColor"
                     strokeWidth="1.8"
                     strokeLinecap="round"
                   />
-
                   <path
                     d="M3 12H7"
                     stroke="currentColor"
                     strokeWidth="1.8"
                     strokeLinecap="round"
                   />
-
                   <path
                     d="M17 12H21"
                     stroke="currentColor"
                     strokeWidth="1.8"
                     strokeLinecap="round"
                   />
-
                   <circle
                     cx="12"
                     cy="12"
@@ -1073,55 +1004,20 @@ export default function HeroSection({
                   />
                 </svg>
               </div>
-
-              {/* Text */}
-
               <div className="min-w-0 flex-1">
                 <h3
                   className="
-                    truncate
-                    whitespace-nowrap
-                    font-semibold
-                    leading-[1.15]
-                    text-white
-
-                    text-[10px]
-
-                    sm:text-[11px]
-
-                    md:text-[12px]
-
-                    lg:text-[13px]
-
-                    xl:text-[14px]
-
-                    2xl:text-[15px]
-                  "
+              truncate whitespace-nowrap font-semibold leading-[1.15] text-white
+              text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px]
+            "
                 >
                   24/7 Protection
                 </h3>
-
                 <p
                   className="
-                    mt-[4px]
-                    truncate
-                    whitespace-nowrap
-                    font-normal
-                    leading-none
-                    text-white/70
-
-                    text-[6px]
-
-                    sm:text-[7px]
-
-                    md:text-[7px]
-
-                    lg:text-[8px]
-
-                    xl:text-[9px]
-
-                    2xl:text-[10px]
-                  "
+              mt-[4px] truncate whitespace-nowrap font-normal leading-none text-white/70
+              text-[7px] md:text-[7px] lg:text-[8px] xl:text-[9px] 2xl:text-[10px]
+            "
                 >
                   Round The Clock Security Service
                 </p>
@@ -1129,77 +1025,32 @@ export default function HeroSection({
             </div>
 
             {/* ==========================================================
-                TRUSTED BY CLIENTS
-                ========================================================== */}
-
+          TRUSTED BY CLIENTS
+          ========================================================== */}
             <div
               className="
-                flex
-                min-w-0
-                items-center
-
-                rounded-[5px]
-                border
-                border-white/15
-                bg-white/[0.025]
-
-                px-2
-                py-2
-
-                sm:px-2.5
-                sm:py-2.5
-
-                md:rounded-none
-                md:border-0
-                md:px-3
-                md:py-0
-
-                lg:px-4
-
-                xl:px-5
-
-                2xl:px-6
-              "
+          flex min-w-0 items-center
+          rounded-[5px] border border-white/15 bg-white/[0.025]
+          px-2.5 py-2.5
+          lg:rounded-none lg:border-0 lg:px-4 lg:py-0
+          xl:px-5 2xl:px-6
+        "
             >
-              {/* Icon */}
-
               <div
                 className="
-                  mr-2
-                  flex
-                  shrink-0
-                  items-center
-                  justify-center
-                  text-[#F26A23]
-
-                  sm:mr-2.5
-
-                  md:mr-2.5
-
-                  lg:mr-3
-
-                  xl:mr-3.5
-                "
+            mr-2.5 flex shrink-0 items-center justify-center text-[#F26A23]
+            md:mr-2.5 lg:mr-3 xl:mr-3.5
+          "
               >
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   className="
-                    h-[20px]
-                    w-[20px]
-
-                    sm:h-[22px]
-                    sm:w-[22px]
-
-                    md:h-[23px]
-                    md:w-[23px]
-
-                    lg:h-[25px]
-                    lg:w-[25px]
-
-                    xl:h-[27px]
-                    xl:w-[27px]
-                  "
+              h-[22px] w-[22px]
+              md:h-[23px] md:w-[23px]
+              lg:h-[25px] lg:w-[25px]
+              xl:h-[27px] xl:w-[27px]
+            "
                 >
                   <path
                     d="M12 3L14.8 8.2L20.5 9L16.3 13.1L17.3 18.8L12 16.1L6.7 18.8L7.7 13.1L3.5 9L9.2 8.2L12 3Z"
@@ -1208,7 +1059,6 @@ export default function HeroSection({
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-
                   <path
                     d="M9 12L11 14L15.5 9.5"
                     stroke="currentColor"
@@ -1218,55 +1068,20 @@ export default function HeroSection({
                   />
                 </svg>
               </div>
-
-              {/* Text */}
-
               <div className="min-w-0 flex-1">
                 <h3
                   className="
-                    truncate
-                    whitespace-nowrap
-                    font-semibold
-                    leading-[1.15]
-                    text-white
-
-                    text-[10px]
-
-                    sm:text-[11px]
-
-                    md:text-[12px]
-
-                    lg:text-[13px]
-
-                    xl:text-[14px]
-
-                    2xl:text-[15px]
-                  "
+              truncate whitespace-nowrap font-semibold leading-[1.15] text-white
+              text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px] 2xl:text-[15px]
+            "
                 >
                   Trusted By Clients
                 </h3>
-
                 <p
                   className="
-                    mt-[4px]
-                    truncate
-                    whitespace-nowrap
-                    font-normal
-                    leading-none
-                    text-white/70
-
-                    text-[6px]
-
-                    sm:text-[7px]
-
-                    md:text-[7px]
-
-                    lg:text-[8px]
-
-                    xl:text-[9px]
-
-                    2xl:text-[10px]
-                  "
+              mt-[4px] truncate whitespace-nowrap font-normal leading-none text-white/70
+              text-[7px] md:text-[7px] lg:text-[8px] xl:text-[9px] 2xl:text-[10px]
+            "
                 >
                   Delivering Excellence Since 2016
                 </p>
@@ -1276,60 +1091,36 @@ export default function HeroSection({
         </div>
 
         {/* ============================================================
-            ANNIVERSARY IMAGE
-            ============================================================ */}
-        {/* ============================================================
-    ANNIVERSARY IMAGE
-    ============================================================ */}
+      ANNIVERSARY IMAGE — sm+ only, absolute-positioned as before
+      ============================================================ */}
 
         <div
           className="
-    pointer-events-none
-    absolute
-    left-0
-    bottom-0
-    z-30
-    select-none
-  "
+      pointer-events-none
+      hidden
+      sm:block
+      absolute
+      left-0
+      bottom-0
+      z-30
+      select-none
+      overflow-visible
+    "
         >
           <picture>
-            {/* MOBILE */}
-
-            <source
-              media="(max-width: 639px)"
-              srcSet="/images/home/anniversary-mobile.png"
-            />
-
-            {/* TABLET */}
-
             <source
               media="(max-width: 1023px)"
               srcSet="/images/home/anniversary-tablet.png"
             />
-
-            {/* DESKTOP */}
-
             <img
               src="/images/home/anniversary.png"
-              alt=""
-              aria-hidden="true"
+              alt="10th Anniversary"
               className="
-        block
-        h-auto
-        max-w-none
-
-        w-[82px]
-
-        sm:w-[105px]
-
-        md:w-[130px]
-
-        lg:w-[175px]
-
-        xl:w-[205px]
-
-        2xl:w-[235px]
-      "
+          block
+          h-auto
+          max-w-none
+          w-[clamp(185px,13vw+140px,400px)]
+        "
             />
           </picture>
         </div>

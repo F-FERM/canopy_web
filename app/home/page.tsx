@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import AboutSection from "../sections/home/AboutSection";
 import BlogSection from "../sections/home/BlogSection";
 import CTASection from "../sections/home/CTASection";
@@ -11,7 +11,7 @@ import WhyChooseUsSection from "../sections/home/WhyChooseUsSection";
 export default function HomePage() {
   return (
     <>
-<HeroSection />
+      <HeroSection />
       <AboutSection />
       <StatsSection />
       <ServicesSection />
