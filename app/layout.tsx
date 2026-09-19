@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Toaster } from "sonner";
 import Providers from "../providers/QueryProvider";
 
 const poppins = Poppins({
@@ -27,6 +28,7 @@ export default function RootLayout({
       <Providers>
         <body className={`${poppins.variable} font-sans`}>
           <div className="">{children}</div>
+          <Toaster position="top-right" richColors />
         </body>
       </Providers>
     </html>

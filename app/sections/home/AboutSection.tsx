@@ -28,18 +28,17 @@ export default function AboutSection() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchHeroData = async () => {
+    const fetchAboutData = async () => {
       try {
         const data = await listHomeAboutApi({});
-        console.log(data, "herodata");
         setContent(data?.[0] ?? null);
       } catch (error) {
-        console.error("HeroSection API error:", error);
+        console.error("AboutSection API error:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchHeroData();
+    fetchAboutData();
   }, []);
 
   // ── Loading State ────────────────────────────────────────────────────────
@@ -48,7 +47,7 @@ export default function AboutSection() {
       <section
         className="
           relative
-          overflow-x-hidden
+          overflow-x-clip
           py-12
           sm:py-16
           md:py-20
@@ -139,7 +138,6 @@ export default function AboutSection() {
   }
 
   // ── No Data ────────────────────────────────────────────────────────────────
-
   if (!content) return null;
 
   const {
@@ -156,10 +154,16 @@ export default function AboutSection() {
   } = content;
 
   return (
+    /*
+     * FIX: overflow-x-hidden -> overflow-x-clip
+     * `hidden` on one axis forces the other axis to `auto`, which made this
+     * section a scroll container (the decorative patterns overflow vertically).
+     * `clip` cuts overflow without creating a scroll container.
+     */
     <section
       className="
         relative
-        overflow-x-hidden
+        overflow-x-clip
         py-12
         sm:py-16
         md:py-20
@@ -177,10 +181,9 @@ export default function AboutSection() {
       {/* ═══════════════════════════════════════════════════════════════════
           TOP RIGHT DOT PATTERN
       ═══════════════════════════════════════════════════════════════════ */}
-
       <Image
         src={patternImageTop}
-        alt="pattern"
+        alt=""
         width={320}
         height={320}
         aria-hidden="true"
@@ -210,10 +213,10 @@ export default function AboutSection() {
         "
       />
 
-      {/* BOTTOM LEFT dot pattern */}
+      {/* BOTTOM LEFT DOT PATTERN */}
       <Image
         src={patternImageBottom}
-        alt="pattern"
+        alt=""
         width={320}
         height={320}
         aria-hidden="true"
@@ -247,7 +250,6 @@ export default function AboutSection() {
       {/* ═══════════════════════════════════════════════════════════════════
           MAIN CONTAINER
       ═══════════════════════════════════════════════════════════════════ */}
-
       <div
         className="
           relative
@@ -262,7 +264,6 @@ export default function AboutSection() {
         {/* ═════════════════════════════════════════════════════════════════
             SECTION TITLE
         ═════════════════════════════════════════════════════════════════ */}
-
         <div
           className="
             text-center
@@ -333,17 +334,12 @@ export default function AboutSection() {
           </h2>
         </div>
 
-        {/* MAIN CONTENT GRID
-            Breakpoint strategy:
-            - < lg  (< 1024px) : single column stack — fine
-            - lg    (1024px)   : two columns, percentage-based image sizing
-            - xl    (1280px)   : two columns, still percentage-based (fluid through 1535px)
-            - 2xl   (1536px)   : two columns, original fixed pixel values restored
-
-            This fixes the 1290–1624px range where the old code jumped straight
-            from lg percentages to xl fixed-pixel sizes that were too large for
-            the container at those intermediate widths.
-        -->*/}
+        {/*
+         * MAIN CONTENT GRID
+         * - < lg  (< 1024px): single column stack
+         * - lg / xl         : two columns, percentage-based image sizing
+         * - 2xl (1536px+)   : two columns, original fixed pixel values
+         */}
         <div
           className="
             grid
@@ -362,8 +358,8 @@ export default function AboutSection() {
         >
           {/* ═══════════════════════════════════════════════════════════════
               LEFT — IMAGE AREA
+              Reserved height so the text never starts inside this area.
           ═══════════════════════════════════════════════════════════════ */}
-
           <div
             className="
               relative
@@ -371,10 +367,6 @@ export default function AboutSection() {
               max-w-[705px]
               mx-auto
 
-              /*
-               * Reserved height.
-               * The text will NEVER start inside this area.
-               */
               h-[360px]
               sm:h-[420px]
               md:h-[450px]
@@ -496,7 +488,8 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* ── RIGHT: TEXT CONTENT ── */}
+          {/* ── RIGHT: TEXT CONTENT ──
+              lg:pl-* adds breathing room between the images and the text. */}
           <div
             className="
               relative
@@ -508,11 +501,6 @@ export default function AboutSection() {
               mx-auto
               lg:mx-0
 
-              /*
-               * Extra left protection on desktop.
-               * This guarantees visual breathing room between
-               * the images and the text.
-               */
               lg:pl-3
               xl:pl-4
               2xl:pl-5

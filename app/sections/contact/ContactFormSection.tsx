@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 import { Zap, Users, Target, BadgeDollarSign } from "lucide-react";
 
@@ -120,12 +121,10 @@ export default function ContactFormSection() {
         message: formData.message,
       };
 
-      console.log("Payload:", payload);
-
       // API CALL
       await createContactFormApi(payload);
 
-      alert("Message sent successfully!");
+      toast.success("Message sent successfully!");
 
       // RESET FORM
       setFormData({
@@ -137,7 +136,7 @@ export default function ContactFormSection() {
     } catch (error) {
       console.error("Contact Form Error:", error);
 
-      alert("Something went wrong!");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }

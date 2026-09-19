@@ -150,27 +150,30 @@ function Navbar() {
         </nav>
 
         {/* LARGE DESKTOP CTA */}
-        <div className="hidden 2xl:flex shrink-0 ml-4">
-          <button
-            className="
-              w-[160px]
-              h-[55px]
-              rounded-[40px]
-              bg-secondary
-              text-white
-              text-[18px]
-              font-semibold
-              transition-all duration-300
-              hover:scale-105
-              hover:shadow-lg
-              hover:bg-[#d55a1d]
-              active:scale-95
-              whitespace-nowrap
-            "
-          >
-            Get A Quote
-          </button>
-        </div>
+    <div className="hidden 2xl:flex shrink-0 ml-4">
+  <Link
+    href="/contact-us"
+    onClick={() => setActiveItem("Contact Us")}
+    className="
+      flex items-center justify-center
+      w-[160px]
+      h-[55px]
+      rounded-[40px]
+      bg-secondary
+      text-white
+      text-[18px]
+      font-semibold
+      transition-all duration-300
+      hover:scale-105
+      hover:shadow-lg
+      hover:bg-[#d55a1d]
+      active:scale-95
+      whitespace-nowrap
+    "
+  >
+    Get A Quote
+  </Link>
+</div>
 
         {/* MOBILE + TABLET + MACBOOK */}
         <div className="flex 2xl:hidden items-center">
@@ -277,28 +280,33 @@ function Navbar() {
               {item}
             </Link>
           ))}
-
-          {/* CTA BUTTON */}
-          <button
-            className="
-              mt-2 
-              sm:mt-3
-              w-full
-              h-[44px] 
-              sm:h-[48px]     
-              rounded-xl
-              bg-secondary
-              text-white
-              text-[14px]       
-              sm:text-[16px]   
-              font-semibold
-              transition-all duration-300
-              hover:bg-[#d55a1d]
-              active:scale-95
-            "
-          >
-            Get A Quote
-          </button>
+{/* CTA BUTTON */}
+<Link
+  href="/contact-us"
+  onClick={() => {
+    setActiveItem("Contact Us");
+    setMenuOpen(false);
+  }}
+  className="
+    flex items-center justify-center
+    mt-2
+    sm:mt-3
+    w-full
+    h-[44px]
+    sm:h-[48px]
+    rounded-xl
+    bg-secondary
+    text-white
+    text-[14px]
+    sm:text-[16px]
+    font-semibold
+    transition-all duration-300
+    hover:bg-[#d55a1d]
+    active:scale-95
+  "
+>
+  Get A Quote
+</Link>
         </nav>
       </div>
     </header>
