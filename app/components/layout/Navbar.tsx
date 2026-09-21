@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import logo from "../../../public/images/logo.png";
+import ContactFormModal from "../ui/ContactFormModal";
 
 const navItems = [
   "Home",
@@ -22,6 +23,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
 
   // Active menu sync
   useEffect(() => {
@@ -63,16 +65,23 @@ function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // ── Open quote modal helper ──
+  const openQuoteModal = () => {
+    setMenuOpen(false);
+    setQuoteModalOpen(true);
+  };
+
   return (
-    <header
-      className={`
+    <>
+      <header
+        className={`
         sticky top-0 z-50 w-full bg-white border-b border-gray-200
         transition-shadow duration-300
         ${scrolled ? "shadow-md" : ""}
       `}
-    >
-      <div
-        className="
+      >
+        <div
+          className="
           max-w-[1920px]
           mx-auto
           h-[64px]           
@@ -84,30 +93,30 @@ function Navbar() {
           lg:px-[100px]
           flex items-center justify-between
         "
-      >
-        {/* LOGO */}
-        <div className="shrink-0 flex items-center">
-          <div
-            className="
+        >
+          {/* LOGO */}
+          <div className="shrink-0 flex items-center">
+            <div
+              className="
             h-[40px]          
             sm:h-[55px]      
             md:h-[65px]      
             lg:h-[95px] 
             flex items-center
           "
-          >
-            <Image
-              src={logo}
-              alt="Canopy Security Services"
-              priority
-              className="h-full w-auto object-contain"
-            />
+            >
+              <Image
+                src={logo}
+                alt="Canopy Security Services"
+                priority
+                className="h-full w-auto object-contain"
+              />
+            </div>
           </div>
-        </div>
 
-        {/* LARGE DESKTOP NAV ONLY */}
-        <nav
-          className="
+          {/* LARGE DESKTOP NAV ONLY */}
+          <nav
+            className="
             hidden 2xl:flex
             flex-1
             max-w-[977px]
@@ -117,199 +126,203 @@ function Navbar() {
             items-center justify-between
             px-[24px]
           "
-        >
-          {navItems.map((item, index) => (
-            <Link
-              key={index}
-              href={
-                item === "Home"
-                  ? "/"
-                  : `/${item.toLowerCase().replace(/\s+/g, "-")}`
-              }
-              onClick={() => setActiveItem(item)}
-              className={`
-                text-white
-                text-[16px]
-                2xl:text-[18px]
-                font-medium
-                px-4 2xl:px-6
-                py-2
-                rounded-full
-                whitespace-nowrap
-                transition-all duration-300
-                ${
-                  activeItem === item
-                    ? "bg-secondary text-black"
-                    : "hover:bg-secondary hover:text-black"
-                }
-              `}
-            >
-              {item}
-            </Link>
-          ))}
-        </nav>
-
-        {/* LARGE DESKTOP CTA */}
-    <div className="hidden 2xl:flex shrink-0 ml-4">
-  <Link
-    href="/contact-us"
-    onClick={() => setActiveItem("Contact Us")}
-    className="
-      flex items-center justify-center
-      w-[160px]
-      h-[55px]
-      rounded-[40px]
-      bg-secondary
-      text-white
-      text-[18px]
-      font-semibold
-      transition-all duration-300
-      hover:scale-105
-      hover:shadow-lg
-      hover:bg-[#d55a1d]
-      active:scale-95
-      whitespace-nowrap
-    "
-  >
-    Get A Quote
-  </Link>
-</div>
-
-        {/* MOBILE + TABLET + MACBOOK */}
-        <div className="flex 2xl:hidden items-center">
-          {/* HAMBURGER */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle Menu"
-            aria-expanded={menuOpen}
-            className="
-              bg-[#7F220E]
-              text-white
-              w-[38px]           
-              h-[38px]          
-              sm:w-[44px]     
-              sm:h-[44px]       
-              rounded-xl
-              flex flex-col items-center justify-center
-              gap-[4px]        
-              sm:gap-[5px]     
-              transition-all duration-300
-              hover:bg-[#6b1d0c]
-              active:scale-95
-            "
           >
-            <span
-              className={`
-                block w-[18px] h-[2px]  
-                sm:w-[22px]              
-                bg-white rounded-full
-                transition-all duration-300
-                ${menuOpen ? "rotate-45 translate-y-[6px]" : ""} 
-              `}
-            />
+            {navItems.map((item, index) => (
+              <Link
+                key={index}
+                href={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
+                }
+                onClick={() => setActiveItem(item)}
+                className={`
+                  text-white
+                  text-[16px]
+                  2xl:text-[18px]
+                  font-medium
+                  px-4 2xl:px-6
+                  py-2
+                  rounded-full
+                  whitespace-nowrap
+                  transition-all duration-300
+                  ${
+                    activeItem === item
+                      ? "bg-secondary text-black"
+                      : "hover:bg-secondary hover:text-black"
+                  }
+                `}
+              >
+                {item}
+              </Link>
+            ))}
+          </nav>
 
-            <span
-              className={`
-                block w-[18px] h-[2px]  
-                sm:w-[22px]            
-                bg-white rounded-full
+          {/* LARGE DESKTOP CTA */}
+          <div className="hidden 2xl:flex shrink-0 ml-4">
+            <button
+              onClick={openQuoteModal}
+              className="
+                flex items-center justify-center
+                w-[160px]
+                h-[55px]
+                rounded-[40px]
+                bg-secondary
+                text-white
+                text-[18px]
+                font-semibold
                 transition-all duration-300
-                ${menuOpen ? "opacity-0" : ""}
-              `}
-            />
+                hover:scale-105
+                hover:shadow-lg
+                hover:bg-[#d55a1d]
+                active:scale-95
+                whitespace-nowrap
+                cursor-pointer
+              "
+            >
+              Get A Quote
+            </button>
+          </div>
 
-            <span
-              className={`
-                block w-[18px] h-[2px]  
-                sm:w-[22px]            
-                bg-white rounded-full
+          {/* MOBILE + TABLET + MACBOOK */}
+          <div className="flex 2xl:hidden items-center">
+            {/* HAMBURGER */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle Menu"
+              aria-expanded={menuOpen}
+              className="
+                bg-[#7F220E]
+                text-white
+                w-[38px]           
+                h-[38px]          
+                sm:w-[44px]     
+                sm:h-[44px]       
+                rounded-xl
+                flex flex-col items-center justify-center
+                gap-[4px]        
+                sm:gap-[5px]     
                 transition-all duration-300
-                ${menuOpen ? "-rotate-45 -translate-y-[6px]" : ""}  
-              `}
-            />
-          </button>
+                hover:bg-[#6b1d0c]
+                active:scale-95
+              "
+            >
+              <span
+                className={`
+                  block w-[18px] h-[2px]  
+                  sm:w-[22px]              
+                  bg-white rounded-full
+                  transition-all duration-300
+                  ${menuOpen ? "rotate-45 translate-y-[6px]" : ""} 
+                `}
+              />
+
+              <span
+                className={`
+                  block w-[18px] h-[2px]  
+                  sm:w-[22px]            
+                  bg-white rounded-full
+                  transition-all duration-300
+                  ${menuOpen ? "opacity-0" : ""}
+                `}
+              />
+
+              <span
+                className={`
+                  block w-[18px] h-[2px]  
+                  sm:w-[22px]            
+                  bg-white rounded-full
+                  transition-all duration-300
+                  ${menuOpen ? "-rotate-45 -translate-y-[6px]" : ""}  
+                `}
+              />
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* MOBILE / TABLET / MACBOOK MENU */}
-      <div
-        className={`
+        {/* MOBILE / TABLET / MACBOOK MENU */}
+        <div
+          className={`
           2xl:hidden
           overflow-hidden
           transition-all duration-300 ease-in-out
           ${menuOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"}
         `}
-      >
-        <nav
-          className="
+        >
+          <nav
+            className="
             bg-[#7F220E]
             px-4
             pt-2
             pb-4
             flex flex-col gap-1
           "
-        >
-          {navItems.map((item, index) => (
-            <Link
-              key={index}
-              href={
-                item === "Home"
-                  ? "/"
-                  : `/${item.toLowerCase().replace(/\s+/g, "-")}`
-              }
-              onClick={() => {
-                setActiveItem(item);
-                setMenuOpen(false);
-              }}
-              className={`
-                text-white
-                text-[14px]      
-                sm:text-[16px]   
-                font-medium
-                px-5 py-2.5       
-                sm:py-3          
-                rounded-xl
-                transition-all duration-200
-                ${
-                  activeItem === item
-                    ? "bg-secondary text-black"
-                    : "hover:bg-white/10"
+          >
+            {navItems.map((item, index) => (
+              <Link
+                key={index}
+                href={
+                  item === "Home"
+                    ? "/"
+                    : `/${item.toLowerCase().replace(/\s+/g, "-")}`
                 }
-              `}
+                onClick={() => {
+                  setActiveItem(item);
+                  setMenuOpen(false);
+                }}
+                className={`
+                  text-white
+                  text-[14px]      
+                  sm:text-[16px]   
+                  font-medium
+                  px-5 py-2.5       
+                  sm:py-3          
+                  rounded-xl
+                  transition-all duration-200
+                  ${
+                    activeItem === item
+                      ? "bg-secondary text-black"
+                      : "hover:bg-white/10"
+                  }
+                `}
+              >
+                {item}
+              </Link>
+            ))}
+            {/* CTA BUTTON */}
+            <button
+              onClick={openQuoteModal}
+              className="
+                flex items-center justify-center
+                mt-2
+                sm:mt-3
+                w-full
+                h-[44px]
+                sm:h-[48px]
+                rounded-xl
+                bg-secondary
+                text-white
+                text-[14px]
+                sm:text-[16px]
+                font-semibold
+                transition-all duration-300
+                hover:bg-[#d55a1d]
+                active:scale-95
+                cursor-pointer
+              "
             >
-              {item}
-            </Link>
-          ))}
-{/* CTA BUTTON */}
-<Link
-  href="/contact-us"
-  onClick={() => {
-    setActiveItem("Contact Us");
-    setMenuOpen(false);
-  }}
-  className="
-    flex items-center justify-center
-    mt-2
-    sm:mt-3
-    w-full
-    h-[44px]
-    sm:h-[48px]
-    rounded-xl
-    bg-secondary
-    text-white
-    text-[14px]
-    sm:text-[16px]
-    font-semibold
-    transition-all duration-300
-    hover:bg-[#d55a1d]
-    active:scale-95
-  "
->
-  Get A Quote
-</Link>
-        </nav>
-      </div>
-    </header>
+              Get A Quote
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      {/* CONTACT FORM MODAL */}
+      <ContactFormModal
+        isOpen={quoteModalOpen}
+        onClose={() => setQuoteModalOpen(false)}
+      />
+    </>
   );
 }
 

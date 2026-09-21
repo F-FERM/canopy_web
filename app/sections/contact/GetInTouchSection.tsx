@@ -13,7 +13,7 @@ const iconMap: any = {
   ArrowRight,
 };
 
-const GetInTouchSection = () => {
+const GetInTouchSection = ({ onRequestQuote }: { onRequestQuote?: () => void }) => {
   const [data, setData] = useState<ListContactLandingResponse | null>(null);
 
   const [loading, setLoading] = useState(true);
@@ -225,6 +225,28 @@ const GetInTouchSection = () => {
             >
               {data.buttons?.map((btn, index) => {
                 const Icon = iconMap[btn.icon as keyof typeof iconMap];
+                const isQuoteBtn = btn.label?.toLowerCase().includes("quote");
+
+                if (isQuoteBtn && onRequestQuote) {
+                  return (
+                    <Button
+                      key={index}
+                      icon={Icon}
+                      label={btn.label}
+                      onClick={onRequestQuote}
+                      variant={btn.variant}
+                      showArrow={false}
+                      className={`
+                        rounded-full
+                        ${
+                          btn.variant === "outline"
+                            ? "bg-transparent text-white border-white"
+                            : ""
+                        }
+                      `}
+                    />
+                  );
+                }
 
                 return (
                   <Button
@@ -236,7 +258,6 @@ const GetInTouchSection = () => {
                     showArrow={false}
                     className={`
                       rounded-full
-
                       ${
                         btn.variant === "outline"
                           ? "bg-transparent text-white border-white"
